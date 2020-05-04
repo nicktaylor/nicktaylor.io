@@ -1,0 +1,40 @@
+{
+  "name": "nicktaylor.io",
+  "version": "1.0.0",
+  "description": "nicktaylor.io - home of... nick taylor",
+  "main": "index.js",
+  "scripts": {
+    "build": "lerna run build --parallel",
+    "build-web": "lerna bootstrap && (cd web && npm run build)",
+    "build-studio": "lerna bootstrap && (cd studio && npm run build)",
+    "start": "lerna run start --parallel",
+    "format": "lerna run format",
+    "graphql-deploy": "lerna run graphql-deploy",
+    "lint": "lerna run lint",
+    "postinstall": "lerna bootstrap",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicktaylor/nicktaylor.io.git"
+  },
+  "keywords": [
+    "nick",
+    "taylor",
+    "full",
+    "stack",
+    "developer",
+    "web",
+    "site"
+  ],
+  "author": "Nick Taylor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nicktaylor/nicktaylor.io/issues"
+  },
+  "homepage": "https://github.com/nicktaylor/nicktaylor.io#readme",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "lerna": "^3.20.2"
+  }
+}
