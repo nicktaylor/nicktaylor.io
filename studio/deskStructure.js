@@ -14,9 +14,20 @@ export default () =>
         .title('Contents')
         .icon(MdInsertDriveFile)
         .child(
-          S.documentTypeList('content')
-            .title('Content')
-            .defaultLayout('block')
+          S.documentList()
+            .title('Content Categories')
+            .menuItems(S.documentTypeList('category').getMenuItems())
+            .filter('_type == $type')
+            .params({ type: 'category' })
+            .child(categoryId =>
+              S.documentList()
+                .title('Content')
+                .menuItems(S.documentTypeList('content').getMenuItems())
+                .filter(
+                  '_type == $type && (content.mainCategory._ref == $categoryId || $categoryId in content.categories[]._ref)'
+                )
+                .params({ type: 'content', categoryId })
+            )
         ),
       S.listItem()
         .title('Categories')

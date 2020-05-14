@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oleo+Script:wght@700&display=swap');
+
+:root {
+  --color-one: #ff7500;
+  --color-two: #086fa1;
+  --color-three: #ff3500;
+  --color-four: #00b64f;
+}
+
+body {
+  background: radial-gradient(#fff, #b2b2b2) fixed;
+  font-family: 'Barlow Condensed';
+  font-size: 16px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:visited {
+  color: black;
+}

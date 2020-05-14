@@ -1,4 +1,5 @@
 import colorList from '../../library/color-list'
+import { BsTag } from 'react-icons/bs'
 
 export default {
   name: 'category',
@@ -12,6 +13,15 @@ export default {
       validation: Rule => Rule.required().min(2),
     },
     {
+      name: 'slug',
+      type: 'slug',
+      title: 'Slug',
+      options: {
+        source: 'title',
+        maxLength: 96,
+      },
+    },
+    {
       name: 'description',
       type: 'text',
       title: 'Description',
@@ -21,13 +31,15 @@ export default {
       type: 'array',
       title: 'Parents',
       of: [{ type: 'reference', to: { type: 'category' } }],
+      description:
+        'First category in the list is the master category. This will allow /<master-category/<child-category> URLs',
       options: {
         editModal: 'popover',
         sortable: false,
       },
       validation: Rule =>
         Rule.custom((parents, context) => {
-          const isTopLevel = parents.length == 0
+          const isTopLevel = !parents || parents.length == 0
           const color = context.document.color || ''
 
           if (color.length == 0 && isTopLevel) {
@@ -35,6 +47,7 @@ export default {
           }
 
           if (
+            parents &&
             parents.filter(
               r =>
                 r._ref == context.document._id ||
@@ -46,6 +59,12 @@ export default {
 
           return true
         }),
+    },
+    {
+      name: 'homepage',
+      type: 'reference',
+      title: 'Homepage',
+      to: [{ type: 'content' }],
     },
     {
       name: 'color',
@@ -60,7 +79,13 @@ export default {
       },
     },
   ],
-  initialValue: {
-    description: 'test',
+  preview: {
+    select: {
+      title: 'title',
+    },
+    prepare: content => ({
+      title: content.title,
+      media: BsTag,
+    }),
   },
 }

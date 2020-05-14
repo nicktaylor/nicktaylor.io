@@ -1,3 +1,4 @@
+import { BsFileRichtext } from 'react-icons/bs'
 import fullPortableText from './fullPortableText'
 
 export default {
@@ -24,6 +25,7 @@ export default {
     prepare(value) {
       const block = (value.content || []).find(block => block._type === 'block')
       return {
+        media: BsFileRichtext,
         subtitle: block
           ? block.children
               .filter(child => child._type === 'span')

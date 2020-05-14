@@ -1,50 +1,121 @@
 <template>
-  <div class="layout">
-    <header class="header">
-      <strong>
-        <g-link to="/">{{ $static.metadata.siteName }}</g-link>
-      </strong>
-      <nav class="nav">
-        <g-link class="nav__link" to="/">Home</g-link>
-        <g-link class="nav__link" to="/about/">About</g-link>
-      </nav>
+  <div :class="[$style.container, $style.splash]">
+    <header>
+      <ProfileSplash
+        :image="$static.info.image"
+        :name="$static.info.name"
+        :slogan="$static.info.subText"
+      />
+      <NavLinks :links="links" />
     </header>
-    <slot/>
+    <slot />
   </div>
 </template>
 
+<script>
+import ProfileSplash from '~/components/ProfileSplash.vue'
+import NavLinks from '~/components/NavLinks.vue'
+export default {
+  components: {
+    ProfileSplash,
+    NavLinks,
+  },
+  props: {
+    siteName: 'test',
+  },
+  computed: {
+    links() {
+      return this.$static.info.mainLinks.map(l => (l.content ? l.content : l))
+    },
+  },
+}
+</script>
+
 <static-query>
-query {
+{
   metadata {
-    siteName
+    sanityOptions {
+      projectId
+      dataset
+    }
+  }
+  info: sanitySiteSettings(id: "siteSettings") {
+    title
+    mainLinks {
+      ... on SanityCategory {
+        title
+        slug {
+          current
+        }
+      }
+      ... on SanityContent {
+        content {
+          title
+          slug {
+            current
+          }
+          linkTitle
+        }
+      }
+    }
+    image {
+      asset {
+        _id
+        url
+      }
+      hotspot {
+        x
+        y
+        height
+        width
+      }
+      crop {
+        top
+        bottom
+        left
+        right
+      }
+    }
+    name
+    subText
   }
 }
 </static-query>
 
-<style>
-body {
-  font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-  margin:0;
-  padding:0;
-  line-height: 1.5;
+<style lang="postcss" module>
+.container {
+  font-size: 12px;
+}
+.container.splash {
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+  margin: auto;
+  display: grid;
+  align-content: center;
+  grid-template-columns: 1fr;
 }
 
-.layout {
-  max-width: 760px;
-  margin: 0 auto;
-  padding-left: 20px;
-  padding-right: 20px;
+@media screen and (min-width: 540px) {
+  .container {
+    font-size: 13px;
+  }
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  height: 80px;
+@media screen and (min-width: 768px) and (min-height: 560px) {
+  .container.splash {
+    font-size: 16px;
+  }
 }
 
-.nav__link {
-  margin-left: 20px;
+@media screen and (min-width: 1240px) {
+  .container.splash {
+    font-size: 18px;
+  }
+}
+
+@media screen and (min-width: 1840px) {
+  .container.splash {
+    font-size: 20px;
+  }
 }
 </style>
