@@ -29,11 +29,11 @@ export default {
       title: 'Publish date - Old -> New',
       by: [
         {
-          field: 'publishedAt',
+          field: 'content.publishedAt',
           direction: 'asc',
         },
         {
-          field: 'title',
+          field: 'content.title',
           direction: 'asc',
         },
       ],
@@ -43,11 +43,11 @@ export default {
       title: 'Publish date - New -> Old',
       by: [
         {
-          field: 'publishedAt',
+          field: 'content.publishedAt',
           direction: 'desc',
         },
         {
-          field: 'title',
+          field: 'content.title',
           direction: 'asc',
         },
       ],

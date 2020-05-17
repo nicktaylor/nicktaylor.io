@@ -44,7 +44,6 @@ export default {
       to: { type: 'category' },
       fieldset: 'main',
       description: 'Main category, e.g. Blog for structural purposes.',
-      validation: Rule => Rule.required().error('A main category is required'),
     },
     {
       name: 'excerpt',

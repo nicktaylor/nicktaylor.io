@@ -24,7 +24,7 @@ export default {
   --ppic-bgcolor: #f7e7d7;
   height: 12em;
   width: 12em;
-  border: var(--ppic-width) solid black;
+  border: var(--ppic-width) solid var(--border-color);
   border-radius: 50%;
 
   div {

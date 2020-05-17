@@ -6,6 +6,8 @@
   --color-two: #086fa1;
   --color-three: #ff3500;
   --color-four: #00b64f;
+  --text-color: black;
+  --border-color: black;
 }
 
 body {
@@ -16,9 +18,9 @@ body {
 
 a {
   text-decoration: none;
-  color: black;
+  color: var(--text-color);
 }
 
 a:visited {
-  color: black;
+  color: var(--text-color);
 }

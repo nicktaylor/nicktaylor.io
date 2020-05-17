@@ -1,31 +1,54 @@
 <template>
-  <div :class="[$style.container, $style.splash]">
+  <div :class="classes">
     <header>
       <ProfileSplash
         :image="$static.info.image"
         :name="$static.info.name"
         :slogan="$static.info.subText"
       />
-      <NavLinks :links="links" />
+      <NavLinks :links="links" :classes="$style.nav" />
     </header>
     <slot />
+    <footer>
+      <SocialLinks :links="$static.info.socialLinks" />
+    </footer>
   </div>
 </template>
 
 <script>
 import ProfileSplash from '~/components/ProfileSplash.vue'
 import NavLinks from '~/components/NavLinks.vue'
+import SocialLinks from '~/components/SocialLinks.vue'
+import { getClassByColor } from '~/utils/colorList'
+
 export default {
   components: {
     ProfileSplash,
     NavLinks,
+    SocialLinks,
   },
   props: {
-    siteName: 'test',
+    splash: Boolean,
   },
   computed: {
+    classes() {
+      if (this.splash) {
+        return [this.$style.container, this.$style.splash]
+      }
+
+      return this.$style.container
+    },
     links() {
-      return this.$static.info.mainLinks.map(l => (l.content ? l.content : l))
+      const convertToLink = link => ({
+        url: link.slug.current,
+        title: (link.linkTitle ? link.linkTitle : link.title).toLowerCase(),
+        class: getClassByColor(
+          link.mainCategory ? link.mainCategory.color : link.color
+        ),
+      })
+      return this.$static.info.mainLinks.map(l =>
+        convertToLink(l.content ? l.content : l)
+      )
     },
   },
 }
@@ -47,6 +70,7 @@ export default {
         slug {
           current
         }
+        color
       }
       ... on SanityContent {
         content {
@@ -55,6 +79,9 @@ export default {
             current
           }
           linkTitle
+          mainCategory {
+            color
+          }
         }
       }
     }
@@ -78,6 +105,17 @@ export default {
     }
     name
     subText
+    socialLinks {
+      text
+      type
+      logo {
+        asset {
+          _id
+          url
+        }
+      }
+      externalUrl
+    }
   }
 }
 </static-query>
@@ -93,10 +131,22 @@ export default {
   display: grid;
   align-content: center;
   grid-template-columns: 1fr;
+
+  footer {
+    position: fixed;
+    bottom: 1.5em;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .nav {
+    margin-top: 1.8em;
+  }
 }
 
 @media screen and (min-width: 540px) {
-  .container {
+  body {
     font-size: 13px;
   }
 }
@@ -116,6 +166,14 @@ export default {
 @media screen and (min-width: 1840px) {
   .container.splash {
     font-size: 20px;
+  }
+}
+
+@media screen and (min-width: 540px) and (min-height: 560px) {
+  .container.splash {
+    footer {
+      bottom: 2em;
+    }
   }
 }
 </style>

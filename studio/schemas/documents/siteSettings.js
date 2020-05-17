@@ -36,5 +36,11 @@ export default {
       fieldset: 'profile',
       title: 'Sub-text',
     },
+    {
+      name: 'socialLinks',
+      type: 'array',
+      title: 'Social Links',
+      of: [{ type: 'socialLink' }],
+    },
   ],
 }

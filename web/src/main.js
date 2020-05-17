@@ -4,6 +4,9 @@
 import DefaultLayout from '~/layouts/Default.vue'
 import urlForImage from './utils/urlForImage'
 import NormalizeCss from 'normalize.css'
+import { gsap } from 'gsap'
+import { CSSRulePlugin } from 'gsap/all'
+
 import '~/assets/css/global.css'
 
 export default function(Vue, { router, head, isClient }) {
@@ -11,4 +14,5 @@ export default function(Vue, { router, head, isClient }) {
   Vue.component('Layout', DefaultLayout)
   Vue.use(NormalizeCss)
   Vue.prototype.$urlForImage = urlForImage
+  gsap.registerPlugin(CSSRulePlugin)
 }

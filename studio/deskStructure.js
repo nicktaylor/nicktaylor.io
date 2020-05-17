@@ -34,6 +34,15 @@ export default () =>
         .icon(MdToc)
         .child(S.documentTypeList('category').title('Categories')),
       S.listItem()
+        .title('My Content')
+        .child(
+          S.documentList()
+            .title('Content')
+            .menuItems(S.documentTypeList('content').getMenuItems())
+            .filter('_type == $type')
+            .params({ type: 'content' })
+        ),
+      S.listItem()
         .title('Authors')
         .icon(MdPersonOutline)
         .child(S.documentTypeList('author').title('Authors')),
