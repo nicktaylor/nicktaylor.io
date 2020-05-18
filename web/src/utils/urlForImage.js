@@ -2,7 +2,6 @@ import urlBuilder from '@sanity/image-url'
 
 const urlForImage = (source, data) => {
   const isBrowser = typeof window !== 'undefined'
-  console.log(data)
   const { projectId, dataset } = data
   const builder = urlBuilder({ projectId, dataset }).image(source)
   const dpr = isBrowser

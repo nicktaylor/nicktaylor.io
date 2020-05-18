@@ -3,7 +3,7 @@
     <div>
       <g-image
         :alt="name"
-        :src="$urlForImage(image, $page.metadata.sanityOptions).width(250).url()"
+        :src="$urlForImage(image, $page.metadata.sanityOptions).width(250).quality(90).auto('format').url()"
       />
     </div>
   </div>

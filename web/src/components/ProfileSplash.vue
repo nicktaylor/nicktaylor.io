@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.splash">
+  <div :class="splash ? $style.splash : $style.header">
     <ProfilePicture :image="image" :alt="name" />
     <ProfileTitle :slogan="slogan" :name="name" />
   </div>
@@ -14,6 +14,8 @@ export default {
     image: Object,
     name: String,
     slogan: String,
+    splash: Boolean,
+    classes: String,
   },
   components: {
     ProfilePicture,
@@ -23,19 +25,4 @@ export default {
 </script>
 
 <style lang="postcss" module>
-.splash {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-}
-
-@media screen and (min-width: 540px) {
-  .splash {
-    flex-direction: row;
-    & > *:last-child {
-      margin-left: 2.5em;
-    }
-  }
-}
 </style>

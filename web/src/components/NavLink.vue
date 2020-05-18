@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style[link.class]" @mouseover="mouseOver" @mouseout="mouseOut">
+  <div :class="$style[link.class]" @mouseover="mouseOver" @mouseout="mouseOut" @click="click">
     <g-link :key="link.title" ref="gLink" :to="link.url">{{link.title}}</g-link>
   </div>
 </template>
@@ -7,6 +7,17 @@
 <script>
 import { gsap } from 'gsap'
 import { CSSRulePlugin } from 'gsap/all'
+
+function removeBrackets() {
+  this.tl.to(this.beforeRule, {
+    cssRule: { opacity: 0, left: 0 },
+    duration: 0.15,
+  })
+  this.tl.to(this.afterRule, {
+    cssRule: { opacity: 0, right: 0 },
+    duration: 0.15,
+  })
+}
 
 export default {
   props: {
@@ -32,16 +43,8 @@ export default {
         duration: 0.25,
       })
     },
-    mouseOut: function(el) {
-      this.tl.to(this.beforeRule, {
-        cssRule: { opacity: 0, left: 0 },
-        duration: 0.15,
-      })
-      this.tl.to(this.afterRule, {
-        cssRule: { opacity: 0, right: 0 },
-        duration: 0.15,
-      })
-    },
+    mouseOut: removeBrackets,
+    click: removeBrackets,
   },
   mounted: function(props) {
     this.beforeRule = CSSRulePlugin.getRule(
