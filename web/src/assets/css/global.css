@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2&Roboto+Slab:wght@300&display=swap');
 
@@ -10,6 +10,7 @@
   --color-five: #b2b2b2;
   --text-color: black;
   --border-color: black;
+  --color-neutral: white;
   --padding-tiny: 7px;
   --padding-small: 14px;
   --padding-large: calc(var(--padding-small) * 2);

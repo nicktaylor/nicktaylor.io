@@ -1,11 +1,6 @@
 <template>
   <div :class="classes">
     <header :class="[$style.header, openOrClosed]">
-      <ProfilePicture
-        :image="$static.info.image"
-        :alt="$static.info.name"
-        :class="$style.profilePicture"
-      />
       <ProfileTitle
         :slogan="$static.info.subText"
         :name="$static.info.name"
@@ -152,15 +147,16 @@ export default {
 
 <style lang="postcss" module>
 :root {
-  --header-height: 79px;
+  --header-height: 70px;
 }
 
 footer {
   padding: var(--padding-small);
+  display: none;
 }
 
 .container {
-  padding-top: var(--header-height);
+  /* padding-top: var(--header-height); */
 }
 
 .container.splash {
@@ -186,14 +182,14 @@ footer {
   display: grid;
   position: fixed;
   width: 100%;
-  top: 0;
+  top: auto;
 }
 
 .header {
   grid-template-areas:
     'ptitle ptitle hamburger'
     'nav nav nav';
-  grid-template-columns: 1fr auto 80px;
+  grid-template-columns: auto auto 80px;
   overflow: visible;
   z-index: 1000;
   height: 80px;
@@ -201,13 +197,11 @@ footer {
   .nav {
     grid-area: nav;
     height: calc(100vh);
-    position: relative;
+    position: fixed;
     z-index: 100;
-    top: calc(var(--header-height) * -1);
-  }
-
-  .profilePicture,
-  .profileTitle {
+    top: 0;
+    width: 100%;
+    height: 100%;
   }
 
   & > * {
@@ -255,10 +249,10 @@ footer {
 }
 
 .profilePicture {
-  display: none;
-  margin-top: 1.8em;
   justify-self: center;
+  align-self: center;
   grid-area: ppic;
+  font-size: 4px;
 }
 
 .profileTitle {
@@ -302,6 +296,8 @@ footer {
       top: auto;
       display: flex;
       height: auto;
+      position: relative;
+      width: auto;
 
       & > nav {
         pointer-events: auto;
@@ -327,8 +323,6 @@ footer {
 
 .content {
   line-height: 1.5em;
-  margin: var(--padding-small);
-  padding: var(--padding-small);
   background: rgba(255, 255, 255, 0.3);
   border-radius: var(--padding-small);
   font-family: wotfard;
@@ -340,6 +334,9 @@ footer {
   }
 }
 
+@media screen and (min-width: 600px) {
+}
+
 @media screen and (min-width: 540px) {
   .splash .profileTitle {
     font-size: 13px;
@@ -347,12 +344,11 @@ footer {
 
   .splash .header {
     grid-template-areas:
-      'ppic ptitle ptitle'
+      'ptitle ptitle ptitle'
       'nav nav nav';
 
     .profileTitle {
       grid-area: ptitle;
-      margin-left: 1.8em;
     }
   }
 }

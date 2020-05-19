@@ -1,7 +1,6 @@
 <template>
   <div :class="$style.title">
     <div :class="$style.main">{{name.toLowerCase()}}</div>
-    <div :class="$style.subText">{{slogan.toLowerCase()}}</div>
   </div>
 </template>
 
@@ -22,12 +21,12 @@ export default {
   .main {
     font-family: 'Barlow Condensed';
     font-weight: 700;
-    font-size: 6em;
+    font-size: 5em;
     position: relative;
     display: inline-block;
     z-index: 10;
     top: -0.15em;
-    text-shadow: rgba(0, 0, 0, 0.2) 0.03em 0.03em;
+    /* text-shadow: rgba(0, 0, 0, 0.6) 0.03em 0.03em; */
 
     &:before {
       content: ' ';
@@ -41,7 +40,8 @@ export default {
     }
   }
   .subText {
-    font-size: 1.6em;
+    font-size: 1.7em;
+    text-align: center;
     line-height: 1;
   }
 }
