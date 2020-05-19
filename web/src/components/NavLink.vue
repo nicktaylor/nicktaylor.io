@@ -1,6 +1,8 @@
 <template>
-  <div :class="$style[link.class]" @mouseover="mouseOver" @mouseout="mouseOut" @click="click">
-    <g-link :key="link.title" ref="gLink" :to="link.url">{{link.title}}</g-link>
+  <div :class="$style[link.class]" @mouseup="click">
+    <span @mouseover="mouseOver" @mouseout="mouseOut">
+      <g-link :key="link.title" ref="gLink" :to="link.url">{{link.title}}</g-link>
+    </span>
   </div>
 </template>
 
@@ -8,20 +10,10 @@
 import { gsap } from 'gsap'
 import { CSSRulePlugin } from 'gsap/all'
 
-function removeBrackets() {
-  this.tl.to(this.beforeRule, {
-    cssRule: { opacity: 0, left: 0 },
-    duration: 0.15,
-  })
-  this.tl.to(this.afterRule, {
-    cssRule: { opacity: 0, right: 0 },
-    duration: 0.15,
-  })
-}
-
 export default {
   props: {
     link: Object,
+    onClick: Function,
   },
   data: function() {
     return {
@@ -31,6 +23,16 @@ export default {
     }
   },
   methods: {
+    removeBrackets: function() {
+      this.tl.to(this.beforeRule, {
+        cssRule: { opacity: 0, left: 0 },
+        duration: 0.15,
+      })
+      this.tl.to(this.afterRule, {
+        cssRule: { opacity: 0, right: 0 },
+        duration: 0.15,
+      })
+    },
     mouseOver: function(el) {
       this.tl.to(this.beforeRule, {
         cssRule: { opacity: 1, left: '0.3em' },
@@ -43,8 +45,13 @@ export default {
         duration: 0.25,
       })
     },
-    mouseOut: removeBrackets,
-    click: removeBrackets,
+    mouseOut: function() {
+      this.removeBrackets()
+    },
+    click: function(el) {
+      this.removeBrackets()
+      this.onClick()
+    },
   },
   mounted: function(props) {
     this.beforeRule = CSSRulePlugin.getRule(
@@ -89,6 +96,7 @@ export default {
 }
 
 .one a {
+  color: var(--color-one);
   &:before,
   &:after {
     color: var(--color-one);
@@ -102,6 +110,7 @@ export default {
 }
 
 .two a {
+  color: var(--color-two);
   &:before,
   &:after {
     color: var(--color-two);
@@ -115,6 +124,7 @@ export default {
 }
 
 .three a {
+  color: var(--color-three);
   &:before,
   &:after {
     color: var(--color-three);
@@ -128,6 +138,8 @@ export default {
 }
 
 .four a {
+  color: var(--color-four);
+
   &:before,
   &:after {
     color: var(--color-four);

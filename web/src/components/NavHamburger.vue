@@ -25,7 +25,7 @@ export default {
   --hamburger-width: 30px;
   --hamburger-pos-adjust: 1;
   --hamburger-duration: 0.5s;
-  --hamburger-colour: var(--border-color);
+  --hamburger-colour: var(--color-neutral);
 
   width: var(--hamburger-width);
   height: calc((var(--hamburger-gap) * 2) + (var(--hamburger-stroke) * 3));

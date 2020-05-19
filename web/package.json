@@ -11,7 +11,8 @@
     "gridsome": "^0.7.0",
     "gridsome-source-sanity": "^1.0.5",
     "gsap": "^3.2.6",
-    "normalize.css": "^8.0.1"
+    "normalize.css": "^8.0.1",
+    "vue-svg-loader": "^0.16.0"
   },
   "devDependencies": {
     "postcss-cssnext": "^3.1.0",

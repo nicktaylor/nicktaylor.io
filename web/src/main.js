@@ -9,6 +9,7 @@ import { CSSRulePlugin } from 'gsap/all'
 
 import '~/assets/css/global.css'
 import '~/assets/fonts/wotfard-regular-webfont.woff2'
+import '~/assets/images/mac-window.svg'
 
 export default function(Vue, { router, head, isClient }) {
   // Set default layout as a global component

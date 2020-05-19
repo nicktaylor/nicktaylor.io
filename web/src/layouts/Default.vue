@@ -1,14 +1,15 @@
 <template>
   <div :class="classes">
     <header :class="[$style.header, openOrClosed]">
-      <ProfileTitle
-        :slogan="$static.info.subText"
-        :name="$static.info.name"
-        :class="$style.profileTitle"
-      />
-      <NavHamburger :class="$style.hamburger" :onToggle="onToggleNav" :open="open" />
+      <div :class="$style.mac">
+        <MacWindow />
+      </div>
+      <ProfileTitle :slogan="$static.info.subText" :name="$static.info.name" :class="$style.title" />
+      <div :class="$style.hamburger">
+        <NavHamburger :onToggle="onToggleNav" :open="open" />
+      </div>
       <div :class="$style.nav">
-        <NavLinks :links="links" />
+        <NavLinks :links="links" :onClick="onToggleNav" />
       </div>
     </header>
     <div :class="$style.content" v-if="!splash">
@@ -27,6 +28,7 @@ import NavLinks from '~/components/NavLinks.vue'
 import NavHamburger from '~/components/NavHamburger.vue'
 import SocialLinks from '~/components/SocialLinks.vue'
 import { getClassByColor } from '~/utils/colorList'
+import MacWindow from '~/assets/images/mac-window.svg'
 
 export default {
   components: {
@@ -35,6 +37,7 @@ export default {
     ProfilePicture,
     ProfileTitle,
     NavHamburger,
+    MacWindow,
   },
   props: {
     splash: Boolean,
@@ -147,52 +150,51 @@ export default {
 
 <style lang="postcss" module>
 :root {
-  --header-height: 70px;
+  --header-height: 78.5px;
 }
 
 footer {
+  font-size: 10px;
+  position: fixed;
+  background-color: var(--color-header-bg);
+  left: 0;
+  width: 100%;
+  bottom: 0;
   padding: var(--padding-small);
-  display: none;
-}
-
-.container {
-  /* padding-top: var(--header-height); */
-}
-
-.container.splash {
-  height: 100vh;
-  height: calc(var(--vh, 1vh) * 100);
-  margin: auto;
-  display: grid;
-  align-content: center;
-  grid-template-columns: 1fr;
-
-  footer {
-    position: fixed;
-    bottom: 1.5em;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    font-size: 0.8em;
+  box-sizing: border-box;
+  & * {
+    color: white;
   }
 }
 
 .header {
-  margin: auto;
   display: grid;
   position: fixed;
   width: 100%;
-  top: auto;
+  border-bottom: 8px solid var(--color-one);
 }
 
 .header {
   grid-template-areas:
-    'ptitle ptitle hamburger'
+    'mac ptitle hamburger'
     'nav nav nav';
-  grid-template-columns: auto auto 80px;
+  grid-template-columns: 70px auto 70px;
   overflow: visible;
   z-index: 1000;
-  height: 80px;
+  background-color: var(--color-header-bg);
+
+  & > * {
+    padding: var(--padding-small);
+    display: grid;
+    align-items: center;
+  }
+
+  .mac {
+    justify-self: start;
+    svg {
+      width: 45px;
+    }
+  }
 
   .nav {
     grid-area: nav;
@@ -201,27 +203,29 @@ footer {
     z-index: 100;
     top: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    padding: 0;
+    pointer-events: none;
   }
 
   & > * {
-    justify-content: center;
+    justify-self: center;
   }
 
   .nav > nav {
     background: radial-gradient(
         circle at 100% 50%,
         transparent 20%,
-        rgba(255, 255, 255, 0.05) 21%,
-        rgba(255, 255, 255, 0.05) 34%,
+        rgba(255, 255, 255, 0.02) 21%,
+        rgba(255, 255, 255, 0.02) 34%,
         transparent 35%,
         transparent
       ),
       radial-gradient(
           circle at 0% 50%,
           transparent 20%,
-          rgba(255, 255, 255, 0.05) 21%,
-          rgba(255, 255, 255, 0.05) 34%,
+          rgba(255, 255, 255, 0.02) 21%,
+          rgba(255, 255, 255, 0.02) 34%,
           transparent 35%,
           transparent
         )
@@ -248,77 +252,18 @@ footer {
   }
 }
 
-.profilePicture {
-  justify-self: center;
-  align-self: center;
-  grid-area: ppic;
-  font-size: 4px;
-}
-
-.profileTitle {
-  font-size: 8px;
-  align-items: start;
+.title {
   grid-area: ptitle;
-  margin-left: 1.8em;
-  padding: var(--padding-tiny) 0;
+  align-self: center;
+  justify-self: center;
+  color: var(--color-one);
 }
 
 .hamburger {
   align-self: center;
-  justify-self: center;
+  justify-self: end;
   filter: opacity(50%);
   z-index: 150;
-}
-
-.splash {
-  font-size: 13px;
-
-  &.container {
-    padding: 0;
-  }
-
-  .header {
-    height: auto;
-    grid-template-areas:
-      'ppic ppic ppic'
-      'ptitle ptitle ptitle'
-      'nav nav nav';
-    position: relative;
-    width: auto;
-    top: auto;
-
-    .profilePicture {
-      display: block;
-      margin-top: 0;
-    }
-
-    .nav {
-      top: auto;
-      display: flex;
-      height: auto;
-      position: relative;
-      width: auto;
-
-      & > nav {
-        pointer-events: auto;
-        overflow: visible;
-        opacity: 1;
-        background-color: transparent;
-        flex-direction: row;
-      }
-    }
-
-    .profileTitle {
-      font-size: 12px;
-      margin-left: 0;
-      padding: 0;
-      align-items: center;
-    }
-
-    .hamburger {
-      display: none;
-    }
-  }
 }
 
 .content {
@@ -329,68 +274,9 @@ footer {
 
   h1 {
     line-height: 1;
-    font-family: 'Barlow Condensed';
-    margin: 0;
+    font-family: Righteous;
+    margin-top: 0;
+    margin-bottom: 0;
   }
-}
-
-@media screen and (min-width: 600px) {
-}
-
-@media screen and (min-width: 540px) {
-  .splash .profileTitle {
-    font-size: 13px;
-  }
-
-  .splash .header {
-    grid-template-areas:
-      'ptitle ptitle ptitle'
-      'nav nav nav';
-
-    .profileTitle {
-      grid-area: ptitle;
-    }
-  }
-}
-
-@media screen and (min-width: 768px) and (min-height: 560px) {
-  .container.splash,
-  .splash .header .profileTitle {
-    font-size: 16px;
-  }
-}
-
-@media screen and (min-width: 1240px) {
-  .container.splash,
-  .splash .header .profileTitle {
-    font-size: 18px;
-  }
-}
-
-@media screen and (min-width: 1840px) {
-  .container.splash,
-  .splash .header .profileTitle {
-    font-size: 20px;
-  }
-}
-
-@media screen and (min-width: 540px) and (min-height: 560px) {
-  .container.splash {
-    footer {
-      bottom: 2em;
-    }
-  }
-}
-
-.profile {
-  flex-direction: row;
-}
-
-.profile > *:first-child {
-  font-size: 5px;
-}
-
-.profile > *:last-child {
-  font-size: 8px;
 }
 </style>

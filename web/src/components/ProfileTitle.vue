@@ -15,34 +15,9 @@ export default {
 
 <style lang="postcss" module>
 .title {
-  display: flex;
-  flex-direction: column;
-
   .main {
-    font-family: 'Barlow Condensed';
-    font-weight: 700;
-    font-size: 5em;
-    position: relative;
-    display: inline-block;
-    z-index: 10;
-    top: -0.15em;
-    /* text-shadow: rgba(0, 0, 0, 0.6) 0.03em 0.03em; */
-
-    &:before {
-      content: ' ';
-      background-color: var(--color-one);
-      height: 0.12em;
-      width: 100%;
-      position: absolute;
-      bottom: -2px;
-      z-index: -5;
-      box-shadow: rgba(255, 117, 0, 0.2) 0.03em 0.03em;
-    }
-  }
-  .subText {
-    font-size: 1.7em;
-    text-align: center;
-    line-height: 1;
+    font-family: Righteous;
+    font-size: 26px;
   }
 }
 </style>

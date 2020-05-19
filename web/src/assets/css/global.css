@@ -1,16 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2&Roboto+Slab:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 
 :root {
-  --color-one: #ff7500;
-  --color-two: #086fa1;
-  --color-three: #ff3500;
+  --color-one: #f78c1d;
+  --color-two: #509dd2;
+  --color-three: #ff4a16;
   --color-four: #00b64f;
-  --color-five: #b2b2b2;
+  --color-five: #343434;
+
+  --color-one-faded-20: rgba(247, 140, 29, 0.1);
+  --color-two-faded-20: rgba(80, 157, 210, 0.1);
+  --color-three-faded-20: rgba(255, 74, 22, 0.1);
+  --color-four-faded-20: rgba(0, 182, 79, 0.1);
+
   --text-color: black;
   --border-color: black;
   --color-neutral: white;
+
+  --color-header-bg: #343434;
+
   --padding-tiny: 7px;
   --padding-small: 14px;
   --padding-large: calc(var(--padding-small) * 2);
@@ -22,16 +29,11 @@
 }
 
 body {
-  /* background: #dddddd; */
   font-family: wotfard;
   font-size: 18px;
 }
 
 a {
   text-decoration: none;
-  color: var(--text-color);
-}
-
-a:visited {
   color: var(--text-color);
 }

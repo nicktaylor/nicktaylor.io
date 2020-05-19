@@ -8,25 +8,11 @@ const isProd = process.env.NODE_ENV === 'production'
 
 module.exports = {
   siteName: 'Nick Taylor - Web Developer',
-  // templates: {
-  //   SanityContent: [
-  //     {
-  //       //path: '/:content__slug__current',
-  //       path: node => {
-  //         console.log(node)
-  //         return `/${node.mainCategoryTwo.slug.current}/${
-  //           node.content.slug.current
-  //         }`
-  //       },
-  //       component: '~/templates/Content.vue',
-  //     },
-  //     // {
-  //     //   name: 'root',
-  //     //   path: '/:content__slug__current',
-  //     //   component: '~/templates/Content.vue',
-  //     // },
-  //   ],
-  // },
+  chainWebpack: config => {
+    const svgRule = config.module.rule('svg')
+    svgRule.uses.clear()
+    svgRule.use('vue-svg-loader').loader('vue-svg-loader')
+  },
   plugins: [
     {
       use: 'gridsome-source-sanity',

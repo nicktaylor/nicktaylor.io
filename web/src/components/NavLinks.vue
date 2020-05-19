@@ -1,7 +1,7 @@
 <template>
   <nav :class="[$style.nav, classes]">
     <template v-for="link in links">
-      <NavLink :link="link" :key="link.title" />
+      <NavLink :link="link" :key="link.title" :onClick="onClick" />
     </template>
   </nav>
 </template>
@@ -14,6 +14,7 @@ export default {
   },
   props: {
     links: Array,
+    onClick: Function,
     classes: String,
   },
 }
