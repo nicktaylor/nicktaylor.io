@@ -36,5 +36,9 @@
   "devDependencies": {
     "eslint": "^6.8.0",
     "lerna": "^3.20.2"
+  },
+  "dependencies": {
+    "@playlyfe/gql": "^2.6.2",
+    "graphql-import": "^1.0.2"
   }
 }

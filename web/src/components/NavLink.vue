@@ -13,7 +13,7 @@ import { CSSRulePlugin } from 'gsap/all'
 export default {
   props: {
     link: Object,
-    onClick: Function,
+    onClick: Function
   },
   data: function() {
     return {

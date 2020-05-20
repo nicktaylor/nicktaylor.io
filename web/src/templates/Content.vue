@@ -1,71 +1,38 @@
 <template>
   <Layout :splash="false">
-    <main :class="[$style.article, getClass]">
+    <main :class="[$style.article]" :data-ctheme="getClass">
       <header :class="$style.header">
         <div :class="$style.headoverlay">
-          <h1>{{p.title.toLowerCase()}}</h1>
-          <time datetime="2020-05-19 11:10">Tuesday, 19th May 2020</time>
+          <h1>{{$context.title.toLowerCase()}}</h1>
+          <time v-if="datetime" datetime="2020-05-19 11:10">Tuesday, 19th May 2020</time>
         </div>
       </header>
-      <section>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porttitor tellus nec scelerisque posuere. Vivamus eu magna nibh. Sed ac lacinia justo. Proin pellentesque quam commodo est tempus venenatis. Cras quis diam efficitur, facilisis enim eu, gravida orci. Sed a risus ac orci malesuada vestibulum quis sed turpis.</p>
-        <p>Curabitur semper ut dolor et porta. Nam tempus in lacus consequat tempus. Curabitur dignissim magna ut nisi aliquam, in pellentesque est congue. Curabitur velit nibh, convallis et mollis vitae, suscipit eget dui. Donec non sagittis odio.</p>
-        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec nec mi neque. Nunc consequat magna dapibus purus efficitur, eget pellentesque tortor placerat. Quisque commodo libero et nunc scelerisque efficitur. Integer in sem molestie, cursus ex quis, finibus diam.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porttitor tellus nec scelerisque posuere. Vivamus eu magna nibh. Sed ac lacinia justo. Proin pellentesque quam commodo est tempus venenatis. Cras quis diam efficitur, facilisis enim eu, gravida orci. Sed a risus ac orci malesuada vestibulum quis sed turpis.</p>
-        <p>Curabitur semper ut dolor et porta. Nam tempus in lacus consequat tempus. Curabitur dignissim magna ut nisi aliquam, in pellentesque est congue. Curabitur velit nibh, convallis et mollis vitae, suscipit eget dui. Donec non sagittis odio.</p>
-        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec nec mi neque. Nunc consequat magna dapibus purus efficitur, eget pellentesque tortor placerat. Quisque commodo libero et nunc scelerisque efficitur. Integer in sem molestie, cursus ex quis, finibus diam.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porttitor tellus nec scelerisque posuere. Vivamus eu magna nibh. Sed ac lacinia justo. Proin pellentesque quam commodo est tempus venenatis. Cras quis diam efficitur, facilisis enim eu, gravida orci. Sed a risus ac orci malesuada vestibulum quis sed turpis.</p>
-        <p>Curabitur semper ut dolor et porta. Nam tempus in lacus consequat tempus. Curabitur dignissim magna ut nisi aliquam, in pellentesque est congue. Curabitur velit nibh, convallis et mollis vitae, suscipit eget dui. Donec non sagittis odio.</p>
-        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec nec mi neque. Nunc consequat magna dapibus purus efficitur, eget pellentesque tortor placerat. Quisque commodo libero et nunc scelerisque efficitur. Integer in sem molestie, cursus ex quis, finibus diam.</p>
-      </section>
+      <div v-for="block in $context.contentBlocks" :key="block._key">
+        <component :is="$getComponentByType(block)" v-bind="block" />
+      </div>
     </main>
   </Layout>
 </template>
 
 
 <script>
+import ContentBlock from '~/components/ContentBlock.vue'
 import { getClassByColor } from '~/utils/colorList'
 export default {
+  props: {
+    datetime: String,
+    title: String,
+  },
   computed: {
-    p: function() {
-      return this.$page.info.content
-    },
     getClass: function() {
-      if (!this.$page.info.content.mainCategory) {
+      if (!this.$context.mainCategory) {
         return
       }
-      return this.$style[
-        getClassByColor(this.$page.info.content.mainCategory.color)
-      ]
+      return getClassByColor(this.$context.mainCategory.color)
     },
   },
 }
 </script>
-
-<page-query>
-query ContentQuery($id: ID!) {
-  metadata {
-    sanityOptions {
-      projectId
-      dataset
-    }
-  }
-  info: sanityContent(id: $id) {
-    content {
-      title
-      slug {
-        current
-      }
-      mainCategory {
-        slug {
-          current
-        }
-        color
-      }
-    }    
-  }
-}
-</page-query>
 
 <style lang="postcss" module>
 .header {
@@ -73,7 +40,7 @@ query ContentQuery($id: ID!) {
   padding: var(--padding-small);
   padding-top: 160px;
 
-  background-color: var(--color-one-faded-20);
+  background-color: var(--content-color-faded);
   background-image: repeating-linear-gradient(
       45deg,
       transparent,
@@ -96,13 +63,13 @@ query ContentQuery($id: ID!) {
   }
 
   time {
-    color: var(--color-one);
+    color: var(--content-color-main);
     filter: brightness(75%);
   }
 
   h1,
   h2 {
-    color: var(--color-one);
+    color: var(--content-color-main);
     font-weight: 500;
   }
 }

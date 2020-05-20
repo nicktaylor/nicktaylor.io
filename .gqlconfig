@@ -1,0 +1,17 @@
+{
+  schema: {
+    files: 'schemas/**/*.gql',
+  },
+  query: {
+    files: [
+      {
+        match: '**/*.vue',
+        parser: [
+          'EmbeddedQueryParser',
+          { startTag: '<page-query>', endTag: '</page-query>' },
+          k,
+        ],
+      },
+    ],
+  },
+}

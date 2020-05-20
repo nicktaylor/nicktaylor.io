@@ -5,6 +5,12 @@
 // Changes here require a server restart.
 // To restart press CTRL + C in terminal and run `gridsome develop`
 const clientConfig = require('./client-config')
+const urlResolver = require('./utils/urlResolver')
+var fs = require('fs')
+
+require.extensions['.gql'] = function(module, filename) {
+  module.exports = fs.readFileSync(filename, 'utf8')
+}
 
 module.exports = function(api) {
   api.loadSource(({ addMetadata }) => {
@@ -12,54 +18,22 @@ module.exports = function(api) {
     addMetadata('sanityOptions', clientConfig.sanity)
   })
 
+  const allContentQuery = require('./src/schemas/allContent.gql')
+
   api.createPages(async ({ graphql, createPage }) => {
     // Use the Pages API here: https://gridsome.org/docs/pages-api/
-    const { data } = await graphql(`
-      query AllContentQuery {
-        info: allSanityContent {
-          edges {
-            node {
-              id
-              content {
-                title
-                slug {
-                  current
-                }
-                mainCategory {
-                  homepage {
-                    id
-                  }
-                  slug {
-                    current
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    `)
+    const { data } = await graphql(allContentQuery)
 
     data.info.edges.forEach(({ node }) => {
-      let path = `/${node.content.slug.current}`
-
-      if (
-        node.content.mainCategory &&
-        node.content.mainCategory.homepage &&
-        node.content.mainCategory.homepage.id == node.id
-      ) {
-        path = `/${node.content.mainCategory.slug.current}`
-      } else if (node.content.mainCategory) {
-        path = `/${node.content.mainCategory.slug.current}/${
-          node.content.slug.current
-        }`
-      }
+      let path = urlResolver(node, data.settings)
 
       createPage({
         path: path,
         component: './src/templates/Content.vue',
         context: {
           id: node.id,
+          metadata: data.metadata,
+          ...node.content,
         },
       })
     })

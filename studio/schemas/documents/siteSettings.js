@@ -42,5 +42,12 @@ export default {
       title: 'Social Links',
       of: [{ type: 'socialLink' }],
     },
+    {
+      name: 'homepage',
+      type: 'reference',
+      title: 'Homepage',
+      to: { type: 'content' },
+      validation: Rule => Rule.required().error('Homepage must be chosen'),
+    },
   ],
 }

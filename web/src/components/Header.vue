@@ -143,6 +143,9 @@ export default {
     & > * {
       padding-top: var(--padding-large);
     }
+    & > *:first-child {
+      padding-top: 0;
+    }
   }
 }
 

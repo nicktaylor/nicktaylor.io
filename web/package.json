@@ -7,11 +7,13 @@
     "explore": "gridsome explore"
   },
   "dependencies": {
+    "@playlyfe/gql": "^2.6.2",
     "@sanity/image-url": "^0.140.19",
     "gridsome": "^0.7.0",
     "gridsome-source-sanity": "^1.0.5",
     "gsap": "^3.2.6",
     "normalize.css": "^8.0.1",
+    "sanity-blocks-vue-component": "^0.1.0",
     "vue-svg-loader": "^0.16.0"
   },
   "devDependencies": {

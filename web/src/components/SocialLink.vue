@@ -2,7 +2,7 @@
   <a :href="url" :class="$style.social">
     <g-image
       :alt="`${type}`"
-      :src="$urlForImage(logo, $page.metadata.sanityOptions).width(25).quality(90).auto('format').url()"
+      :src="$urlForImage(logo, $context.metadata.sanityOptions).width(25).quality(90).auto('format').url()"
     />
     <span>{{text}}</span>
   </a>

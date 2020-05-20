@@ -21,6 +21,9 @@
   --padding-tiny: 7px;
   --padding-small: 14px;
   --padding-large: calc(var(--padding-small) * 2);
+
+  --content-color-main: var(--color-one);
+  --content-color-faded: var(--color-one-faded-20);
 }
 
 @font-face {
@@ -36,4 +39,19 @@ body {
 a {
   text-decoration: none;
   color: var(--text-color);
+}
+
+*[data-ctheme='two'] {
+  --content-color-main: var(--color-two);
+  --content-color-faded: var(--color-two-faded-20);
+}
+
+*[data-ctheme='three'] {
+  --content-color-main: var(--color-three);
+  --content-color-faded: var(--color-three-faded-20);
+}
+
+*[data-ctheme='four'] {
+  --content-color-main: var(--color-four);
+  --content-color-faded: var(--color-four-faded-20);
 }

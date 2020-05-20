@@ -1,0 +1,52 @@
+query AllContentQuery {
+  metadata {
+    sanityOptions {
+      projectId
+      dataset
+    }
+  }
+  settings: sanitySiteSettings(id: "siteSettings") {
+    homepage {
+      id
+    }
+  }
+  info: allSanityContent {
+    edges {
+      node {
+        id
+        content {
+          title
+          slug {
+            current
+          }
+          mainCategory {
+            homepage {
+              id
+            }
+            slug {
+              current
+            }
+            color
+          }
+          contentBlocks {
+            ... on SanityFullPortableTextObject {
+              _key
+              _type
+              _rawContent(resolveReferences: { maxDepth: 7 })
+            }
+            ... on SanityContentList {
+              _key
+              _type
+              title
+              resultsPerPage
+              hasPaging
+              filterCategory {
+                title
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
