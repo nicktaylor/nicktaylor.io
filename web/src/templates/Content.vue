@@ -31,6 +31,9 @@ export default {
       return this.$page.info.content
     },
     getClass: function() {
+      if (!this.$page.info.content.mainCategory) {
+        return
+      }
       return this.$style[
         getClassByColor(this.$page.info.content.mainCategory.color)
       ]

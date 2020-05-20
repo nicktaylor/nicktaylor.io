@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.title">
-    <div :class="$style.main">{{name.toLowerCase()}}</div>
+    <g-link :to="url" :class="$style.main">{{name.toLowerCase()}}</g-link>
   </div>
 </template>
 
@@ -9,6 +9,7 @@ export default {
   props: {
     name: String,
     slogan: String,
+    url: String,
   },
 }
 </script>
@@ -18,6 +19,7 @@ export default {
   .main {
     font-family: Righteous;
     font-size: 26px;
+    color: var(--color-one);
   }
 }
 </style>

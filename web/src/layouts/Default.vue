@@ -4,7 +4,12 @@
       <div :class="$style.mac">
         <MacWindow />
       </div>
-      <ProfileTitle :slogan="$static.info.subText" :name="$static.info.name" :class="$style.title" />
+      <ProfileTitle
+        url="/"
+        :slogan="$static.info.subText"
+        :name="$static.info.name"
+        :class="$style.title"
+      />
       <div :class="$style.hamburger">
         <NavHamburger :onToggle="onToggleNav" :open="open" />
       </div>
@@ -277,6 +282,40 @@ footer {
     font-family: Righteous;
     margin-top: 0;
     margin-bottom: 0;
+  }
+}
+
+@media screen and (min-width: 980px) {
+  .hamburger {
+    display: none;
+  }
+
+  .header {
+    grid-template-areas: 'mac ptitle nav';
+    grid-template-columns: 70px 200px auto;
+    .nav {
+      display: block;
+      position: relative;
+      height: auto;
+      width: auto;
+      top: auto;
+      align-self: center;
+      justify-self: end;
+      pointer-events: auto;
+
+      & > nav {
+        flex-direction: row;
+        background: none;
+        opacity: 1;
+        overflow: visible;
+        font-size: 0.8em;
+        pointer-events: auto;
+
+        & > * {
+          padding-top: 0;
+        }
+      }
+    }
   }
 }
 </style>
