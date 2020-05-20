@@ -71,8 +71,8 @@ query ContentQuery($id: ID!) {
 .header {
   display: block;
   padding: var(--padding-small);
-  border-bottom: 6px solid var(--color-one);
   padding-top: 160px;
+
   background-color: var(--color-one-faded-20);
   background-image: repeating-linear-gradient(
       45deg,

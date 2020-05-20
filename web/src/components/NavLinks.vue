@@ -27,7 +27,6 @@ export default {
 
   & > * {
     text-align: center;
-    font-size: 1.3em;
     line-height: 1;
 
     a {
