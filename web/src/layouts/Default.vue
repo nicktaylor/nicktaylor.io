@@ -14,12 +14,6 @@ import Footer from '~/components/Footer.vue'
 
 import { getClassByColor } from '~/utils/colorList'
 
-document.addEventListener('DOMContentLoaded', () => {
-  let vh = window.innerHeight * 0.01
-  document.documentElement.style.setProperty('--vh', `${vh}px`)
-  console.log(`DOM LOADED ${vh}`)
-})
-
 export default {
   components: {
     Header,
@@ -27,13 +21,6 @@ export default {
   },
   props: {
     splash: Boolean,
-  },
-  mounted: function() {
-    window.addEventListener('resize', () => {
-      let vh = window.innerHeight * 0.01
-      document.documentElement.style.setProperty('--vh', `${vh}px`)
-      console.log(`Setting property to ${vh}`)
-    })
   },
   computed: {
     classes() {
