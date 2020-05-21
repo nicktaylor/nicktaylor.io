@@ -29,7 +29,7 @@ export default {
                     []
                   )
                 ),
-                300
+                200
               ),
       }))
       return retVal
