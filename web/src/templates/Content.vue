@@ -84,10 +84,6 @@ section {
   }
 }
 
-main {
-  margin-bottom: 40px;
-}
-
 main.two {
   header {
     border-bottom-color: var(--color-two);

@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section :class="$style.block">
     <BlockContent :blocks="_rawContent" :serializers="serializers" />
   </section>
 </template>
@@ -33,5 +33,11 @@ export default {
 <style lang="postcss" module>
 a {
   color: var(--content-color-main);
+}
+
+.block {
+  & > div > *:first-child {
+    margin-top: 0;
+  }
 }
 </style>

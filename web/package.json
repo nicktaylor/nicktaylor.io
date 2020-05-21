@@ -9,6 +9,7 @@
   "dependencies": {
     "@playlyfe/gql": "^2.6.2",
     "@sanity/image-url": "^0.140.19",
+    "dayjs": "^1.8.27",
     "gridsome": "^0.7.0",
     "gridsome-source-sanity": "^1.0.5",
     "gsap": "^3.2.6",

@@ -4,6 +4,7 @@
 import DefaultLayout from '~/layouts/Default.vue'
 import urlForImage from './utils/urlForImage'
 import NormalizeCss from 'normalize.css'
+import dayjs from 'dayjs'
 import { gsap } from 'gsap'
 import { CSSRulePlugin } from 'gsap/all'
 
@@ -15,6 +16,7 @@ export default function(Vue, { router, head, isClient }) {
   // Set default layout as a global component
   Vue.component('Layout', DefaultLayout)
   Vue.use(NormalizeCss)
+  Vue.filter('niceDateFormat', value => dayjs(value).format("dddd, D MMMM 'YY"))
   Vue.prototype.$getComponentByType = getComponent
   Vue.prototype.$urlForImage = urlForImage
   gsap.registerPlugin(CSSRulePlugin)
