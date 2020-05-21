@@ -28,7 +28,7 @@
 
 @font-face {
   font-family: wotfard;
-  src: url(/assets/fonts/wotfard-regular-webfont.woff2);
+  src: url(/static/fonts/wotfard-regular-webfont.woff2);
 }
 
 body {

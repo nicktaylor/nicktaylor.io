@@ -8,7 +8,6 @@ import { gsap } from 'gsap'
 import { CSSRulePlugin } from 'gsap/all'
 
 import '~/assets/css/global.css'
-import '~/assets/fonts/wotfard-regular-webfont.woff2'
 import '~/assets/images/mac-window.svg'
 import { getComponent } from './utils/contentTypes'
 
