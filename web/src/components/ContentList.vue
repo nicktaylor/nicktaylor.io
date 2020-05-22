@@ -1,20 +1,22 @@
 <template>
   <div :class="$style.list">
     <template v-for="item in contentItems">
-      <ContentItemPreview v-bind="item" :key="item.id" />
+      <ContentItemPreview v-bind="item" :key="item.title" :class="$style.item" />
     </template>
   </div>
 </template>
 
 <script>
 import ContentItemPreview from '~/components/ContentItemPreview.vue'
-import { toPlainText, cutAtEndOfLine } from '~/utils/portableText'
+import { getExcerptFromContent } from '~/utils/portableText'
 import urlResolver from '~/utils/urlResolver'
 export default {
   components: {
     ContentItemPreview,
   },
-  props: {},
+  props: {
+    title: String,
+  },
   computed: {
     contentItems: function() {
       return this.$static.items.edges.map(({ node: i }) => ({
@@ -23,18 +25,7 @@ export default {
           ? new Date(i.content.publishedAt)
           : null,
         url: urlResolver(i, this.$context.settings),
-        text:
-          i.content._rawExcerpt && i.content._rawExcerpt.length > 0
-            ? toPlainText(i.content._rawExcerpt)
-            : cutAtEndOfLine(
-                toPlainText(
-                  i.content.contentBlocks.reduce(
-                    (c, b) => c.concat(b._rawContent),
-                    []
-                  )
-                ),
-                200
-              ),
+        text: getExcerptFromContent(i, 200),
       }))
     },
   },
@@ -43,16 +34,75 @@ export default {
 
 <style lang="postcss" module>
 .list {
+  --list-spacing: var(--padding-large);
   padding: var(--padding-small);
-  max-width: 900px;
+  max-width: 800px;
   margin: auto;
 
   & > * {
-    margin-top: var(--padding-xlarge);
+    margin-top: var(--list-spacing);
   }
 
   & > *:first-child {
     margin-top: 0;
+  }
+  .item {
+    position: relative;
+
+    &:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 50vw solid transparent;
+      border-right: 50vw solid var(--content-color-two);
+      border-top: 0px solid transparent;
+      border-bottom: 1px solid transparent;
+      bottom: calc(var(--list-spacing) * -0.5);
+      right: 0;
+      opacity: 0.3;
+    }
+  }
+
+  .item:nth-child(2n) {
+    &:after {
+      border-left: 50vw solid var(--content-color-three);
+      border-right: 50vw solid transparent;
+      border-top: 0px solid transparent;
+      border-bottom: 1px solid transparent;
+      bottom: calc(var(--list-spacing) * -0.5);
+      left: 0;
+    }
+  }
+
+  .item:nth-child(4n) {
+    &:after {
+      border-left-color: var(--content-color-two);
+    }
+  }
+
+  .item:nth-child(4n + 1) {
+    &:after {
+      border-right-color: var(--content-color-three);
+    }
+  }
+
+  .item:nth-child(4n + 2) {
+    &:after {
+      border-left-color: var(--content-color-main);
+    }
+  }
+
+  .item:nth-child(4n + 3) {
+    &:after {
+      border-right-color: var(--content-color-action);
+    }
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .list {
+    --list-spacing: var(--padding-xlarge);
   }
 }
 
@@ -64,8 +114,8 @@ export default {
 </style>
 
 <static-query>
-query ContentQuery($limit: Int = 10, $offset: Int = 0) {
-  items: allSanityContent(limit: $limit, skip: $offset) {
+query ContentQuery {
+  items: allSanityContent {
     edges {
       node {
         id
@@ -84,6 +134,7 @@ query ContentQuery($limit: Int = 10, $offset: Int = 0) {
             }
           }
           mainCategory {
+            id
             title
             homepage {
               id

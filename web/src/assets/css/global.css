@@ -22,7 +22,7 @@
   --padding-small: 1rem;
   --padding-medium: calc(var(--padding-small) * 1.5);
   --padding-large: calc(var(--padding-small) * 3);
-  --padding-xlarge: calc(var(--padding-small) * 5);
+  --padding-xlarge: calc(var(--padding-small) * 6);
 
   --content-color-main: var(--color-one);
   --content-color-faded: var(--color-one-faded-20);
@@ -145,6 +145,12 @@ a:hover {
 }
 
 @media screen and (min-width: 576px) {
+  body {
+    font-size: 17px;
+  }
+}
+
+@media screen and (min-width: 768px) {
   body {
     font-size: 18px;
   }

@@ -27,3 +27,16 @@ export const cutAtEndOfLine = (text, numChars, ellipsis) => {
 
   return newText
 }
+
+export const getExcerptFromContent = (content, numChars) =>
+  content.content._rawExcerpt && content.content._rawExcerpt.length > 0
+    ? toPlainText(content.content._rawExcerpt)
+    : cutAtEndOfLine(
+        toPlainText(
+          content.content.contentBlocks.reduce(
+            (c, b) => c.concat(b._rawContent),
+            []
+          )
+        ),
+        numChars
+      )

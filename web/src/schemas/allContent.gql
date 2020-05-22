@@ -20,6 +20,7 @@ query AllContentQuery {
             current
           }
           mainCategory {
+            id
             homepage {
               id
             }
