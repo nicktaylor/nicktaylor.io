@@ -31,6 +31,7 @@ module.exports = function(api) {
         path: path,
         component: './src/templates/Content.vue',
         context: {
+          settings: data.settings,
           id: node.id,
           metadata: data.metadata,
           ...node.content,

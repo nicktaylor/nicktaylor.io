@@ -15,7 +15,7 @@ export default {
       serializers: {
         marks: {
           internalLink: content => {
-            const node = content.mark.reference.content
+            const node = content.mark.reference
             const url = urlResolver(node, this.$context.settings)
             return <g-link to={url}>{content.children.join('')}</g-link>
           },

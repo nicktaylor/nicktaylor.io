@@ -8,6 +8,9 @@ import dayjs from 'dayjs'
 import { gsap } from 'gsap'
 import { CSSRulePlugin } from 'gsap/all'
 
+import 'vue-awesome/icons/angle-double-right'
+import Icon from 'vue-awesome/components/Icon'
+
 import '~/assets/css/global.css'
 import '~/assets/images/mac-window.svg'
 import { getComponent } from './utils/contentTypes'
@@ -15,6 +18,7 @@ import { getComponent } from './utils/contentTypes'
 export default function(Vue, { router, head, isClient }) {
   // Set default layout as a global component
   Vue.component('Layout', DefaultLayout)
+  Vue.component('v-icon', Icon)
   Vue.use(NormalizeCss)
   Vue.filter('niceDateFormat', value => dayjs(value).format("dddd, D MMMM 'YY"))
   Vue.prototype.$getComponentByType = getComponent

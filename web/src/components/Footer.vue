@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer :class="$style.footer">
     <SocialLinks :links="socialLinks" />
   </footer>
 </template>
@@ -17,7 +17,7 @@ export default {
 </script>
 
 <style lang="postcss" module>
-footer {
+.footer {
   box-sizing: border-box;
   padding: var(--padding-small);
   position: fixed;

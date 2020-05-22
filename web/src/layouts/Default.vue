@@ -119,10 +119,10 @@ export default {
   border-radius: var(--padding-small);
   font-family: wotfard;
   padding-bottom: 50px;
+  overflow: hidden;
 
   h1 {
     line-height: 1;
-    font-family: Righteous;
     margin-top: 0;
     margin-bottom: 0;
   }

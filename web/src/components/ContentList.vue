@@ -9,6 +9,7 @@
 <script>
 import ContentItemPreview from '~/components/ContentItemPreview.vue'
 import { toPlainText, cutAtEndOfLine } from '~/utils/portableText'
+import urlResolver from '~/utils/urlResolver'
 export default {
   components: {
     ContentItemPreview,
@@ -16,9 +17,12 @@ export default {
   props: {},
   computed: {
     contentItems: function() {
-      const retVal = this.$static.items.edges.map(({ node: i }) => ({
+      return this.$static.items.edges.map(({ node: i }) => ({
         title: i.content.title,
-        datetime: i.content.publishedAt ? i.content.publishedAt : null,
+        datetime: i.content.publishedAt
+          ? new Date(i.content.publishedAt)
+          : null,
+        url: urlResolver(i, this.$context.settings),
         text:
           i.content._rawExcerpt && i.content._rawExcerpt.length > 0
             ? toPlainText(i.content._rawExcerpt)
@@ -32,7 +36,6 @@ export default {
                 200
               ),
       }))
-      return retVal
     },
   },
 }
@@ -40,16 +43,22 @@ export default {
 
 <style lang="postcss" module>
 .list {
-  padding: var(--padding-medium);
-  max-width: 800px;
+  padding: var(--padding-small);
+  max-width: 900px;
   margin: auto;
 
   & > * {
-    margin-top: var(--padding-large);
+    margin-top: var(--padding-xlarge);
   }
 
   & > *:first-child {
     margin-top: 0;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .list {
+    padding: var(--padding-large);
   }
 }
 </style>
@@ -59,6 +68,7 @@ query ContentQuery($limit: Int = 10, $offset: Int = 0) {
   items: allSanityContent(limit: $limit, skip: $offset) {
     edges {
       node {
+        id
         content {
           title
           slug {
@@ -75,6 +85,12 @@ query ContentQuery($limit: Int = 10, $offset: Int = 0) {
           }
           mainCategory {
             title
+            homepage {
+              id
+            }
+            slug {
+              current
+            }
           }
           mainImage {
             asset {

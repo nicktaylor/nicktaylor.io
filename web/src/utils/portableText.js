@@ -17,7 +17,6 @@ export const cutAtEndOfLine = (text, numChars, ellipsis) => {
   }
 
   let newText = ''
-  console.log(sentences)
   for (let i = 0; i < sentences.length; i++) {
     newText += sentences[i] ? `${sentences[i]}` : ''
     if (newText.length > numChars) {
