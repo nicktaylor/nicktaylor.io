@@ -5,11 +5,10 @@
   query: {
     files: [
       {
-        match: '**/*.vue',
+        match: 'web/src/**/*.vue',
         parser: [
           'EmbeddedQueryParser',
-          { startTag: '<page-query>', endTag: '</page-query>' },
-          k,
+          { startTag: '<static-query>', endTag: '</static-query>' },
         ],
       },
     ],
