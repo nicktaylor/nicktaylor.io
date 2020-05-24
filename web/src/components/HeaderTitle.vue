@@ -20,7 +20,7 @@ export default {
   .main {
     font-family: var(--font-title);
     font-size: 26px;
-    color: var(--color-one);
+    color: var(--color-one-darkbg);
   }
 
   .subText {

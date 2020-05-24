@@ -70,7 +70,7 @@ export default {
   display: grid;
   position: fixed;
   width: 100%;
-  border-bottom: 8px solid var(--color-one);
+  border-bottom: 8px solid var(--color-one-darkbg);
 }
 
 .header {

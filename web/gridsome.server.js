@@ -76,13 +76,13 @@ module.exports = function(api) {
       const context = {}
 
       const createNavData = (navToPage) => ({
-        title: navToPage.title,
+        title: navToPage.content.title,
         url: urlResolver(navToPage, data.settings),
       })
 
       if (homepagesByCategory[categoryId].partOfContentList) {
         context.previousPage = index > 0 ? createNavData(pages[index - 1]) : null
-        context.nextpage = index + 1 !== pages.length ? createNavData(pages[index + 1]) : null
+        context.nextPage = index + 1 !== pages.length ? createNavData(pages[index + 1]) : null
       }
 
       localCreate(page, path, context)

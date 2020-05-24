@@ -96,10 +96,10 @@ export default {
 }
 
 .one a {
-  color: var(--color-one);
+  color: var(--color-one-darkbg);
   &:before,
   &:after {
-    color: var(--color-one);
+    color: var(--color-one-darkbg);
   }
   &:before {
     content: '<';
@@ -110,10 +110,10 @@ export default {
 }
 
 .two a {
-  color: var(--color-two);
+  color: var(--color-two-darkbg);
   &:before,
   &:after {
-    color: var(--color-two);
+    color: var(--color-two-darkbg]);
   }
   &:before {
     content: '{';
@@ -124,10 +124,10 @@ export default {
 }
 
 .three a {
-  color: var(--color-three);
+  color: var(--color-three-darkbg);
   &:before,
   &:after {
-    color: var(--color-three);
+    color: var(--color-three-darkbg);
   }
   &:before {
     content: '(';
@@ -138,11 +138,11 @@ export default {
 }
 
 .four a {
-  color: var(--color-four);
+  color: var(--color-four-darkbg);
 
   &:before,
   &:after {
-    color: var(--color-four);
+    color: var(--color-four-darkbg);
   }
   &:before {
     content: '[';

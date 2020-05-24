@@ -10,6 +10,10 @@
       <div v-for="block in $context.contentBlocks" :key="block._key">
         <component :is="$getComponentByType(block)" v-bind="getBlockData(block)"/>
       </div>
+      <PageNavigation v-if="$context.nextPage || $context.previousPage"
+                      :next-page="$context.nextPage"
+                      :previous-page="$context.previousPage"
+                      prev-next-label="true"/>
     </main>
   </Layout>
 </template>
@@ -17,8 +21,10 @@
 
 <script>
   import { getClassByColor } from '~/utils/colorList'
+  import PageNavigation from '~/components/PageNavigation'
 
   export default {
+    components: { PageNavigation },
     props: {
       datetime: String,
       title: String,
@@ -26,12 +32,12 @@
     methods: {
       getBlockData: function(block) {
         return block._type === 'contentList'
-          ? {
-            ...block,
-            listData: this.$context.listData,
-            pagingInfo: this.$context.listOptions,
-          }
-          : block
+            ? {
+              ...block,
+              listData: this.$context.listData,
+              pagingInfo: this.$context.listOptions,
+            }
+            : block
       },
     },
     computed: {

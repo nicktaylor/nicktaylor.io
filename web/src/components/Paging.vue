@@ -1,14 +1,19 @@
 <template>
   <div v-if="hasPaging" :class="$style.paging">
-    <g-link :to="pageUrl(previousPage)" v-if="previousPage > 0">Previous</g-link>
-    <div>Page {{currentPage}} of {{numberOfPages}}</div>
-    <g-link :to="pageUrl(nextPage)" v-if="nextPage > 0">Next</g-link>
+    <PageNavigation
+                    :next-page="nextPage"
+                    :previous-page="previousPage"
+                    prev-next-label="true"/>
   </div>
 </template>
 
 <script>
+  import PageNavigation from '~/components/PageNavigation'
   export default {
     name: 'Paging',
+    components: {
+      PageNavigation
+    },
     props: {
       baseUrl: String,
       resultsPerPage: Number,
@@ -23,10 +28,18 @@
     },
     computed: {
       nextPage: function() {
-        return this.currentPage < this.numberOfPages ? this.currentPage + 1 : 0
+        const nextPage = this.currentPage < this.numberOfPages ? this.currentPage + 1 : 0
+        return nextPage === 0 ? null : {
+          title: `# ${nextPage}`,
+          url: this.pageUrl(nextPage)
+        }
       },
       previousPage: function() {
-        return this.currentPage > 1 ? this.currentPage - 1 : 0
+        const previousPage = this.currentPage - 1 > 0 ? this.currentPage - 1 : 0
+        return previousPage === 0 ? null : {
+          title: `# ${previousPage}`,
+          url: this.pageUrl(previousPage)
+        }
       },
       hasPaging: function() {
         return this.numberOfPages > 1
