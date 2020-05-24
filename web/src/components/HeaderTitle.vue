@@ -18,7 +18,7 @@ export default {
 <style lang="postcss" module>
 .title {
   .main {
-    font-family: Righteous;
+    font-family: var(--font-title);
     font-size: 26px;
     color: var(--color-one);
   }

@@ -10,7 +10,12 @@ query AllContentQuery {
       id
     }
   }
-  info: allSanityContent {
+  info: allSanityContent(
+    sort: [
+        { by: "content.publishedAt", order: DESC }
+        { by: "_createdAt", order: DESC }
+      ]
+   ){
     edges {
       node {
         id
@@ -42,6 +47,7 @@ query AllContentQuery {
               resultsPerPage
               hasPaging
               filterCategory {
+                id
                 title
               }
             }

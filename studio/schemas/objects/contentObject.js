@@ -1,13 +1,14 @@
 import Tabs from 'sanity-plugin-tabs'
+
 export default {
   name: 'contentObject',
   type: 'object',
   inputComponent: Tabs,
 
   fieldsets: [
-    { name: 'setup', title: 'Setup' },
-    { name: 'main', title: 'Main' },
-    { name: 'meta', title: 'Meta' },
+    {name: 'setup', title: 'Setup'},
+    {name: 'main', title: 'Main'},
+    {name: 'meta', title: 'Meta'},
   ],
 
   fields: [
@@ -17,7 +18,7 @@ export default {
       title: 'Title',
       fieldset: 'setup',
       description:
-        "Descriptive title, not too long, we don't want massive links",
+          "Descriptive title, not too long, we don't want massive links",
       validation: Rule => Rule.required().min(2),
     },
     {
@@ -29,6 +30,7 @@ export default {
         source: 'content.title',
         maxLength: 96,
       },
+      validation: Rule => Rule.required(),
     },
     {
       name: 'mainImage',
@@ -36,12 +38,12 @@ export default {
       title: 'Main Image',
       fieldset: 'setup',
       description:
-        "Main image for the content, to be used within any 'preview' links",
+          "Main image for the content, to be used within any 'preview' links",
     },
     {
       name: 'mainCategory',
       type: 'reference',
-      to: { type: 'category' },
+      to: {type: 'category'},
       fieldset: 'main',
       description: 'Main category, e.g. Blog for structural purposes.',
     },
@@ -56,12 +58,12 @@ export default {
       name: 'contentBlocks',
       type: 'array',
       fieldset: 'main',
-      of: [{ type: 'fullPortableTextObject' }, { type: 'contentList' }],
+      of: [{type: 'fullPortableTextObject'}, {type: 'contentList'}],
     },
     {
       name: 'categories',
       type: 'array',
-      of: [{ type: 'reference', to: { type: 'category' } }],
+      of: [{type: 'reference', to: {type: 'category'}}],
       description: 'Other applicable categories for the content to go under',
       fieldset: 'meta',
       options: {
@@ -78,7 +80,7 @@ export default {
     {
       name: 'author',
       type: 'reference',
-      to: { type: 'author' },
+      to: {type: 'author'},
       fieldset: 'meta',
       description: 'Author of the content',
     },

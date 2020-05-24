@@ -10,6 +10,12 @@ export default {
       type: 'contentObject',
       title: 'Content',
     },
+    {
+      name: 'mainCategoryThree',
+      type: 'reference',
+      to: { type: 'category' },
+      description: 'Main category, e.g. Blog for structural purposes.',
+    },
   ],
   preview: {
     select: {

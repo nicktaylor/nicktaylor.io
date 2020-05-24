@@ -6,6 +6,7 @@
   --color-three: #ff4a16;
   --color-four: #00b64f;
   --color-five: #343434;
+  --color-neutral: white;
 
   --color-one-faded-20: rgba(247, 140, 29, 0.1);
   --color-two-faded-20: rgba(80, 157, 210, 0.1);
@@ -14,7 +15,6 @@
 
   --text-color: black;
   --border-color: black;
-  --color-neutral: white;
 
   --color-header-bg: #343434;
 
@@ -23,6 +23,8 @@
   --padding-medium: calc(var(--padding-small) * 1.5);
   --padding-large: calc(var(--padding-small) * 3);
   --padding-xlarge: calc(var(--padding-small) * 6);
+
+  --font-title: Righteous;
 
   --content-color-main: var(--color-one);
   --content-color-faded: var(--color-one-faded-20);

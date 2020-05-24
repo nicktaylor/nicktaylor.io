@@ -80,6 +80,7 @@ export default {
   gap: 1.5rem;
   text-decoration: none;
 
+
   .text {
     margin: 0.5rem 0 0.5rem 0;
     color: var(--text-color);
@@ -152,7 +153,7 @@ export default {
     animation: color-rotate 1.5s infinite;
     svg {
       animation: arrow-move 1.5s infinite;
-      circle {
+      & > g > circle {
         animation: color-rotate-arrow 1.5s infinite;
       }
     }
