@@ -4,22 +4,15 @@
 
 // Changes here require a server restart.
 // To restart press CTRL + C in terminal and run `gridsome develop`
+
 const clientConfig = require('./client-config')
 const urlResolver = require('./utils/urlResolver')
-var fs = require('fs')
+const { generatePagesForContentList } = require('./utils/contentBuilding')
+const fs = require('fs')
 
 require.extensions['.gql'] = function(module, filename) {
   module.exports = fs.readFileSync(filename, 'utf8')
 }
-
-const getPagesByCategoryId = (nodes, categoryId) => nodes
-    .filter(
-        ({ node }) =>
-            node.content.mainCategory &&
-            node.content.mainCategory.id === categoryId &&
-            node.content.mainCategory.homepage.id !== node.id,
-    )
-    .map(({ node }) => node)
 
 module.exports = function(api) {
   api.loadSource(({ addMetadata }) => {
@@ -27,66 +20,72 @@ module.exports = function(api) {
     addMetadata('sanityOptions', clientConfig.sanity)
   })
 
-  const allContentQuery = require('./src/schemas/allContent.gql')
-
   api.createPages(async ({ graphql, createPage }) => {
-    // Use the Pages API here: https://gridsome.org/docs/pages-api/
-    const { data } = await graphql(allContentQuery)
+    const { data } = await graphql(require('./src/schemas/allContent.gql'))
+    const homepagesByCategory = {}
+    const pagesByCategory = {}
 
+    const localCreate = (page, pagePath, additionalContext) => createPage({
+      path: pagePath,
+      component: './src/templates/Content.vue',
+      context: {
+        settings: data.settings,
+        id: page.id,
+        metadata: data.metadata,
+        ...page.content,
+        ...additionalContext,
+      },
+    })
+
+
+    // Organise all pages into groups for processing, create pages with no category assigned
     data.info.edges.forEach(({ node }) => {
-      let path = urlResolver(node, data.settings)
-      let contentLists = node.content.contentBlocks.filter(
-          b => b._type == 'contentList',
-      )
+      const mainCategory = node.content.mainCategory
 
-      const localCreate = (pagePath, additionalContext) => createPage({
-        path: pagePath,
-        component: './src/templates/Content.vue',
-        context: {
-          settings: data.settings,
-          id: node.id,
-          metadata: data.metadata,
-          ...node.content,
-          ...additionalContext,
-        },
-      })
-
-      if (contentLists.length > 0) {
-        const b = contentLists[0]
-        const resultsPerPage = b.resultsPerPage ? parseInt(b.resultsPerPage) : 10
-        const listData = getPagesByCategoryId(data.info.edges, b.mainCategory.id)
-        const numberOfPages = Math.ceil(listData.length / resultsPerPage)
-
-        for (let i = 0; i < numberOfPages; i++) {
-          const nextPage = i + 1
-          const start = i * resultsPerPage
-          const end = (i * resultsPerPage) + (nextPage === numberOfPages ? listData.length - start : resultsPerPage)
-
-          localCreate(`${path}${i === 0 ? '' : `/${(i + 1)}`}`, {
-            listData: listData.slice(start, end),
-            listOptions: {
-              title: b.title,
-              resultsPerPage: b.resultsPerPage,
-              hasPaging: b.hasPaging,
-              numberOfResults: listData.length,
-              currentPage: i + 1,
-              numberOfPages,
-              baseUrl: path,
-            },
-          })
-        }
+      if (!mainCategory) {
+        localCreate(node, urlResolver(node, data.settings))
+      } else if (mainCategory.homepage && mainCategory.homepage.id === node.id) {
+        homepagesByCategory[mainCategory.id] = node
       } else {
-        let context = {}
-        if (node.content.mainCategory && node.content.mainCategory.homepage &&
-            node.content.mainCategory.homepage.contentBlocks &&
-            node.content.mainCategory.homepage.content.contentBlocks.filter(b => b._type === 'contentList').length > 0) {
-          context = {
-            nextPage,
-          }
+        if (!pagesByCategory[mainCategory.id]) {
+          pagesByCategory[mainCategory.id] = []
         }
-
-        localCreate(path, context)
+        pagesByCategory[mainCategory.id].push(node)
       }
     })
+
+    // Create all pages flagged as homepages
+    Object.entries(homepagesByCategory).forEach(([categoryId, node]) => {
+      const path = urlResolver(node, data.settings)
+      const contentLists = node.content.contentBlocks.filter(
+          b => b._type === 'contentList',
+      )
+
+      if (contentLists.length === 0) {
+        localCreate(node, path, {})
+        return
+      }
+
+      homepagesByCategory[categoryId].partOfContentList = true
+      generatePagesForContentList(node, contentLists[0], pagesByCategory[contentLists[0].filterCategory.id], path, localCreate)
+    })
+
+    // Create all pages assigned to a category
+    Object.entries(pagesByCategory).forEach(([categoryId, pages]) => pages.forEach((page, index) => {
+      const path = urlResolver(page, data.settings)
+      const context = {}
+
+      const createNavData = (navToPage) => ({
+        title: navToPage.title,
+        url: urlResolver(navToPage, data.settings),
+      })
+
+      if (homepagesByCategory[categoryId].partOfContentList) {
+        context.previousPage = index > 0 ? createNavData(pages[index - 1]) : null
+        context.nextpage = index + 1 !== pages.length ? createNavData(pages[index + 1]) : null
+      }
+
+      localCreate(page, path, context)
+    }))
   })
 }
