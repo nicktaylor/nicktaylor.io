@@ -9,6 +9,7 @@ query AllContentQuery {
     homepage {
       id
     }
+    description
   }
   info: allSanityContent(
     sort: [

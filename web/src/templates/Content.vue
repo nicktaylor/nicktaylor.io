@@ -20,17 +20,27 @@
 
 
 <script>
-  import { getClassByColor } from '~/utils/colorList'
+  import {getClassByColor} from '~/utils/colorList'
   import PageNavigation from '~/components/PageNavigation'
+  import {getExcerptFromContent} from "~/utils/portableText";
 
   export default {
-    components: { PageNavigation },
+    components: {PageNavigation},
+    metaInfo: function () {
+      const excerpt = getExcerptFromContent(this.$context, 200);
+      return {
+        title: this.$context.title,
+        meta: [
+          {key: 'description', name: 'description', content: excerpt.length > 0 ? excerpt : this.$context.settings.description}
+        ]
+      }
+    },
     props: {
       datetime: String,
       title: String,
     },
     methods: {
-      getBlockData: function(block) {
+      getBlockData: function (block) {
         return block._type === 'contentList'
             ? {
               ...block,
@@ -41,7 +51,7 @@
       },
     },
     computed: {
-      getClass: function() {
+      getClass: function () {
         if (!this.$context.mainCategory) {
           return
         }

@@ -25,14 +25,12 @@
     },
     computed: {
       sources: function() {
-        const ret = this.media ? this.media.map(m => ({
+        return this.media ? this.media.map(m => ({
           width: m.width ? m.width : null,
           height: m.height ? m.height : null,
           quality: m.quality ? m.quality : 90,
           minWidth: m.minWidth ? m.minWidth : m.width,
         })) : null
-        console.dir(ret)
-        return ret
       },
     },
   }

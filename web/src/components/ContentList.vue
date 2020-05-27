@@ -32,7 +32,7 @@
               ? new Date(i.content.publishedAt)
               : null,
           url: urlResolver(i, this.$context.settings),
-          text: getExcerptFromContent(i, 200),
+          text: getExcerptFromContent(i.content, 200),
           image: i.content.mainImage,
         }))
       },

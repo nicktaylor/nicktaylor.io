@@ -11,6 +11,12 @@ export default {
       description: 'Added to the end of every page',
     },
     {
+      name: 'description',
+      type: 'text',
+      title: 'Description',
+      description: 'Description for meta data',
+    },
+    {
       name: 'mainLinks',
       type: 'array',
       title: 'Main Links',
