@@ -34,6 +34,24 @@ query AllContentQuery {
             }
             color
           }
+        mainImage {
+          asset {
+            _id
+            url
+          }
+          hotspot {
+            x
+            y
+            width
+            height
+          }
+          crop {
+            top
+            left
+            right
+            bottom
+          }
+        }
           contentBlocks {
             ... on SanityFullPortableTextObject {
               _key

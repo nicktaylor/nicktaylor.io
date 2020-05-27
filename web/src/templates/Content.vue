@@ -13,7 +13,7 @@
       <PageNavigation v-if="$context.nextPage || $context.previousPage"
                       :next-page="$context.nextPage"
                       :previous-page="$context.previousPage"
-                      prev-next-label="true"/>
+                      :prev-next-label="true"/>
     </main>
   </Layout>
 </template>

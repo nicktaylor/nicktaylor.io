@@ -1,7 +1,10 @@
 <template>
   <article :class="$style.item">
     <g-link :to="url" active-class=" ">
-      <div :class="$style.image"></div>
+      <div :class="$style.image">
+        <Picture v-if="image != undefined" :image="image" :default-width="550" :default-height="344"
+                 :media="[{minWidth: 576, width: 240, height: 150}]"/>
+      </div>
       <div :class="$style.content">
         <header :class="$style.header">
           <h1>{{title}}</h1>
@@ -11,7 +14,7 @@
         <footer :class="$style.footer" v-if="url">
           <span :class="$style.action">
             Let's do this
-            <ArrowSvg />
+            <ArrowSvg/>
           </span>
         </footer>
       </div>
@@ -21,16 +24,19 @@
 
 <script>
   import ArrowSvg from '~/components/ArrowSvg'
+  import Picture from '~/components/Image'
 
   export default {
     components: {
-      ArrowSvg
+      ArrowSvg,
+      Picture,
     },
     props: {
       title: String,
       datetime: Date,
       text: String,
       url: String,
+      image: Object,
     },
   }
 </script>
@@ -89,11 +95,20 @@
     }
 
     .image {
-      width: 100%;
       height: 100%;
       min-height: 150px;
       background-color: var(--content-color-faded);
       position: relative;
+      border: 2px solid var(--content-color-faded);
+      object-fit: cover;
+
+
+      img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
 
       &:before,
       &:after {
@@ -123,7 +138,6 @@
 
     .content {
       display: flex;
-      font-display: column;
       flex-direction: column;
 
       & > p {
@@ -132,15 +146,10 @@
     }
 
     &:hover .action {
-      animation: color-rotate 1.5s infinite;
       text-decoration: underline;
 
       svg {
-        animation: arrow-move 1.5s infinite;
-
-        & > g > circle {
-          animation: color-rotate-arrow 1.5s infinite;
-        }
+        animation: arrow-move 1s infinite;
       }
     }
   }
@@ -151,40 +160,6 @@
     }
     50% {
       transform: translate(0.3rem);
-    }
-  }
-
-  @keyframes color-rotate-arrow {
-    0% {
-      fill: var(--content-color-action);
-    }
-    25% {
-      fill: var(--content-color-two);
-    }
-    50% {
-      fill: var(--content-color-three);
-    }
-    75% {
-      fill: var(--content-color-main);
-    }
-  }
-
-  @keyframes color-rotate {
-    0% {
-      color: var(--content-color-action);
-      fill: var(--content-color-action);
-    }
-    25% {
-      color: var(--content-color-two);
-      fill: var(--content-color-two);
-    }
-    50% {
-      color: var(--content-color-three);
-      fill: var(--content-color-three);
-    }
-    75% {
-      color: var(--content-color-main);
-      fill: var(--content-color-main);
     }
   }
 

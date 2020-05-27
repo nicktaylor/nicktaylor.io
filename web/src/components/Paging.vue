@@ -3,7 +3,7 @@
     <PageNavigation
                     :next-page="nextPage"
                     :previous-page="previousPage"
-                    prev-next-label="true"/>
+                    :prev-next-label="true"/>
   </div>
 </template>
 

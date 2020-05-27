@@ -36,6 +36,9 @@ a {
 }
 
 .block {
+  & > div > *:last-child {
+    margin-bottom: 0;
+  }
   & > div > *:first-child {
     margin-top: 0;
   }

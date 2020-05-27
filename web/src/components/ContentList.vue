@@ -1,10 +1,10 @@
 <template>
   <div :class="$style.list">
-    <Paging v-bind="pagingInfo" />
+    <Paging v-bind="pagingInfo"/>
     <template v-for="item in contentItems">
       <ContentItemPreview v-bind="item" :key="item.title" :class="$style.item"/>
     </template>
-    <Paging v-bind="pagingInfo" />
+    <Paging v-bind="pagingInfo"/>
   </div>
 </template>
 
@@ -22,17 +22,18 @@
     props: {
       title: String,
       listData: Array,
-      pagingInfo: Object
+      pagingInfo: Object,
     },
     computed: {
       contentItems: function() {
         return this.listData.map((i) => ({
           title: i.content.title,
           datetime: i.content.publishedAt
-            ? new Date(i.content.publishedAt)
-            : null,
+              ? new Date(i.content.publishedAt)
+              : null,
           url: urlResolver(i, this.$context.settings),
           text: getExcerptFromContent(i, 200),
+          image: i.content.mainImage,
         }))
       },
     },
@@ -48,15 +49,14 @@
 
     & > * {
       margin-top: var(--list-spacing);
-    }
-
-    & > *:first-child {
-      margin-top: 0;
-    }
-
-    .item {
       position: relative;
 
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+    & > * {
       &:after {
         content: '';
         position: absolute;
@@ -72,7 +72,13 @@
       }
     }
 
-    .item:nth-child(2n) {
+
+    .item {
+      position: relative;
+      background: #fff;
+    }
+
+    & > *:nth-child(2n) {
       &:after {
         border-left: 50vw solid var(--content-color-three);
         border-right: 50vw solid transparent;
@@ -83,28 +89,26 @@
       }
     }
 
-    .item:nth-child(4n) {
+    & > *:nth-child(4n) {
       &:after {
         border-left-color: var(--content-color-two);
       }
     }
 
-    .item:nth-child(4n + 1) {
+    & > *:nth-child(4n + 1) {
       &:after {
         border-right-color: var(--content-color-three);
       }
     }
 
-    .item:nth-child(4n + 2) {
+    & > *:nth-child(4n + 2) {
       &:after {
         border-left-color: var(--content-color-main);
       }
     }
 
-    .item:nth-child(4n + 3) {
-      &:after {
-        border-right-color: var(--content-color-action);
-      }
+    & > *:nth-child(4n + 3):after {
+      border-right-color: var(--content-color-action);
     }
   }
 
@@ -121,58 +125,3 @@
   }
 </style>
 
-<static-query>
-  query ContentQuery {
-    items: allSanityContent {
-      edges {
-        node {
-          id
-          content {
-            title
-            slug {
-              current
-            }
-            categories {
-              title
-            }
-            _rawExcerpt
-            contentBlocks {
-              ... on SanityFullPortableTextObject {
-                _rawContent
-              }
-            }
-            mainCategory {
-              id
-              title
-              homepage {
-                id
-              }
-              slug {
-                current
-              }
-            }
-            mainImage {
-              asset {
-                _id
-                url
-              }
-              hotspot {
-                x
-                y
-                width
-                height
-              }
-              crop {
-                top
-                left
-                right
-                bottom
-              }
-            }
-            publishedAt
-          }
-        }
-      }
-    }
-  }
-</static-query>

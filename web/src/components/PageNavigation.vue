@@ -33,6 +33,7 @@
     max-width: var(--max-container-width);
     box-sizing: border-box;
     margin: auto;
+    overflow: hidden;
 
     a {
       font-family: var(--font-normal);
@@ -59,13 +60,20 @@
     }
 
     a.previous {
-      padding-left: 50px;
+      padding-left: calc(18px + var(--padding-small));
       float: left;
 
       svg {
-        left: var(--padding-small);
+        left: 0;
+      }
+
+      &:hover {
+        svg {
+          animation: arrow-move-back 1s infinite;
+        }
       }
     }
+
 
     .previous + .next {
       margin-top: var(--padding-medium);
@@ -73,12 +81,37 @@
 
     a.next {
       text-align: right;
-      padding-right: 50px;
+      padding-right: calc(18px + var(--padding-small));
       float: right;
+      overflow: visible;
 
       svg {
-        right: var(--padding-small);
+        right: 0;
       }
+
+      &:hover {
+        svg {
+          animation: arrow-move-forward 1s infinite;
+        }
+      }
+    }
+  }
+
+  @keyframes arrow-move-back {
+    0% {
+      transform: translate(0rem);
+    }
+    50% {
+      transform: translate(0.3rem);
+    }
+  }
+
+  @keyframes arrow-move-forward{
+    0% {
+      transform: translate(0rem);
+    }
+    50% {
+      transform: translate(-0.3rem);
     }
   }
 
