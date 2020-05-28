@@ -13,7 +13,7 @@ export default {
     return {
       serializers: {
         marks: {
-          internalLink: function(content) {
+          internalLink: content => {
             const node = content.mark.reference
             const url = urlResolver(node, this.$context.settings)
             return <g-link to={url}>{content.children.join('')}</g-link>
