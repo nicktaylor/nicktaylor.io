@@ -13,7 +13,7 @@
 
 <script>
   export default {
-    name: 'Image',
+    name: 'Picture',
     data: function() {
       return {}
     },

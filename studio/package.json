@@ -30,7 +30,8 @@
     "react-dom": "^16.2",
     "react-icons": "^3.10.0",
     "sanity-plugin-color-list": "^1.2.1",
-    "sanity-plugin-tabs": "^1.1.8"
+    "sanity-plugin-tabs": "^1.1.8",
+    "sanity-plugin-visual-options": "^0.8.2"
   },
   "devDependencies": {}
 }

@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.list">
     <Paging v-bind="pagingInfo"/>
-    <template v-for="item in contentItems">
+    <template v-for="item in listData">
       <ContentItemPreview v-bind="item" :key="item.title" :class="$style.item"/>
     </template>
     <Paging v-bind="pagingInfo"/>
@@ -10,8 +10,6 @@
 
 <script>
   import ContentItemPreview from '~/components/ContentItemPreview.vue'
-  import { getExcerptFromContent } from '~/utils/portableText'
-  import urlResolver from '~/utils/urlResolver'
   import Paging from '~/components/Paging'
 
   export default {
@@ -23,19 +21,6 @@
       title: String,
       listData: Array,
       pagingInfo: Object,
-    },
-    computed: {
-      contentItems: function() {
-        return this.listData.map((i) => ({
-          title: i.content.title,
-          datetime: i.content.publishedAt
-              ? new Date(i.content.publishedAt)
-              : null,
-          url: urlResolver(i, this.$context.settings),
-          text: getExcerptFromContent(i.content, 200),
-          image: i.content.mainImage,
-        }))
-      },
     },
   }
 </script>
@@ -54,72 +39,56 @@
       &:first-child {
         margin-top: 0;
       }
-    }
 
-    & > * {
       &:after {
         content: '';
-        position: absolute;
-        width: 0;
-        height: 0;
-        border-left: 50vw solid transparent;
-        border-right: 50vw solid var(--content-color-two);
-        border-top: 0 solid transparent;
-        border-bottom: 1px solid transparent;
+        display: block;
+        position: relative;
+        height: 1px;
+        width: 100%;
+        opacity: 0.5;
+        background-size: cover;
         bottom: calc(var(--list-spacing) * -0.5);
-        right: 0;
-        opacity: 0.3;
+        background: linear-gradient(90deg, var(--content-color-main), transparent) no-repeat;
+      }
+
+      &:nth-child(2n):after {
+        transform: rotateZ(180deg);
+      }
+
+      &:nth-child(4n):after {
+        transform: rotateZ(180deg);
+      }
+
+      &:nth-child(4n + 1):after {
+        background: linear-gradient(90deg, var(--content-color-two), transparent) no-repeat;
+      }
+
+      &:nth-child(4n + 2):after {
+        background: linear-gradient(90deg, var(--content-color-three), transparent) no-repeat;
+      }
+
+      &:nth-child(4n + 3):after {
+        background: linear-gradient(90deg, var(--content-color-action), transparent) no-repeat;
       }
     }
-
 
     .item {
       position: relative;
-      background: #fff;
-    }
+      transition: transform 0.3s linear;
 
-    & > *:nth-child(2n) {
-      &:after {
-        border-left: 50vw solid var(--content-color-three);
-        border-right: 50vw solid transparent;
-        border-top: 0px solid transparent;
-        border-bottom: 1px solid transparent;
-        bottom: calc(var(--list-spacing) * -0.5);
-        left: 0;
+      &:hover {
+        transform: scale(1.02);
       }
-    }
-
-    & > *:nth-child(4n) {
-      &:after {
-        border-left-color: var(--content-color-two);
-      }
-    }
-
-    & > *:nth-child(4n + 1) {
-      &:after {
-        border-right-color: var(--content-color-three);
-      }
-    }
-
-    & > *:nth-child(4n + 2) {
-      &:after {
-        border-left-color: var(--content-color-main);
-      }
-    }
-
-    & > *:nth-child(4n + 3):after {
-      border-right-color: var(--content-color-action);
     }
   }
 
-  @media screen and (min-width: 576px) {
-    .list {
+  .list {
+    @media screen and (min-width: 576px) {
       --list-spacing: var(--padding-xlarge);
     }
-  }
 
-  @media screen and (min-width: 768px) {
-    .list {
+    @media screen and (min-width: 768px) {
       padding: var(--padding-large);
     }
   }

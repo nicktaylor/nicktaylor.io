@@ -4,6 +4,7 @@ import fullPortableText from './fullPortableText'
 export default {
   name: 'fullPortableTextObject',
   type: 'object',
+  title: 'Portable Text Container Object',
   fields: [
     {
       name: 'name',

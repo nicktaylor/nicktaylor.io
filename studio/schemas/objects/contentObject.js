@@ -3,6 +3,7 @@ import Tabs from 'sanity-plugin-tabs'
 export default {
   name: 'contentObject',
   type: 'object',
+  title: 'Content Object',
   inputComponent: Tabs,
 
   fieldsets: [
@@ -58,7 +59,11 @@ export default {
       name: 'contentBlocks',
       type: 'array',
       fieldset: 'main',
-      of: [{type: 'fullPortableTextObject'}, {type: 'contentList'}],
+      of: [
+        {type: 'fullPortableTextObject'},
+        {type: 'contentList'},
+        {type: 'header'}
+      ],
     },
     {
       name: 'categories',

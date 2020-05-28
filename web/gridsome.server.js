@@ -8,20 +8,43 @@
 const clientConfig = require('./client-config')
 const urlResolver = require('./utils/urlResolver')
 const { generatePagesForContentList } = require('./utils/contentBuilding')
+const {getExcerptFromContent} = require("./utils/portableText")
 const fs = require('fs')
 
-require.extensions['.gql'] = function(module, filename) {
+require.extensions['.graphql'] = function(module, filename) {
   module.exports = fs.readFileSync(filename, 'utf8')
 }
 
+const dayjs = require('dayjs')
+
+function sanitizeData(data) {
+   const newData = {
+    ...data,
+    pages: data.info.edges.map(({node}) => ({
+      ...node,
+      content: {
+        ...node.content,
+        plainTextExcerpt: getExcerptFromContent(node.content, 300),
+        publishedAt: node.content.publishedAt ? new Date(node.content.publishedAt) : null,
+        nicePublishedAt: node.content.publishedAt ? dayjs(node.content.publishedAt).format("dddd, D MMMM 'YY") : null
+      },
+      _url: urlResolver(node, data.settings)
+    }))
+  }
+  delete newData.info
+  return newData
+}
+
 module.exports = function(api) {
+
   api.loadSource(({ addMetadata }) => {
     // Use the Data Store API here: https://gridsome.org/docs/data-store-api/
     addMetadata('sanityOptions', clientConfig.sanity)
   })
 
   api.createPages(async ({ graphql, createPage }) => {
-    const { data } = await graphql(require('./src/schemas/allContent.gql'))
+    const result = await graphql(require('./src/schemas/allContent.graphql'))
+    const data = sanitizeData(result.data)
     const homepagesByCategory = {}
     const pagesByCategory = {}
 
@@ -33,13 +56,14 @@ module.exports = function(api) {
         id: page.id,
         metadata: data.metadata,
         ...page.content,
+        publishedAt: page.content.publishedAt ? new Date(page.content.publishedAt) : null,
         ...additionalContext,
       },
     })
 
 
     // Organise all pages into groups for processing, create pages with no category assigned
-    data.info.edges.forEach(({ node }) => {
+    data.pages.forEach(node => {
       const mainCategory = node.content.mainCategory
 
       if (!mainCategory) {

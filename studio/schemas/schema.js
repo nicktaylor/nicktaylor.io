@@ -16,6 +16,7 @@ import fullPortableTextObject from './objects/fullPortableTextObject'
 import contentList from './objects/contentList'
 import contentObject from './objects/contentObject'
 import socialLink from './objects/socialLink'
+import header from "./objects/header";
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -28,6 +29,7 @@ export default createSchema({
     contentList,
     content,
     contentObject,
+    header,
     siteSettings,
     socialLink,
     category,

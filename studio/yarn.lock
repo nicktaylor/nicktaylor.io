@@ -6851,6 +6851,10 @@ sanity-plugin-tabs@^1.1.8:
     react "^16.12.0"
     react-dom "^16.12.0"
 
+sanity-plugin-visual-options@^0.8.2:
+  version "0.8.2"
+  resolved "https://registry.npmjs.org/sanity-plugin-visual-options/-/sanity-plugin-visual-options-0.8.2.tgz#705d86324943567625f66ccea91e0e2cf3530d89"
+
 sax@~1.2.4:
   version "1.2.4"
   resolved "https://registry.npmjs.org/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"

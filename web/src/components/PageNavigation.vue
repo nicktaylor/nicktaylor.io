@@ -30,9 +30,7 @@
 
 <style lang="postcss" module>
   .pageNav {
-    max-width: var(--max-container-width);
     box-sizing: border-box;
-    margin: auto;
     overflow: hidden;
 
     a {

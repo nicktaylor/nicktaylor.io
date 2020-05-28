@@ -8,7 +8,7 @@
       <div :class="$style.content">
         <header :class="$style.header">
           <h1>{{title}}</h1>
-          <time v-if="datetime" :datetime="datetime">{{datetime | niceDateFormat}}</time>
+          <time v-if="datetime" :datetime="datetime">{{niceDatetime}}</time>
         </header>
         <p :class="$style.text">{{text}}</p>
         <footer :class="$style.footer" v-if="url">
@@ -24,7 +24,7 @@
 
 <script>
   import ArrowSvg from '~/components/ArrowSvg'
-  import Picture from '~/components/Image'
+  import Picture from '~/components/Picture'
 
   export default {
     components: {
@@ -33,7 +33,8 @@
     },
     props: {
       title: String,
-      datetime: Date,
+      datetime: String,
+      niceDatetime: String,
       text: String,
       url: String,
       image: Object,
@@ -44,7 +45,8 @@
 <style lang="postcss" module>
   .action {
     color: var(--content-color-action);
-    font-family: 'wotfardlight';
+    font-family: var(--font-normal);
+    font-weight: lighter;
     font-size: 1rem;
     display: inline-block;
     position: relative;
@@ -68,7 +70,6 @@
     gap: 1.5rem;
     text-decoration: none;
 
-
     .text {
       margin: 0.5rem 0 0.5rem 0;
       color: var(--text-color);
@@ -80,11 +81,12 @@
     }
 
     .header {
-      h1 {
+      h1, h2, h3 {
         font-family: var(--font-normal);
         font-weight: bold;
         color: var(--content-color-main);
         font-size: 1.4rem;
+        margin: 0;
       }
 
       time {
@@ -119,7 +121,6 @@
         border-top-left-radius: 1rem;
         border-top-right-radius: 1rem;
         border-bottom: 0;
-
         opacity: 0.1;
       }
 

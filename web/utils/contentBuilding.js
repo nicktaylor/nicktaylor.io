@@ -1,3 +1,6 @@
+const {getExcerptFromContent} = require("../utils/portableText")
+const dayjs = require('dayjs')
+
 function generatePagesForContentList(node, list, listPages, path, createFunc) {
   const resultsPerPage = list.resultsPerPage ? parseInt(list.resultsPerPage) : 10
   const numberOfPages = Math.ceil(listPages.length / resultsPerPage)
@@ -8,7 +11,14 @@ function generatePagesForContentList(node, list, listPages, path, createFunc) {
     const end = (i * resultsPerPage) + (nextPage === numberOfPages ? listPages.length - start : resultsPerPage)
 
     createFunc(node, `${path}${i === 0 ? '' : `/${(i + 1)}`}`, {
-      listData: listPages.slice(start, end),
+      listData: listPages.slice(start, end).map((i) => ({
+        title: i.content.title,
+        datetime: i.content.publishedAt,
+        niceDatetime: i.content.publishedAt ? dayjs(i.content.publishedAt).format("dddd, D MMMM 'YY") : null,
+        url: i._url,
+        text: i.content.plainTextExcerpt,
+        image: i.content.mainImage,
+      })),
       listOptions: {
         title: list.title,
         resultsPerPage: list.resultsPerPage,

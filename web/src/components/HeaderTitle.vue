@@ -24,8 +24,9 @@ export default {
   }
 
   .subText {
-    font-size: 14px;
-    filter: saturate(50%);
+    font-size: 15px;
+    color: var(--color-one-darkbg);
+    filter: brightness(90%);
   }
 }
 </style>

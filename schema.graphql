@@ -1,1099 +1,1109 @@
 # This file was generated based on ".graphqlconfig". Do not edit manually.
 
 schema {
-    query: Query
+  query: Query
 }
 
 interface Node {
-    id: ID!
+  id: ID!
 }
 
 interface NodeConnection {
-    edges: [NodeConnectionEdge]
-    pageInfo: PageInfo!
-    totalCount: Int!
+  edges: [NodeConnectionEdge]
+  pageInfo: PageInfo!
+  totalCount: Int!
 }
 
 interface NodeConnectionEdge {
-    next: Node
-    node: Node
-    previous: Node
+  next: Node
+  node: Node
+  previous: Node
 }
 
 union SanityAuthorOrContent = SanityAuthor | SanityContent
 
 union SanityCategoryOrContent = SanityCategory | SanityContent
 
-union SanityContentListOrFullPortableTextObject = SanityContentList | SanityFullPortableTextObject
+union SanityContentListOrFullPortableTextObjectOrHeader = SanityContentList | SanityFullPortableTextObject | SanityHeader
 
 type Metadata {
-    pathPrefix: String
-    sanityOptions: Metadata_SanityOptions
-    siteDescription: String
-    siteName: String
-    siteUrl: String
+  pathPrefix: String
+  sanityOptions: Metadata_SanityOptions
+  siteDescription: String
+  siteName: String
+  siteUrl: String
 }
 
 type Metadata_SanityOptions {
-    dataset: String
-    projectId: String
+  dataset: String
+  projectId: String
 }
 
 type NodeBelongsTo implements NodeConnection {
-    edges: [NodeBelongsToEdge]
-    pageInfo: PageInfo!
-    totalCount: Int!
+  edges: [NodeBelongsToEdge]
+  pageInfo: PageInfo!
+  totalCount: Int!
 }
 
 type NodeBelongsToEdge implements NodeConnectionEdge {
-    next: Node
-    node: Node
-    previous: Node
+  next: Node
+  node: Node
+  previous: Node
 }
 
 type Page {
-    context: JSON!
-    path: String!
+  context: JSON!
+  path: String!
 }
 
 type PageInfo {
-    currentPage: Int!
-    hasNextPage: Boolean!
-    hasPreviousPage: Boolean!
-    isFirst: Boolean!
-    isLast: Boolean!
-    perPage: Int!
-    totalItems: Int!
-    totalPages: Int!
+  currentPage: Int!
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  isFirst: Boolean!
+  isLast: Boolean!
+  perPage: Int!
+  totalItems: Int!
+  totalPages: Int!
 }
 
 type Query {
-    allPage(
-        "Filter pages."
-        filter: PageFilterInput
-    ): [Page]
-    allSanityAuthor(
-        "Filter for SanityAuthor nodes."
-        filter: SanityAuthorFilterInput,
-        limit: Int,
-        order: SortOrder = DESC,
-        page: Int,
-        "Defaults to 25 when page is provided."
-        perPage: Int,
-        skip: Int = 0,
-        sort: [SortArgument],
-        sortBy: String = "_createdAt"
-    ): SanityAuthorConnection
-    allSanityCategory(
-        "Filter for SanityCategory nodes."
-        filter: SanityCategoryFilterInput,
-        limit: Int,
-        order: SortOrder = DESC,
-        page: Int,
-        "Defaults to 25 when page is provided."
-        perPage: Int,
-        skip: Int = 0,
-        sort: [SortArgument],
-        sortBy: String = "_createdAt"
-    ): SanityCategoryConnection
-    allSanityContent(
-        "Filter for SanityContent nodes."
-        filter: SanityContentFilterInput,
-        limit: Int,
-        order: SortOrder = DESC,
-        page: Int,
-        "Defaults to 25 when page is provided."
-        perPage: Int,
-        skip: Int = 0,
-        sort: [SortArgument],
-        sortBy: String = "_createdAt"
-    ): SanityContentConnection
-    allSanityFileAsset(
-        "Filter for SanityFileAsset nodes."
-        filter: SanityFileAssetFilterInput,
-        limit: Int,
-        order: SortOrder = DESC,
-        page: Int,
-        "Defaults to 25 when page is provided."
-        perPage: Int,
-        skip: Int = 0,
-        sort: [SortArgument],
-        sortBy: String = "_createdAt"
-    ): SanityFileAssetConnection
-    allSanityImageAsset(
-        "Filter for SanityImageAsset nodes."
-        filter: SanityImageAssetFilterInput,
-        limit: Int,
-        order: SortOrder = DESC,
-        page: Int,
-        "Defaults to 25 when page is provided."
-        perPage: Int,
-        skip: Int = 0,
-        sort: [SortArgument],
-        sortBy: String = "_createdAt"
-    ): SanityImageAssetConnection
-    allSanitySiteSettings(
-        "Filter for SanitySiteSettings nodes."
-        filter: SanitySiteSettingsFilterInput,
-        limit: Int,
-        order: SortOrder = DESC,
-        page: Int,
-        "Defaults to 25 when page is provided."
-        perPage: Int,
-        skip: Int = 0,
-        sort: [SortArgument],
-        sortBy: String = "_createdAt"
-    ): SanitySiteSettingsConnection
-    metaData: Metadata @deprecated(reason : "Use Query.metadata instead.")
-    metadata: Metadata
-    page(path: String!): Page
-    sanityAuthor(
-        id: ID,
-        "Will return an error if not nullable."
-        nullable: Boolean = false,
-        path: String
-    ): SanityAuthor
-    sanityCategory(
-        id: ID,
-        "Will return an error if not nullable."
-        nullable: Boolean = false,
-        path: String
-    ): SanityCategory
-    sanityContent(
-        id: ID,
-        "Will return an error if not nullable."
-        nullable: Boolean = false,
-        path: String
-    ): SanityContent
-    sanityFileAsset(
-        id: ID,
-        "Will return an error if not nullable."
-        nullable: Boolean = false,
-        path: String
-    ): SanityFileAsset
-    sanityImageAsset(
-        id: ID,
-        "Will return an error if not nullable."
-        nullable: Boolean = false,
-        path: String
-    ): SanityImageAsset
-    sanitySiteSettings(
-        id: ID,
-        "Will return an error if not nullable."
-        nullable: Boolean = false,
-        path: String
-    ): SanitySiteSettings
+  allPage(
+    "Filter pages."
+    filter: PageFilterInput
+  ): [Page]
+  allSanityAuthor(
+    "Filter for SanityAuthor nodes."
+    filter: SanityAuthorFilterInput,
+    limit: Int,
+    order: SortOrder = DESC,
+    page: Int,
+    "Defaults to 25 when page is provided."
+    perPage: Int,
+    skip: Int = 0,
+    sort: [SortArgument],
+    sortBy: String = "_createdAt"
+  ): SanityAuthorConnection
+  allSanityCategory(
+    "Filter for SanityCategory nodes."
+    filter: SanityCategoryFilterInput,
+    limit: Int,
+    order: SortOrder = DESC,
+    page: Int,
+    "Defaults to 25 when page is provided."
+    perPage: Int,
+    skip: Int = 0,
+    sort: [SortArgument],
+    sortBy: String = "_createdAt"
+  ): SanityCategoryConnection
+  allSanityContent(
+    "Filter for SanityContent nodes."
+    filter: SanityContentFilterInput,
+    limit: Int,
+    order: SortOrder = DESC,
+    page: Int,
+    "Defaults to 25 when page is provided."
+    perPage: Int,
+    skip: Int = 0,
+    sort: [SortArgument],
+    sortBy: String = "_createdAt"
+  ): SanityContentConnection
+  allSanityFileAsset(
+    "Filter for SanityFileAsset nodes."
+    filter: SanityFileAssetFilterInput,
+    limit: Int,
+    order: SortOrder = DESC,
+    page: Int,
+    "Defaults to 25 when page is provided."
+    perPage: Int,
+    skip: Int = 0,
+    sort: [SortArgument],
+    sortBy: String = "_createdAt"
+  ): SanityFileAssetConnection
+  allSanityImageAsset(
+    "Filter for SanityImageAsset nodes."
+    filter: SanityImageAssetFilterInput,
+    limit: Int,
+    order: SortOrder = DESC,
+    page: Int,
+    "Defaults to 25 when page is provided."
+    perPage: Int,
+    skip: Int = 0,
+    sort: [SortArgument],
+    sortBy: String = "_createdAt"
+  ): SanityImageAssetConnection
+  allSanitySiteSettings(
+    "Filter for SanitySiteSettings nodes."
+    filter: SanitySiteSettingsFilterInput,
+    limit: Int,
+    order: SortOrder = DESC,
+    page: Int,
+    "Defaults to 25 when page is provided."
+    perPage: Int,
+    skip: Int = 0,
+    sort: [SortArgument],
+    sortBy: String = "_createdAt"
+  ): SanitySiteSettingsConnection
+  metaData: Metadata @deprecated(reason : "Use Query.metadata instead.")
+  metadata: Metadata
+  page(path: String!): Page
+  sanityAuthor(
+    id: ID,
+    "Will return an error if not nullable."
+    nullable: Boolean = false,
+    path: String
+  ): SanityAuthor
+  sanityCategory(
+    id: ID,
+    "Will return an error if not nullable."
+    nullable: Boolean = false,
+    path: String
+  ): SanityCategory
+  sanityContent(
+    id: ID,
+    "Will return an error if not nullable."
+    nullable: Boolean = false,
+    path: String
+  ): SanityContent
+  sanityFileAsset(
+    id: ID,
+    "Will return an error if not nullable."
+    nullable: Boolean = false,
+    path: String
+  ): SanityFileAsset
+  sanityImageAsset(
+    id: ID,
+    "Will return an error if not nullable."
+    nullable: Boolean = false,
+    path: String
+  ): SanityImageAsset
+  sanitySiteSettings(
+    id: ID,
+    "Will return an error if not nullable."
+    nullable: Boolean = false,
+    path: String
+  ): SanitySiteSettings
 }
 
 type SanityAssetSourceData {
-    _key: String
-    _type: String
-    id: String
-    name: String
-    url: String
+  _key: String
+  _type: String
+  id: String
+  name: String
+  url: String
 }
 
 type SanityAuthor implements Node {
-    _createdAt(
-        "Date format"
-        format: String,
-        "Locale"
-        locale: String
-    ): Date
-    _id: ID
-    _key: String
-    _rev: String
-    _type: String
-    _updatedAt(
-        "Date format"
-        format: String,
-        "Locale"
-        locale: String
-    ): Date
-    belongsTo(
-        filter: BelongsToFilterInput,
-        limit: Int,
-        order: SortOrder = DESC,
-        page: Int,
-        "Defaults to 25 when page is provided."
-        perPage: Int,
-        skip: Int = 0,
-        sort: [SortArgument!],
-        sortBy: String = "date"
-    ): NodeBelongsTo
-    bioPage: SanityContent
-    id: ID!
-    name: String
+  _createdAt(
+    "Date format"
+    format: String,
+    "Locale"
+    locale: String
+  ): Date
+  _id: ID
+  _key: String
+  _rev: String
+  _type: String
+  _updatedAt(
+    "Date format"
+    format: String,
+    "Locale"
+    locale: String
+  ): Date
+  belongsTo(
+    filter: BelongsToFilterInput,
+    limit: Int,
+    order: SortOrder = DESC,
+    page: Int,
+    "Defaults to 25 when page is provided."
+    perPage: Int,
+    skip: Int = 0,
+    sort: [SortArgument!],
+    sortBy: String = "date"
+  ): NodeBelongsTo
+  bioPage: SanityContent
+  id: ID!
+  name: String
 }
 
 type SanityAuthorConnection implements NodeConnection {
-    edges: [SanityAuthorEdge]
-    pageInfo: PageInfo!
-    totalCount: Int!
+  edges: [SanityAuthorEdge]
+  pageInfo: PageInfo!
+  totalCount: Int!
 }
 
 type SanityAuthorEdge implements NodeConnectionEdge {
-    next: SanityAuthor
-    node: SanityAuthor
-    previous: SanityAuthor
+  next: SanityAuthor
+  node: SanityAuthor
+  previous: SanityAuthor
 }
 
 type SanityBlock {
-    _key: String
-    _type: String
-    children: [SanitySpan]
-    list: String
-    style: String
+  _key: String
+  _type: String
+  children: [SanitySpan]
+  list: String
+  style: String
 }
 
 type SanityCategory implements Node {
-    _createdAt(
-        "Date format"
-        format: String,
-        "Locale"
-        locale: String
-    ): Date
-    _id: ID
-    _key: String
-    _rev: String
-    _type: String
-    _updatedAt(
-        "Date format"
-        format: String,
-        "Locale"
-        locale: String
-    ): Date
-    belongsTo(
-        filter: BelongsToFilterInput,
-        limit: Int,
-        order: SortOrder = DESC,
-        page: Int,
-        "Defaults to 25 when page is provided."
-        perPage: Int,
-        skip: Int = 0,
-        sort: [SortArgument!],
-        sortBy: String = "date"
-    ): NodeBelongsTo
-    color: String
-    description: String
-    homepage: SanityContent
-    id: ID!
-    parents: [SanityCategory]
-    slug: SanitySlug
-    title: String
+  _createdAt(
+    "Date format"
+    format: String,
+    "Locale"
+    locale: String
+  ): Date
+  _id: ID
+  _key: String
+  _rev: String
+  _type: String
+  _updatedAt(
+    "Date format"
+    format: String,
+    "Locale"
+    locale: String
+  ): Date
+  belongsTo(
+    filter: BelongsToFilterInput,
+    limit: Int,
+    order: SortOrder = DESC,
+    page: Int,
+    "Defaults to 25 when page is provided."
+    perPage: Int,
+    skip: Int = 0,
+    sort: [SortArgument!],
+    sortBy: String = "date"
+  ): NodeBelongsTo
+  color: String
+  description: String
+  homepage: SanityContent
+  id: ID!
+  parents: [SanityCategory]
+  slug: SanitySlug
+  title: String
 }
 
 type SanityCategoryConnection implements NodeConnection {
-    edges: [SanityCategoryEdge]
-    pageInfo: PageInfo!
-    totalCount: Int!
+  edges: [SanityCategoryEdge]
+  pageInfo: PageInfo!
+  totalCount: Int!
 }
 
 type SanityCategoryEdge implements NodeConnectionEdge {
-    next: SanityCategory
-    node: SanityCategory
-    previous: SanityCategory
+  next: SanityCategory
+  node: SanityCategory
+  previous: SanityCategory
 }
 
 type SanityContent implements Node {
-    _createdAt(
-        "Date format"
-        format: String,
-        "Locale"
-        locale: String
-    ): Date
-    _id: ID
-    _key: String
-    _rev: String
-    _type: String
-    _updatedAt(
-        "Date format"
-        format: String,
-        "Locale"
-        locale: String
-    ): Date
-    belongsTo(
-        filter: BelongsToFilterInput,
-        limit: Int,
-        order: SortOrder = DESC,
-        page: Int,
-        "Defaults to 25 when page is provided."
-        perPage: Int,
-        skip: Int = 0,
-        sort: [SortArgument!],
-        sortBy: String = "date"
-    ): NodeBelongsTo
-    content: SanityContentObject
-    id: ID!
-    mainCategoryThree: SanityCategory
+  _createdAt(
+    "Date format"
+    format: String,
+    "Locale"
+    locale: String
+  ): Date
+  _id: ID
+  _key: String
+  _rev: String
+  _type: String
+  _updatedAt(
+    "Date format"
+    format: String,
+    "Locale"
+    locale: String
+  ): Date
+  belongsTo(
+    filter: BelongsToFilterInput,
+    limit: Int,
+    order: SortOrder = DESC,
+    page: Int,
+    "Defaults to 25 when page is provided."
+    perPage: Int,
+    skip: Int = 0,
+    sort: [SortArgument!],
+    sortBy: String = "date"
+  ): NodeBelongsTo
+  content: SanityContentObject
+  id: ID!
+  mainCategoryThree: SanityCategory
 }
 
 type SanityContentConnection implements NodeConnection {
-    edges: [SanityContentEdge]
-    pageInfo: PageInfo!
-    totalCount: Int!
+  edges: [SanityContentEdge]
+  pageInfo: PageInfo!
+  totalCount: Int!
 }
 
 type SanityContentEdge implements NodeConnectionEdge {
-    next: SanityContent
-    node: SanityContent
-    previous: SanityContent
+  next: SanityContent
+  node: SanityContent
+  previous: SanityContent
 }
 
 type SanityContentList {
-    _key: String
-    _type: String
-    filterCategory: SanityCategory
-    hasPaging: Boolean
-    resultsPerPage: Float
-    title: String
+  _key: String
+  _type: String
+  filterCategory: SanityCategory
+  hasPaging: Boolean
+  resultsPerPage: Float
+  title: String
 }
 
 type SanityContentObject {
-    _key: String
-    _rawExcerpt(resolveReferences: SanityResolveReferencesConfiguration): JSON
-    _type: String
-    author: SanityAuthor
-    categories: [SanityCategory]
-    contentBlocks: [SanityContentListOrFullPortableTextObject]
-    linkTitle: String
-    mainCategory: SanityCategory
-    mainImage: SanitySeoImage
-    publishedAt(
-        "Date format"
-        format: String,
-        "Locale"
-        locale: String
-    ): Date
-    slug: SanitySlug
-    title: String
+  _key: String
+  _rawExcerpt(resolveReferences: SanityResolveReferencesConfiguration): JSON
+  _type: String
+  author: SanityAuthor
+  categories: [SanityCategory]
+  contentBlocks: [SanityContentListOrFullPortableTextObjectOrHeader]
+  linkTitle: String
+  mainCategory: SanityCategory
+  mainImage: SanitySeoImage
+  publishedAt(
+    "Date format"
+    format: String,
+    "Locale"
+    locale: String
+  ): Date
+  slug: SanitySlug
+  title: String
 }
 
 type SanityExternalLink {
-    _key: String
-    _type: String
-    blank: Boolean
-    href: String
+  _key: String
+  _type: String
+  blank: Boolean
+  href: String
 }
 
 type SanityFile {
-    _key: String
-    _type: String
-    asset: SanityFileAsset
+  _key: String
+  _type: String
+  asset: SanityFileAsset
 }
 
 type SanityFileAsset implements Node {
-    _createdAt(
-        "Date format"
-        format: String,
-        "Locale"
-        locale: String
-    ): Date
-    _id: ID
-    _key: String
-    _rev: String
-    _type: String
-    _updatedAt(
-        "Date format"
-        format: String,
-        "Locale"
-        locale: String
-    ): Date
-    assetId: String
-    belongsTo(
-        filter: BelongsToFilterInput,
-        limit: Int,
-        order: SortOrder = DESC,
-        page: Int,
-        "Defaults to 25 when page is provided."
-        perPage: Int,
-        skip: Int = 0,
-        sort: [SortArgument!],
-        sortBy: String = "date"
-    ): NodeBelongsTo
-    description: String
-    extension: String
-    id: ID!
-    label: String
-    mimeType: String
-    originalFilename: String
-    path(to: String = "default"): String
-    sha1hash: String
-    size: Float
-    source: SanityAssetSourceData
-    title: String
-    url: String
+  _createdAt(
+    "Date format"
+    format: String,
+    "Locale"
+    locale: String
+  ): Date
+  _id: ID
+  _key: String
+  _rev: String
+  _type: String
+  _updatedAt(
+    "Date format"
+    format: String,
+    "Locale"
+    locale: String
+  ): Date
+  assetId: String
+  belongsTo(
+    filter: BelongsToFilterInput,
+    limit: Int,
+    order: SortOrder = DESC,
+    page: Int,
+    "Defaults to 25 when page is provided."
+    perPage: Int,
+    skip: Int = 0,
+    sort: [SortArgument!],
+    sortBy: String = "date"
+  ): NodeBelongsTo
+  description: String
+  extension: String
+  id: ID!
+  label: String
+  mimeType: String
+  originalFilename: String
+  path(to: String = "default"): String
+  sha1hash: String
+  size: Float
+  source: SanityAssetSourceData
+  title: String
+  url: String
 }
 
 type SanityFileAssetConnection implements NodeConnection {
-    edges: [SanityFileAssetEdge]
-    pageInfo: PageInfo!
-    totalCount: Int!
+  edges: [SanityFileAssetEdge]
+  pageInfo: PageInfo!
+  totalCount: Int!
 }
 
 type SanityFileAssetEdge implements NodeConnectionEdge {
-    next: SanityFileAsset
-    node: SanityFileAsset
-    previous: SanityFileAsset
+  next: SanityFileAsset
+  node: SanityFileAsset
+  previous: SanityFileAsset
 }
 
 type SanityFullPortableTextObject {
-    _key: String
-    _rawContent(resolveReferences: SanityResolveReferencesConfiguration): JSON
-    _type: String
-    name: String
+  _key: String
+  _rawContent(resolveReferences: SanityResolveReferencesConfiguration): JSON
+  _type: String
+  name: String
 }
 
 type SanityGeopoint {
-    _key: String
-    _type: String
-    alt: Float
-    lat: Float
-    lng: Float
+  _key: String
+  _type: String
+  alt: Float
+  lat: Float
+  lng: Float
+}
+
+type SanityHeader {
+  _key: String
+  _type: String
+  image: SanityImage
+  showDate: Boolean
+  showImage: Boolean
 }
 
 type SanityImage {
-    _key: String
-    _type: String
-    asset: SanityImageAsset
-    crop: SanityImageCrop
-    hotspot: SanityImageHotspot
+  _key: String
+  _type: String
+  asset: SanityImageAsset
+  crop: SanityImageCrop
+  hotspot: SanityImageHotspot
 }
 
 type SanityImageAsset implements Node {
-    _createdAt(
-        "Date format"
-        format: String,
-        "Locale"
-        locale: String
-    ): Date
-    _id: ID
-    _key: String
-    _rev: String
-    _type: String
-    _updatedAt(
-        "Date format"
-        format: String,
-        "Locale"
-        locale: String
-    ): Date
-    assetId: String
-    belongsTo(
-        filter: BelongsToFilterInput,
-        limit: Int,
-        order: SortOrder = DESC,
-        page: Int,
-        "Defaults to 25 when page is provided."
-        perPage: Int,
-        skip: Int = 0,
-        sort: [SortArgument!],
-        sortBy: String = "date"
-    ): NodeBelongsTo
-    description: String
-    extension: String
-    id: ID!
-    label: String
-    metadata: SanityImageMetadata
-    mimeType: String
-    originalFilename: String
-    path(to: String = "default"): String
-    sha1hash: String
-    size: Float
-    source: SanityAssetSourceData
-    title: String
-    url: String
+  _createdAt(
+    "Date format"
+    format: String,
+    "Locale"
+    locale: String
+  ): Date
+  _id: ID
+  _key: String
+  _rev: String
+  _type: String
+  _updatedAt(
+    "Date format"
+    format: String,
+    "Locale"
+    locale: String
+  ): Date
+  assetId: String
+  belongsTo(
+    filter: BelongsToFilterInput,
+    limit: Int,
+    order: SortOrder = DESC,
+    page: Int,
+    "Defaults to 25 when page is provided."
+    perPage: Int,
+    skip: Int = 0,
+    sort: [SortArgument!],
+    sortBy: String = "date"
+  ): NodeBelongsTo
+  description: String
+  extension: String
+  id: ID!
+  label: String
+  metadata: SanityImageMetadata
+  mimeType: String
+  originalFilename: String
+  path(to: String = "default"): String
+  sha1hash: String
+  size: Float
+  source: SanityAssetSourceData
+  title: String
+  url: String
 }
 
 type SanityImageAssetConnection implements NodeConnection {
-    edges: [SanityImageAssetEdge]
-    pageInfo: PageInfo!
-    totalCount: Int!
+  edges: [SanityImageAssetEdge]
+  pageInfo: PageInfo!
+  totalCount: Int!
 }
 
 type SanityImageAssetEdge implements NodeConnectionEdge {
-    next: SanityImageAsset
-    node: SanityImageAsset
-    previous: SanityImageAsset
+  next: SanityImageAsset
+  node: SanityImageAsset
+  previous: SanityImageAsset
 }
 
 type SanityImageCrop {
-    _key: String
-    _type: String
-    bottom: Float
-    left: Float
-    right: Float
-    top: Float
+  _key: String
+  _type: String
+  bottom: Float
+  left: Float
+  right: Float
+  top: Float
 }
 
 type SanityImageDimensions {
-    _key: String
-    _type: String
-    aspectRatio: Float
-    height: Float
-    width: Float
+  _key: String
+  _type: String
+  aspectRatio: Float
+  height: Float
+  width: Float
 }
 
 type SanityImageHotspot {
-    _key: String
-    _type: String
-    height: Float
-    width: Float
-    x: Float
-    y: Float
+  _key: String
+  _type: String
+  height: Float
+  width: Float
+  x: Float
+  y: Float
 }
 
 type SanityImageMetadata {
-    _key: String
-    _type: String
-    dimensions: SanityImageDimensions
-    hasAlpha: Boolean
-    isOpaque: Boolean
-    location: SanityGeopoint
-    lqip: String
-    palette: SanityImagePalette
+  _key: String
+  _type: String
+  dimensions: SanityImageDimensions
+  hasAlpha: Boolean
+  isOpaque: Boolean
+  location: SanityGeopoint
+  lqip: String
+  palette: SanityImagePalette
 }
 
 type SanityImagePalette {
-    _key: String
-    _type: String
-    darkMuted: SanityImagePaletteSwatch
-    darkVibrant: SanityImagePaletteSwatch
-    dominant: SanityImagePaletteSwatch
-    lightMuted: SanityImagePaletteSwatch
-    lightVibrant: SanityImagePaletteSwatch
-    muted: SanityImagePaletteSwatch
-    vibrant: SanityImagePaletteSwatch
+  _key: String
+  _type: String
+  darkMuted: SanityImagePaletteSwatch
+  darkVibrant: SanityImagePaletteSwatch
+  dominant: SanityImagePaletteSwatch
+  lightMuted: SanityImagePaletteSwatch
+  lightVibrant: SanityImagePaletteSwatch
+  muted: SanityImagePaletteSwatch
+  vibrant: SanityImagePaletteSwatch
 }
 
 type SanityImagePaletteSwatch {
-    _key: String
-    _type: String
-    background: String
-    foreground: String
-    population: Float
-    title: String
+  _key: String
+  _type: String
+  background: String
+  foreground: String
+  population: Float
+  title: String
 }
 
 type SanityInternalLink {
-    _key: String
-    _type: String
-    reference: SanityAuthorOrContent
+  _key: String
+  _type: String
+  reference: SanityAuthorOrContent
 }
 
 type SanityRootQuery {
-    Author: SanityAuthor
-    Category: SanityCategory
-    Content: SanityContent
-    SanityFileAsset: SanityFileAsset
-    SanityImageAsset: SanityImageAsset
-    SiteSettings: SanitySiteSettings
-    allAuthor: SanityAuthor
-    allCategory: SanityCategory
-    allContent: SanityContent
-    allSanityFileAsset: SanityFileAsset
-    allSanityImageAsset: SanityImageAsset
-    allSiteSettings: SanitySiteSettings
+  Author: SanityAuthor
+  Category: SanityCategory
+  Content: SanityContent
+  SanityFileAsset: SanityFileAsset
+  SanityImageAsset: SanityImageAsset
+  SiteSettings: SanitySiteSettings
+  allAuthor: SanityAuthor
+  allCategory: SanityCategory
+  allContent: SanityContent
+  allSanityFileAsset: SanityFileAsset
+  allSanityImageAsset: SanityImageAsset
+  allSiteSettings: SanitySiteSettings
 }
 
 type SanitySeoImage {
-    _key: String
-    _type: String
-    alt: String
-    asset: SanityImageAsset
-    caption: String
-    crop: SanityImageCrop
-    hotspot: SanityImageHotspot
+  _key: String
+  _type: String
+  alt: String
+  asset: SanityImageAsset
+  caption: String
+  crop: SanityImageCrop
+  hotspot: SanityImageHotspot
 }
 
 type SanitySiteSettings implements Node {
-    _createdAt(
-        "Date format"
-        format: String,
-        "Locale"
-        locale: String
-    ): Date
-    _id: ID
-    _key: String
-    _rev: String
-    _type: String
-    _updatedAt(
-        "Date format"
-        format: String,
-        "Locale"
-        locale: String
-    ): Date
-    belongsTo(
-        filter: BelongsToFilterInput,
-        limit: Int,
-        order: SortOrder = DESC,
-        page: Int,
-        "Defaults to 25 when page is provided."
-        perPage: Int,
-        skip: Int = 0,
-        sort: [SortArgument!],
-        sortBy: String = "date"
-    ): NodeBelongsTo
-    homepage: SanityContent
-    id: ID!
-    image: SanityImage
-    mainLinks: [SanityCategoryOrContent]
-    name: String
-    socialLinks: [SanitySocialLink]
-    subText: String
-    title: String
+  _createdAt(
+    "Date format"
+    format: String,
+    "Locale"
+    locale: String
+  ): Date
+  _id: ID
+  _key: String
+  _rev: String
+  _type: String
+  _updatedAt(
+    "Date format"
+    format: String,
+    "Locale"
+    locale: String
+  ): Date
+  belongsTo(
+    filter: BelongsToFilterInput,
+    limit: Int,
+    order: SortOrder = DESC,
+    page: Int,
+    "Defaults to 25 when page is provided."
+    perPage: Int,
+    skip: Int = 0,
+    sort: [SortArgument!],
+    sortBy: String = "date"
+  ): NodeBelongsTo
+  description: String
+  homepage: SanityContent
+  id: ID!
+  image: SanityImage
+  mainLinks: [SanityCategoryOrContent]
+  name: String
+  socialLinks: [SanitySocialLink]
+  subText: String
+  title: String
 }
 
 type SanitySiteSettingsConnection implements NodeConnection {
-    edges: [SanitySiteSettingsEdge]
-    pageInfo: PageInfo!
-    totalCount: Int!
+  edges: [SanitySiteSettingsEdge]
+  pageInfo: PageInfo!
+  totalCount: Int!
 }
 
 type SanitySiteSettingsEdge implements NodeConnectionEdge {
-    next: SanitySiteSettings
-    node: SanitySiteSettings
-    previous: SanitySiteSettings
+  next: SanitySiteSettings
+  node: SanitySiteSettings
+  previous: SanitySiteSettings
 }
 
 type SanitySlug {
-    _key: String
-    _type: String
-    current: String
+  _key: String
+  _type: String
+  current: String
 }
 
 type SanitySocialLink {
-    _key: String
-    _type: String
-    externalUrl: String
-    logo: SanityImage
-    text: String
-    type: String
+  _key: String
+  _type: String
+  externalUrl: String
+  logo: SanityImage
+  text: String
+  type: String
 }
 
 type SanitySpan {
-    _key: String
-    _type: String
-    marks: [String]
-    text: String
+  _key: String
+  _type: String
+  marks: [String]
+  text: String
 }
 
 enum ImageFit {
-    "Embed within both provided dimensions."
-    contain
-    "Crop to cover both provided dimensions."
-    cover
-    "Ignore the aspect ratio of the input and stretch to both provided dimensions."
-    fill
-    "Preserving aspect ratio, resize the image to be as large as possible while ensuring its dimensions are less than or equal to both those specified."
-    inside
-    "Preserving aspect ratio, resize the image to be as small as possible while ensuring its dimensions are greater than or equal to both those specified. Some of these values are based on the object-fit CSS property."
-    outside
+  "Embed within both provided dimensions."
+  contain
+  "Crop to cover both provided dimensions."
+  cover
+  "Ignore the aspect ratio of the input and stretch to both provided dimensions."
+  fill
+  "Preserving aspect ratio, resize the image to be as large as possible while ensuring its dimensions are less than or equal to both those specified."
+  inside
+  "Preserving aspect ratio, resize the image to be as small as possible while ensuring its dimensions are greater than or equal to both those specified. Some of these values are based on the object-fit CSS property."
+  outside
 }
 
 enum SortOrder {
-    "Sort ascending"
-    ASC
-    "Sort descending"
-    DESC
+  "Sort ascending"
+  ASC
+  "Sort descending"
+  DESC
 }
 
 enum TypeName {
-    SanityAuthor
-    SanityCategory
-    SanityContent
-    SanityFileAsset
-    SanityImageAsset
-    SanitySiteSettings
+  SanityAuthor
+  SanityCategory
+  SanityContent
+  SanityFileAsset
+  SanityImageAsset
+  SanitySiteSettings
 }
 
 input BelongsToFilterInput {
-    id: IDQueryOperatorInput
-    path: StringQueryOperatorInput
-    typeName: TypeNameQueryOperatorInput
+  id: IDQueryOperatorInput
+  path: StringQueryOperatorInput
+  typeName: TypeNameQueryOperatorInput
 }
 
 input BooleanQueryOperatorInput {
-    "Filter by property of (strict) equality."
-    eq: Boolean
-    "Filter by property matching any of the provided values."
-    in: [Boolean]
-    "Filter by property not equal to provided value."
-    ne: Boolean
-    "Filter by property not matching any of the provided values."
-    nin: [Boolean]
+  "Filter by property of (strict) equality."
+  eq: Boolean
+  "Filter by property matching any of the provided values."
+  in: [Boolean]
+  "Filter by property not equal to provided value."
+  ne: Boolean
+  "Filter by property not matching any of the provided values."
+  nin: [Boolean]
 }
 
 input DateQueryOperatorInput {
-    "Filter by property between provided values."
-    between: [Date]
-    "Filter by date property equal to provided date value."
-    dteq: Date
-    "Filter by property of (strict) equality."
-    eq: Date
-    "Filter by property greater than provided value."
-    gt: Date
-    "Filter by property greater or equal to provided value."
-    gte: Date
-    "Filter by property matching any of the provided values."
-    in: [Date]
-    "Filter by property less than provided value."
-    lt: Date
-    "Filter by property less than or equal to provided value."
-    lte: Date
-    "Filter by property not equal to provided value."
-    ne: Date
-    "Filter by property not matching any of the provided values."
-    nin: [Date]
+  "Filter by property between provided values."
+  between: [Date]
+  "Filter by date property equal to provided date value."
+  dteq: Date
+  "Filter by property of (strict) equality."
+  eq: Date
+  "Filter by property greater than provided value."
+  gt: Date
+  "Filter by property greater or equal to provided value."
+  gte: Date
+  "Filter by property matching any of the provided values."
+  in: [Date]
+  "Filter by property less than provided value."
+  lt: Date
+  "Filter by property less than or equal to provided value."
+  lte: Date
+  "Filter by property not equal to provided value."
+  ne: Date
+  "Filter by property not matching any of the provided values."
+  nin: [Date]
 }
 
 input FloatQueryOperatorInput {
-    "Filter by property between provided values."
-    between: [Float]
-    "Filter by property of (strict) equality."
-    eq: Float
-    "Filter by property greater than provided value."
-    gt: Float
-    "Filter by property greater or equal to provided value."
-    gte: Float
-    "Filter by property matching any of the provided values."
-    in: [Float]
-    "Filter by property less than provided value."
-    lt: Float
-    "Filter by property less than or equal to provided value."
-    lte: Float
-    "Filter by property not equal to provided value."
-    ne: Float
-    "Filter by property not matching any of the provided values."
-    nin: [Float]
+  "Filter by property between provided values."
+  between: [Float]
+  "Filter by property of (strict) equality."
+  eq: Float
+  "Filter by property greater than provided value."
+  gt: Float
+  "Filter by property greater or equal to provided value."
+  gte: Float
+  "Filter by property matching any of the provided values."
+  in: [Float]
+  "Filter by property less than provided value."
+  lt: Float
+  "Filter by property less than or equal to provided value."
+  lte: Float
+  "Filter by property not equal to provided value."
+  ne: Float
+  "Filter by property not matching any of the provided values."
+  nin: [Float]
 }
 
 input IDQueryOperatorInput {
-    "Filter by property of (strict) equality."
-    eq: ID
-    "Filter by property matching any of the provided values."
-    in: [ID]
-    "Filter by property not equal to provided value."
-    ne: ID
-    "Filter by property not matching any of the provided values."
-    nin: [ID]
+  "Filter by property of (strict) equality."
+  eq: ID
+  "Filter by property matching any of the provided values."
+  in: [ID]
+  "Filter by property not equal to provided value."
+  ne: ID
+  "Filter by property not matching any of the provided values."
+  nin: [ID]
 }
 
 input PageFilterInput {
-    path: StringQueryOperatorInput
+  path: StringQueryOperatorInput
 }
 
 input SanityAssetSourceDataFilterInput {
-    _key: StringQueryOperatorInput
-    _type: StringQueryOperatorInput
-    id: StringQueryOperatorInput
-    name: StringQueryOperatorInput
-    url: StringQueryOperatorInput
+  _key: StringQueryOperatorInput
+  _type: StringQueryOperatorInput
+  id: StringQueryOperatorInput
+  name: StringQueryOperatorInput
+  url: StringQueryOperatorInput
 }
 
 input SanityAuthorFilterInput {
-    _createdAt: DateQueryOperatorInput
-    _id: IDQueryOperatorInput
-    _key: StringQueryOperatorInput
-    _rev: StringQueryOperatorInput
-    _type: StringQueryOperatorInput
-    _updatedAt: DateQueryOperatorInput
-    bioPage: SanityContentQueryOperatorInput
-    id: IDQueryOperatorInput
-    name: StringQueryOperatorInput
+  _createdAt: DateQueryOperatorInput
+  _id: IDQueryOperatorInput
+  _key: StringQueryOperatorInput
+  _rev: StringQueryOperatorInput
+  _type: StringQueryOperatorInput
+  _updatedAt: DateQueryOperatorInput
+  bioPage: SanityContentQueryOperatorInput
+  id: IDQueryOperatorInput
+  name: StringQueryOperatorInput
 }
 
 input SanityAuthorQueryOperatorInput {
-    "Use the id field instead."
-    eq: ID
-    id: IDQueryOperatorInput
-    "Use the id field instead."
-    in: [ID]
-    "Use the id field instead."
-    ne: ID
-    "Use the id field instead."
-    nin: [ID]
+  "Use the id field instead."
+  eq: ID
+  id: IDQueryOperatorInput
+  "Use the id field instead."
+  in: [ID]
+  "Use the id field instead."
+  ne: ID
+  "Use the id field instead."
+  nin: [ID]
 }
 
 input SanityCategoryFilterInput {
-    _createdAt: DateQueryOperatorInput
-    _id: IDQueryOperatorInput
-    _key: StringQueryOperatorInput
-    _rev: StringQueryOperatorInput
-    _type: StringQueryOperatorInput
-    _updatedAt: DateQueryOperatorInput
-    color: StringQueryOperatorInput
-    description: StringQueryOperatorInput
-    homepage: SanityContentQueryOperatorInput
-    id: IDQueryOperatorInput
-    parents: SanityCategoryListQueryOperatorInput
-    slug: SanitySlugFilterInput
-    title: StringQueryOperatorInput
+  _createdAt: DateQueryOperatorInput
+  _id: IDQueryOperatorInput
+  _key: StringQueryOperatorInput
+  _rev: StringQueryOperatorInput
+  _type: StringQueryOperatorInput
+  _updatedAt: DateQueryOperatorInput
+  color: StringQueryOperatorInput
+  description: StringQueryOperatorInput
+  homepage: SanityContentQueryOperatorInput
+  id: IDQueryOperatorInput
+  parents: SanityCategoryListQueryOperatorInput
+  slug: SanitySlugFilterInput
+  title: StringQueryOperatorInput
 }
 
 input SanityCategoryListQueryOperatorInput {
-    "Use the id field instead."
-    contains: [ID]
-    "Use the id field instead."
-    containsAny: [ID]
-    "Use the id field instead."
-    containsNone: [ID]
-    id: IDQueryOperatorInput
-    "Use the id field instead."
-    size: Int
+  "Use the id field instead."
+  contains: [ID]
+  "Use the id field instead."
+  containsAny: [ID]
+  "Use the id field instead."
+  containsNone: [ID]
+  id: IDQueryOperatorInput
+  "Use the id field instead."
+  size: Int
 }
 
 input SanityCategoryQueryOperatorInput {
-    "Use the id field instead."
-    eq: ID
-    id: IDQueryOperatorInput
-    "Use the id field instead."
-    in: [ID]
-    "Use the id field instead."
-    ne: ID
-    "Use the id field instead."
-    nin: [ID]
+  "Use the id field instead."
+  eq: ID
+  id: IDQueryOperatorInput
+  "Use the id field instead."
+  in: [ID]
+  "Use the id field instead."
+  ne: ID
+  "Use the id field instead."
+  nin: [ID]
 }
 
 input SanityContentFilterInput {
-    _createdAt: DateQueryOperatorInput
-    _id: IDQueryOperatorInput
-    _key: StringQueryOperatorInput
-    _rev: StringQueryOperatorInput
-    _type: StringQueryOperatorInput
-    _updatedAt: DateQueryOperatorInput
-    content: SanityContentObjectFilterInput
-    id: IDQueryOperatorInput
-    mainCategoryThree: SanityCategoryQueryOperatorInput
+  _createdAt: DateQueryOperatorInput
+  _id: IDQueryOperatorInput
+  _key: StringQueryOperatorInput
+  _rev: StringQueryOperatorInput
+  _type: StringQueryOperatorInput
+  _updatedAt: DateQueryOperatorInput
+  content: SanityContentObjectFilterInput
+  id: IDQueryOperatorInput
+  mainCategoryThree: SanityCategoryQueryOperatorInput
 }
 
 input SanityContentObjectFilterInput {
-    _key: StringQueryOperatorInput
-    _type: StringQueryOperatorInput
-    author: SanityAuthorQueryOperatorInput
-    categories: SanityCategoryListQueryOperatorInput
-    linkTitle: StringQueryOperatorInput
-    mainCategory: SanityCategoryQueryOperatorInput
-    mainImage: SanitySeoImageFilterInput
-    publishedAt: DateQueryOperatorInput
-    slug: SanitySlugFilterInput
-    title: StringQueryOperatorInput
+  _key: StringQueryOperatorInput
+  _type: StringQueryOperatorInput
+  author: SanityAuthorQueryOperatorInput
+  categories: SanityCategoryListQueryOperatorInput
+  linkTitle: StringQueryOperatorInput
+  mainCategory: SanityCategoryQueryOperatorInput
+  mainImage: SanitySeoImageFilterInput
+  publishedAt: DateQueryOperatorInput
+  slug: SanitySlugFilterInput
+  title: StringQueryOperatorInput
 }
 
 input SanityContentQueryOperatorInput {
-    "Use the id field instead."
-    eq: ID
-    id: IDQueryOperatorInput
-    "Use the id field instead."
-    in: [ID]
-    "Use the id field instead."
-    ne: ID
-    "Use the id field instead."
-    nin: [ID]
+  "Use the id field instead."
+  eq: ID
+  id: IDQueryOperatorInput
+  "Use the id field instead."
+  in: [ID]
+  "Use the id field instead."
+  ne: ID
+  "Use the id field instead."
+  nin: [ID]
 }
 
 input SanityFileAssetFilterInput {
-    _createdAt: DateQueryOperatorInput
-    _id: IDQueryOperatorInput
-    _key: StringQueryOperatorInput
-    _rev: StringQueryOperatorInput
-    _type: StringQueryOperatorInput
-    _updatedAt: DateQueryOperatorInput
-    assetId: StringQueryOperatorInput
-    description: StringQueryOperatorInput
-    extension: StringQueryOperatorInput
-    id: IDQueryOperatorInput
-    label: StringQueryOperatorInput
-    mimeType: StringQueryOperatorInput
-    originalFilename: StringQueryOperatorInput
-    path: StringQueryOperatorInput
-    sha1hash: StringQueryOperatorInput
-    size: FloatQueryOperatorInput
-    source: SanityAssetSourceDataFilterInput
-    title: StringQueryOperatorInput
-    url: StringQueryOperatorInput
+  _createdAt: DateQueryOperatorInput
+  _id: IDQueryOperatorInput
+  _key: StringQueryOperatorInput
+  _rev: StringQueryOperatorInput
+  _type: StringQueryOperatorInput
+  _updatedAt: DateQueryOperatorInput
+  assetId: StringQueryOperatorInput
+  description: StringQueryOperatorInput
+  extension: StringQueryOperatorInput
+  id: IDQueryOperatorInput
+  label: StringQueryOperatorInput
+  mimeType: StringQueryOperatorInput
+  originalFilename: StringQueryOperatorInput
+  path: StringQueryOperatorInput
+  sha1hash: StringQueryOperatorInput
+  size: FloatQueryOperatorInput
+  source: SanityAssetSourceDataFilterInput
+  title: StringQueryOperatorInput
+  url: StringQueryOperatorInput
 }
 
 input SanityGeopointFilterInput {
-    _key: StringQueryOperatorInput
-    _type: StringQueryOperatorInput
-    alt: FloatQueryOperatorInput
-    lat: FloatQueryOperatorInput
-    lng: FloatQueryOperatorInput
+  _key: StringQueryOperatorInput
+  _type: StringQueryOperatorInput
+  alt: FloatQueryOperatorInput
+  lat: FloatQueryOperatorInput
+  lng: FloatQueryOperatorInput
 }
 
 input SanityImageAssetFilterInput {
-    _createdAt: DateQueryOperatorInput
-    _id: IDQueryOperatorInput
-    _key: StringQueryOperatorInput
-    _rev: StringQueryOperatorInput
-    _type: StringQueryOperatorInput
-    _updatedAt: DateQueryOperatorInput
-    assetId: StringQueryOperatorInput
-    description: StringQueryOperatorInput
-    extension: StringQueryOperatorInput
-    id: IDQueryOperatorInput
-    label: StringQueryOperatorInput
-    metadata: SanityImageMetadataFilterInput
-    mimeType: StringQueryOperatorInput
-    originalFilename: StringQueryOperatorInput
-    path: StringQueryOperatorInput
-    sha1hash: StringQueryOperatorInput
-    size: FloatQueryOperatorInput
-    source: SanityAssetSourceDataFilterInput
-    title: StringQueryOperatorInput
-    url: StringQueryOperatorInput
+  _createdAt: DateQueryOperatorInput
+  _id: IDQueryOperatorInput
+  _key: StringQueryOperatorInput
+  _rev: StringQueryOperatorInput
+  _type: StringQueryOperatorInput
+  _updatedAt: DateQueryOperatorInput
+  assetId: StringQueryOperatorInput
+  description: StringQueryOperatorInput
+  extension: StringQueryOperatorInput
+  id: IDQueryOperatorInput
+  label: StringQueryOperatorInput
+  metadata: SanityImageMetadataFilterInput
+  mimeType: StringQueryOperatorInput
+  originalFilename: StringQueryOperatorInput
+  path: StringQueryOperatorInput
+  sha1hash: StringQueryOperatorInput
+  size: FloatQueryOperatorInput
+  source: SanityAssetSourceDataFilterInput
+  title: StringQueryOperatorInput
+  url: StringQueryOperatorInput
 }
 
 input SanityImageAssetQueryOperatorInput {
-    "Use the id field instead."
-    eq: ID
-    id: IDQueryOperatorInput
-    "Use the id field instead."
-    in: [ID]
-    "Use the id field instead."
-    ne: ID
-    "Use the id field instead."
-    nin: [ID]
+  "Use the id field instead."
+  eq: ID
+  id: IDQueryOperatorInput
+  "Use the id field instead."
+  in: [ID]
+  "Use the id field instead."
+  ne: ID
+  "Use the id field instead."
+  nin: [ID]
 }
 
 input SanityImageCropFilterInput {
-    _key: StringQueryOperatorInput
-    _type: StringQueryOperatorInput
-    bottom: FloatQueryOperatorInput
-    left: FloatQueryOperatorInput
-    right: FloatQueryOperatorInput
-    top: FloatQueryOperatorInput
+  _key: StringQueryOperatorInput
+  _type: StringQueryOperatorInput
+  bottom: FloatQueryOperatorInput
+  left: FloatQueryOperatorInput
+  right: FloatQueryOperatorInput
+  top: FloatQueryOperatorInput
 }
 
 input SanityImageDimensionsFilterInput {
-    _key: StringQueryOperatorInput
-    _type: StringQueryOperatorInput
-    aspectRatio: FloatQueryOperatorInput
-    height: FloatQueryOperatorInput
-    width: FloatQueryOperatorInput
+  _key: StringQueryOperatorInput
+  _type: StringQueryOperatorInput
+  aspectRatio: FloatQueryOperatorInput
+  height: FloatQueryOperatorInput
+  width: FloatQueryOperatorInput
 }
 
 input SanityImageFilterInput {
-    _key: StringQueryOperatorInput
-    _type: StringQueryOperatorInput
-    asset: SanityImageAssetQueryOperatorInput
-    crop: SanityImageCropFilterInput
-    hotspot: SanityImageHotspotFilterInput
+  _key: StringQueryOperatorInput
+  _type: StringQueryOperatorInput
+  asset: SanityImageAssetQueryOperatorInput
+  crop: SanityImageCropFilterInput
+  hotspot: SanityImageHotspotFilterInput
 }
 
 input SanityImageHotspotFilterInput {
-    _key: StringQueryOperatorInput
-    _type: StringQueryOperatorInput
-    height: FloatQueryOperatorInput
-    width: FloatQueryOperatorInput
-    x: FloatQueryOperatorInput
-    y: FloatQueryOperatorInput
+  _key: StringQueryOperatorInput
+  _type: StringQueryOperatorInput
+  height: FloatQueryOperatorInput
+  width: FloatQueryOperatorInput
+  x: FloatQueryOperatorInput
+  y: FloatQueryOperatorInput
 }
 
 input SanityImageMetadataFilterInput {
-    _key: StringQueryOperatorInput
-    _type: StringQueryOperatorInput
-    dimensions: SanityImageDimensionsFilterInput
-    hasAlpha: BooleanQueryOperatorInput
-    isOpaque: BooleanQueryOperatorInput
-    location: SanityGeopointFilterInput
-    lqip: StringQueryOperatorInput
-    palette: SanityImagePaletteFilterInput
+  _key: StringQueryOperatorInput
+  _type: StringQueryOperatorInput
+  dimensions: SanityImageDimensionsFilterInput
+  hasAlpha: BooleanQueryOperatorInput
+  isOpaque: BooleanQueryOperatorInput
+  location: SanityGeopointFilterInput
+  lqip: StringQueryOperatorInput
+  palette: SanityImagePaletteFilterInput
 }
 
 input SanityImagePaletteFilterInput {
-    _key: StringQueryOperatorInput
-    _type: StringQueryOperatorInput
-    darkMuted: SanityImagePaletteSwatchFilterInput
-    darkVibrant: SanityImagePaletteSwatchFilterInput
-    dominant: SanityImagePaletteSwatchFilterInput
-    lightMuted: SanityImagePaletteSwatchFilterInput
-    lightVibrant: SanityImagePaletteSwatchFilterInput
-    muted: SanityImagePaletteSwatchFilterInput
-    vibrant: SanityImagePaletteSwatchFilterInput
+  _key: StringQueryOperatorInput
+  _type: StringQueryOperatorInput
+  darkMuted: SanityImagePaletteSwatchFilterInput
+  darkVibrant: SanityImagePaletteSwatchFilterInput
+  dominant: SanityImagePaletteSwatchFilterInput
+  lightMuted: SanityImagePaletteSwatchFilterInput
+  lightVibrant: SanityImagePaletteSwatchFilterInput
+  muted: SanityImagePaletteSwatchFilterInput
+  vibrant: SanityImagePaletteSwatchFilterInput
 }
 
 input SanityImagePaletteSwatchFilterInput {
-    _key: StringQueryOperatorInput
-    _type: StringQueryOperatorInput
-    background: StringQueryOperatorInput
-    foreground: StringQueryOperatorInput
-    population: FloatQueryOperatorInput
-    title: StringQueryOperatorInput
+  _key: StringQueryOperatorInput
+  _type: StringQueryOperatorInput
+  background: StringQueryOperatorInput
+  foreground: StringQueryOperatorInput
+  population: FloatQueryOperatorInput
+  title: StringQueryOperatorInput
 }
 
 input SanityResolveReferencesConfiguration {
-    maxDepth: Int!
+  maxDepth: Int!
 }
 
 input SanitySeoImageFilterInput {
-    _key: StringQueryOperatorInput
-    _type: StringQueryOperatorInput
-    alt: StringQueryOperatorInput
-    asset: SanityImageAssetQueryOperatorInput
-    caption: StringQueryOperatorInput
-    crop: SanityImageCropFilterInput
-    hotspot: SanityImageHotspotFilterInput
+  _key: StringQueryOperatorInput
+  _type: StringQueryOperatorInput
+  alt: StringQueryOperatorInput
+  asset: SanityImageAssetQueryOperatorInput
+  caption: StringQueryOperatorInput
+  crop: SanityImageCropFilterInput
+  hotspot: SanityImageHotspotFilterInput
 }
 
 input SanitySiteSettingsFilterInput {
-    _createdAt: DateQueryOperatorInput
-    _id: IDQueryOperatorInput
-    _key: StringQueryOperatorInput
-    _rev: StringQueryOperatorInput
-    _type: StringQueryOperatorInput
-    _updatedAt: DateQueryOperatorInput
-    homepage: SanityContentQueryOperatorInput
-    id: IDQueryOperatorInput
-    image: SanityImageFilterInput
-    name: StringQueryOperatorInput
-    socialLinks: SanitySocialLinkFilterInput
-    subText: StringQueryOperatorInput
-    title: StringQueryOperatorInput
+  _createdAt: DateQueryOperatorInput
+  _id: IDQueryOperatorInput
+  _key: StringQueryOperatorInput
+  _rev: StringQueryOperatorInput
+  _type: StringQueryOperatorInput
+  _updatedAt: DateQueryOperatorInput
+  description: StringQueryOperatorInput
+  homepage: SanityContentQueryOperatorInput
+  id: IDQueryOperatorInput
+  image: SanityImageFilterInput
+  name: StringQueryOperatorInput
+  socialLinks: SanitySocialLinkFilterInput
+  subText: StringQueryOperatorInput
+  title: StringQueryOperatorInput
 }
 
 input SanitySlugFilterInput {
-    _key: StringQueryOperatorInput
-    _type: StringQueryOperatorInput
-    current: StringQueryOperatorInput
+  _key: StringQueryOperatorInput
+  _type: StringQueryOperatorInput
+  current: StringQueryOperatorInput
 }
 
 input SanitySocialLinkFilterInput {
-    _key: StringQueryOperatorInput
-    _type: StringQueryOperatorInput
-    externalUrl: StringQueryOperatorInput
-    logo: SanityImageFilterInput
-    text: StringQueryOperatorInput
-    type: StringQueryOperatorInput
+  _key: StringQueryOperatorInput
+  _type: StringQueryOperatorInput
+  externalUrl: StringQueryOperatorInput
+  logo: SanityImageFilterInput
+  text: StringQueryOperatorInput
+  type: StringQueryOperatorInput
 }
 
 input SortArgument {
-    by: String! = "date"
-    order: SortOrder = DESC
+  by: String! = "date"
+  order: SortOrder = DESC
 }
 
 input StringQueryOperatorInput {
-    "Filter by property of (strict) equality."
-    eq: String
-    "Filter by property matching any of the provided values."
-    in: [String]
-    "Filter by property not equal to provided value."
-    ne: String
-    "Filter by property not matching any of the provided values."
-    nin: [String]
-    "Filter by property matching provided regular expression."
-    regex: String
+  "Filter by property of (strict) equality."
+  eq: String
+  "Filter by property matching any of the provided values."
+  in: [String]
+  "Filter by property not equal to provided value."
+  ne: String
+  "Filter by property not matching any of the provided values."
+  nin: [String]
+  "Filter by property matching provided regular expression."
+  regex: String
 }
 
 input TypeNameQueryOperatorInput {
-    "Filter by property of (strict) equality."
-    eq: TypeName
-    "Filter by property matching any of the provided values."
-    in: [TypeName]
-    "Filter by property not equal to provided value."
-    ne: TypeName
-    "Filter by property not matching any of the provided values."
-    nin: [TypeName]
+  "Filter by property of (strict) equality."
+  eq: TypeName
+  "Filter by property matching any of the provided values."
+  in: [TypeName]
+  "Filter by property not equal to provided value."
+  ne: TypeName
+  "Filter by property not matching any of the provided values."
+  nin: [TypeName]
 }
 
 

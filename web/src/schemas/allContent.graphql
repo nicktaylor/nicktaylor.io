@@ -53,11 +53,36 @@ query AllContentQuery {
             bottom
           }
         }
+        publishedAt
           contentBlocks {
             ... on SanityFullPortableTextObject {
               _key
               _type
               _rawContent(resolveReferences: { maxDepth: 7 })
+            }
+            ... on SanityHeader {
+              _key
+              _type
+              showDate
+              showImage
+              image {
+                asset {
+                  _id
+                  url
+                }
+                hotspot {
+                  x
+                  y
+                  width
+                  height
+                }
+                crop {
+                  top
+                  left
+                  right
+                  bottom
+                }
+              }
             }
             ... on SanityContentList {
               _key

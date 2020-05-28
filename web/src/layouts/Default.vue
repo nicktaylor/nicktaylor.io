@@ -115,16 +115,8 @@ export default {
 <style lang="postcss" module>
 .content {
   line-height: 1.5em;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: var(--padding-small);
-  font-family: wotfard;
+  font-family: var(--font-normal);
   padding-bottom: 50px;
-  overflow: hidden;
-
-  h1 {
-    line-height: 1;
-    margin-top: 0;
-    margin-bottom: 0;
-  }
+  padding-top: 87px;
 }
 </style>

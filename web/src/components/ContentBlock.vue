@@ -6,7 +6,6 @@
 
 <script>
 import BlockContent from 'sanity-blocks-vue-component'
-import { contentSerializers } from '~/utils/contentTypes.js'
 import urlResolver from '~/utils/urlResolver.js'
 
 export default {
@@ -14,7 +13,7 @@ export default {
     return {
       serializers: {
         marks: {
-          internalLink: content => {
+          internalLink: function(content) {
             const node = content.mark.reference
             const url = urlResolver(node, this.$context.settings)
             return <g-link to={url}>{content.children.join('')}</g-link>
@@ -36,6 +35,11 @@ a {
 }
 
 .block {
+  margin: auto;
+  box-sizing: border-box;
+  max-width: var(--max-container-width);
+  padding: var(--padding-small);
+
   & > div > *:last-child {
     margin-bottom: 0;
   }

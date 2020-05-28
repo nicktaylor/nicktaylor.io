@@ -10,9 +10,9 @@ export const toPlainText = (blocks = []) => {
 }
 
 export const cutAtEndOfLine = (text, numChars, ellipsis) => {
-  let sentences = text.split(/(\.\n\n)|([\.\?\!]\ )/g)
+  let sentences = text.split(/(\.\n\n)|([.?!] )/g)
 
-  if (sentences.length == 1 && sentences[0] == '') {
+  if (sentences.length === 1 && sentences[0] === '') {
     return ''
   }
 
@@ -21,7 +21,7 @@ export const cutAtEndOfLine = (text, numChars, ellipsis) => {
     newText += sentences[i] ? `${sentences[i]}` : ''
     if (newText.length > numChars) {
       const lastChar = newText.trim().substr(-1)
-      if (lastChar == '!' || lastChar == '?' || lastChar == '.') break
+      if (lastChar === '!' || lastChar === '?' || lastChar === '.') break
     }
   }
 
