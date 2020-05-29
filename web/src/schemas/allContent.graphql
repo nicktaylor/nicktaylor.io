@@ -65,6 +65,7 @@ query AllContentQuery {
               _type
               showDate
               showImage
+              layout
               image {
                 asset {
                   _id

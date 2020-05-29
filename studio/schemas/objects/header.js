@@ -1,4 +1,5 @@
 import {MdTitle} from "react-icons/md";
+import {BsArrowsAngleContract, BsArrowsAngleExpand} from "react-icons/bs"
 
 export default {
   name: 'header',
@@ -16,11 +17,30 @@ export default {
       title: 'Show Image'
     },
     {
+      name: 'layout',
+      type: 'visualOptions',
+      title: 'Layout',
+      options: {
+        showTooltip: true,
+        optionSize: 'small',
+        list: {
+          contain: {
+            name: 'Contain Image',
+            icon: BsArrowsAngleContract,
+          },
+          cover: {
+            name: 'Cover Image',
+            icon: BsArrowsAngleExpand
+          }
+        }
+      }
+    },
+    {
       name: 'image',
-      type: 'image',
+      type: 'seoImage',
       title: 'Image',
       description: 'Select an image if you wish to override the content main image'
-    }
+    },
   ],
   preview: {
     select: {

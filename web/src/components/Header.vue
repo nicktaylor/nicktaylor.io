@@ -1,14 +1,14 @@
 <template>
   <header :class="[$style.header, openOrClosed]">
     <div :class="$style.mac">
-      <MacWindow />
+      <mac-window />
     </div>
-    <HeaderTitle url="/" :subText="subText" :title="title" :class="$style.title" />
+    <header-title url="/" :subText="subText" :title="title" :class="$style.title" />
     <div :class="$style.hamburger">
-      <NavHamburger :onToggle="onToggleNav" :open="open" />
+      <nav-hamburger :onToggle="onToggleNav" :open="open" />
     </div>
     <div :class="$style.nav">
-      <NavLinks :links="links" :onClick="onToggleNav" />
+      <nav-links :links="links" :onClick="onToggleNav" />
     </div>
   </header>
 </template>

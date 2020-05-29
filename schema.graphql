@@ -455,7 +455,8 @@ type SanityGeopoint {
 type SanityHeader {
   _key: String
   _type: String
-  image: SanityImage
+  image: SanitySeoImage
+  layout: String
   showDate: Boolean
   showImage: Boolean
 }

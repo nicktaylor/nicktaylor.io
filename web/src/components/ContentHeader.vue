@@ -1,5 +1,5 @@
 <template>
-  <header :class="[$style.header, showImage ? $style.image : '']">
+  <header :class="[$style.header, showImage ? $style.image : '', layout ? $style[layout] : '']">
     <Picture v-if="showImage"
              :default-height="200"
              :default-width="500"
@@ -31,7 +31,8 @@
       showDate: Boolean,
       showImage: Boolean,
       image: Object,
-      title: String
+      title: String,
+      layout: String,
     },
     computed: {
       dateAndTime() {
@@ -77,9 +78,6 @@
     }
 
     &.image {
-      object-fit: cover;
-      background: none;
-
       img {
         position: absolute;
         width: 100%;
@@ -115,6 +113,19 @@
           position: absolute;
         }
       }
+
+      &.cover {
+        background: none;
+      }
+
+      &.contain {
+        object-fit: contain;
+
+        img {
+          object-fit: contain;
+          opacity: 1;
+        }
+      }
     }
 
     .headoverlay {
@@ -137,6 +148,7 @@
       bottom: 0;
     }
   }
+
 
   @media screen and (min-width: 768px) {
     .header {
