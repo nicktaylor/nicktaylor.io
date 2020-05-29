@@ -4,7 +4,7 @@
 
 <script>
   import 'prismjs'
-  import '~/assets/css/prism-dracula.css'
+  import '~/assets/css/prism-custom.css'
   import Prism from 'vue-prism-component'
 
   export default {
