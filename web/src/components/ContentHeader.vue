@@ -115,7 +115,6 @@
           position: absolute;
         }
       }
-
     }
 
     .headoverlay {
@@ -123,7 +122,7 @@
       bottom: 0;
       left: 0;
       right: 0;
-      padding: var(--padding-small);
+      padding: var(--padding-small) 0;
 
       & > * {
         max-width: 980px;

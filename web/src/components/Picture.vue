@@ -5,8 +5,9 @@
             :media="`(min-width: ${source.minWidth}px)`"
     />
     <g-image
+            :loading="loading"
             :alt="`${image.alt}`"
-            :src="$urlForImage(image, $context.metadata.sanityOptions).width(defaultWidth).height(defaultHeight).quality(90).auto('format').url()"
+            :src="$urlForImage(image, $context.metadata.sanityOptions).width(defaultWidth).height(defaultHeight).quality(80).auto('format').url()"
     />
   </picture>
 </template>
@@ -22,13 +23,14 @@
       media: Array,
       defaultWidth: Number,
       defaultHeight: Number,
+      loading: String,
     },
     computed: {
       sources: function() {
         return this.media ? this.media.map(m => ({
           width: m.width ? m.width : null,
           height: m.height ? m.height : null,
-          quality: m.quality ? m.quality : 90,
+          quality: m.quality ? m.quality : 80,
           minWidth: m.minWidth ? m.minWidth : m.width,
         })) : null
       },

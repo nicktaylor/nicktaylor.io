@@ -61,11 +61,17 @@
 
 <style lang="postcss" module>
   main > * {
-    margin-top: var(--padding-medium);
+    margin-top: var(--padding-small);
     box-sizing: border-box;
 
     &:first-child {
       margin-top: 0;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    main > * {
+      margin-top: var(--padding-medium);
     }
   }
 

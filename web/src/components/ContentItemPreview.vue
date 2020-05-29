@@ -2,7 +2,7 @@
   <article :class="$style.item">
     <g-link :to="url" active-class=" ">
       <div :class="$style.image">
-        <Picture v-if="image != undefined" :image="image" :default-width="550" :default-height="344"
+        <Picture v-if="image != undefined" loading="lazy" :image="image" :default-width="550" :default-height="344"
                  :media="[{minWidth: 576, width: 240, height: 150}]"/>
       </div>
       <div :class="$style.content">
