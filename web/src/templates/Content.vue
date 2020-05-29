@@ -17,9 +17,10 @@
 <script>
   import {getClassByColor} from '~/utils/colorList'
   import PageNavigation from '~/components/PageNavigation'
+  import CodeBlock from "~/components/CodeBlock";
 
   export default {
-    components: {PageNavigation},
+    components: {CodeBlock, PageNavigation},
     metaInfo: function () {
       console.log(this.$context.contentBlocks)
       return {

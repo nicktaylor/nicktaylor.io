@@ -17,6 +17,7 @@ import contentList from './objects/contentList'
 import contentObject from './objects/contentObject'
 import socialLink from './objects/socialLink'
 import header from "./objects/header";
+import codeBlock from "./objects/codeBlock";
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -26,6 +27,7 @@ export default createSchema({
   // to the ones provided by any plugins that are installed
   types: schemaTypes.concat([
     author,
+    codeBlock,
     contentList,
     content,
     contentObject,

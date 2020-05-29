@@ -15,7 +15,8 @@
     "@sanity/desk-tool",
     "tabs",
     "color-list",
-    "visual-options"
+    "visual-options",
+    "@sanity/code-input"
   ],
   "env": {
     "development": {

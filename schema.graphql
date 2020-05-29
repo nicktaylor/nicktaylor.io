@@ -22,9 +22,11 @@ interface NodeConnectionEdge {
 
 union SanityAuthorOrContent = SanityAuthor | SanityContent
 
+union SanityBlockOrCodeBlock = SanityBlock | SanityCodeBlock
+
 union SanityCategoryOrContent = SanityCategory | SanityContent
 
-union SanityContentListOrFullPortableTextObjectOrHeader = SanityContentList | SanityFullPortableTextObject | SanityHeader
+union SanityCodeBlockOrContentListOrFullPortableTextObjectOrHeader = SanityCodeBlock | SanityContentList | SanityFullPortableTextObject | SanityHeader
 
 type Metadata {
   pathPrefix: String
@@ -295,6 +297,22 @@ type SanityCategoryEdge implements NodeConnectionEdge {
   previous: SanityCategory
 }
 
+type SanityCode {
+  _key: String
+  _type: String
+  code: String
+  filename: String
+  highlightedLines: [Float]
+  language: String
+}
+
+type SanityCodeBlock {
+  _key: String
+  _type: String
+  code: SanityCode
+  language: String
+}
+
 type SanityContent implements Node {
   _createdAt(
     "Date format"
@@ -355,7 +373,7 @@ type SanityContentObject {
   _type: String
   author: SanityAuthor
   categories: [SanityCategory]
-  contentBlocks: [SanityContentListOrFullPortableTextObjectOrHeader]
+  contentBlocks: [SanityCodeBlockOrContentListOrFullPortableTextObjectOrHeader]
   linkTitle: String
   mainCategory: SanityCategory
   mainImage: SanitySeoImage

@@ -7,6 +7,7 @@
 <script>
 import BlockContent from 'sanity-blocks-vue-component'
 import urlResolver from '~/utils/urlResolver.js'
+import CodeBlock from "~/components/CodeBlock";
 
 export default {
   data() {
@@ -19,6 +20,11 @@ export default {
             return <g-link to={url}>{content.children.join('')}</g-link>
           },
         },
+        types: {
+          codeBlock: ({node}) => {
+            return <CodeBlock code={node.code.code} language={node.code.language} />
+          }
+        }
       },
     }
   },

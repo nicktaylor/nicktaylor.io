@@ -1,0 +1,28 @@
+<template>
+  <span :class="$style.code"><prism language="javascript">{{ code }}</prism></span>
+</template>
+
+<script>
+  import 'prismjs'
+  import '~/assets/css/prism-dracula.css'
+  import Prism from 'vue-prism-component'
+
+  export default {
+    name: "CodeBlock",
+    props: {
+      language: String,
+      code: String,
+    },
+    components: {
+      Prism
+    },
+  }
+</script>
+
+<style lang="postcss" module>
+.code {
+  & > * {
+    font-size: 0.8em;
+  }
+}
+</style>

@@ -85,6 +85,14 @@ query AllContentQuery {
                 }
               }
             }
+            ... on SanityCodeBlock {
+              _key
+              _type
+              code {
+                language
+                code
+              }
+            }
             ... on SanityContentList {
               _key
               _type

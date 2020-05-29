@@ -29,5 +29,9 @@ export default {
         annotations: [InternalLink, ExternalLink],
       },
     },
+    {
+      type: 'codeBlock',
+      title: 'Code Block',
+    }
   ],
 }

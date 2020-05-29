@@ -60,8 +60,9 @@ export default {
       type: 'array',
       fieldset: 'main',
       of: [
-        {type: 'fullPortableTextObject'},
+        {type: 'codeBlock'},
         {type: 'contentList'},
+        {type: 'fullPortableTextObject'},
         {type: 'header'}
       ],
     },

@@ -25,6 +25,10 @@ module.exports = {
       },
     },
   ],
+  icon: {
+    favicon: './src/favicon.png',
+    touchicon: './src/touchicon.png'
+  },
   css: {
     loaderOptions: {
       postcss: {
