@@ -17,6 +17,11 @@ export default {
       title: 'Show Image'
     },
     {
+      name: 'fade',
+      type: 'boolean',
+      title: 'Fade',
+    },
+    {
       name: 'layout',
       type: 'visualOptions',
       title: 'Layout',

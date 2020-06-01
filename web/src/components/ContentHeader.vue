@@ -1,17 +1,25 @@
 <template>
-  <header :class="[$style.header, showImage ? $style.image : '', layout ? $style[layout] : '']">
-    <Picture v-if="showImage"
-             :default-height="200"
-             :default-width="500"
-             :image="image || $context.mainImage"
-             :media="[
-                   {minWidth: 576, width: 980, height: 250},
-                   {minWidth: 980, width: 1200, height: 250},
-                   {minWidth: 1200, width: 1800, height: 250},
-                   ]"
-    />
+  <header :class="[
+      $style.header,
+      showImage ? $style.image : '',
+      layout ? $style[layout] : '',
+      fade ? $style.fade : ''
+      ]">
+    <div :class="$style.imageContainer">
+      <Picture v-if="showImage"
+               :default-height="250"
+               :default-width="600"
+               :image="image || $context.mainImage"
+               :media="[
+                     {minWidth: 1900, width: 1700, height: 450},
+                     {minWidth: 1200, width: 1400, height: 450},
+                     {minWidth: 768, width: 1200, height: 350},
+                     {minWidth: 576, width: 768, height: 150},
+                     ]"
+      />
+    </div>
     <div :class="$style.headoverlay">
-      <h1 :title="$context.title.toLowerCase()">{{$context.title.toLowerCase()}}</h1>
+      <h1 :title="$context.title">{{$context.title}}</h1>
       <time v-if="showDate"
             :title="datetime | niceDateFormat"
             datetime="$context.publishedAt">
@@ -30,6 +38,7 @@
     props: {
       showDate: Boolean,
       showImage: Boolean,
+      fade: Boolean,
       image: Object,
       title: String,
       layout: String,
@@ -43,10 +52,10 @@
 </script>
 
 <style lang="postcss" module>
+
   .header {
     display: block;
     box-sizing: border-box;
-    padding: var(--padding-small);
     background-color: var(--content-color-faded);
     background-image: repeating-linear-gradient(
             45deg,
@@ -77,6 +86,7 @@
       font-size: 1.6em;
     }
 
+
     &.image {
       img {
         position: absolute;
@@ -87,7 +97,14 @@
         left: 0;
         right: 0;
         object-fit: cover;
-        opacity: 0.2;
+      }
+
+      &.fade {
+        background: none;
+
+        img {
+          opacity: 0.2;
+        }
       }
 
       h1, h2, h3 {
@@ -108,14 +125,11 @@
 
         &:before {
           -webkit-text-stroke: 0px transparent;
+          padding-right: 10px;
           content: attr(title);
           display: block;
           position: absolute;
         }
-      }
-
-      &.cover {
-        background: none;
       }
 
       &.contain {
@@ -123,17 +137,16 @@
 
         img {
           object-fit: contain;
-          opacity: 1;
         }
       }
     }
 
     .headoverlay {
+      padding: var(--padding-small);
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-      padding: var(--padding-small) 0;
 
       & > * {
         max-width: 980px;
@@ -152,7 +165,7 @@
 
   @media screen and (min-width: 768px) {
     .header {
-      height: 220px;
+      height: 250px;
 
       h1, h2, h2 {
         font-size: 1.9em;
@@ -161,9 +174,36 @@
     }
   }
 
-  @media screen and (min-width: 1080px) {
+  @media screen and (min-width: 1200px) {
+    .contain .imageContainer {
+      max-width: 1400px;
+      margin: auto;
+      position: relative;
+      height: 100%;
+    }
+
     .header {
-      height: 250px;
+      height: 350px;
+
+      h1, h2, h2 {
+        font-size: 2.3em;
+        line-height: 1.3;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1900px) {
+    .contain .imageContainer {
+      max-width: 1700px;
+    }
+
+    .header {
+      height: 450px;
+
+      h1, h2, h2 {
+        font-size: 2.3em;
+        line-height: 1.3;
+      }
     }
   }
 </style>

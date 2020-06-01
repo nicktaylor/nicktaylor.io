@@ -1,5 +1,5 @@
 <template>
-  <span :class="$style.code"><prism language="javascript">{{ code }}</prism></span>
+  <div :class="$style.code"><prism language="javascript">{{ code }}</prism></div>
 </template>
 
 <script>

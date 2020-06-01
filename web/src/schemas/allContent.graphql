@@ -60,11 +60,34 @@ query AllContentQuery {
               _type
               _rawContent(resolveReferences: { maxDepth: 7 })
             }
+            ... on SanitySeoImage {
+              _key
+              _type
+              asset {
+                _id
+                url
+              }
+              hotspot {
+                x
+                y
+                width
+                height
+              }
+              crop {
+                top
+                left
+                right
+                bottom
+              }
+              alt
+              caption
+            }
             ... on SanityHeader {
               _key
               _type
               showDate
               showImage
+              fade
               layout
               image {
                 asset {

@@ -22,11 +22,11 @@ interface NodeConnectionEdge {
 
 union SanityAuthorOrContent = SanityAuthor | SanityContent
 
-union SanityBlockOrCodeBlock = SanityBlock | SanityCodeBlock
+union SanityBlockOrCodeBlockOrSeoImage = SanityBlock | SanityCodeBlock | SanitySeoImage
 
 union SanityCategoryOrContent = SanityCategory | SanityContent
 
-union SanityCodeBlockOrContentListOrFullPortableTextObjectOrHeader = SanityCodeBlock | SanityContentList | SanityFullPortableTextObject | SanityHeader
+union SanityCodeBlockOrContentListOrFullPortableTextObjectOrHeaderOrSeoImage = SanityCodeBlock | SanityContentList | SanityFullPortableTextObject | SanityHeader | SanitySeoImage
 
 type Metadata {
   pathPrefix: String
@@ -310,7 +310,6 @@ type SanityCodeBlock {
   _key: String
   _type: String
   code: SanityCode
-  language: String
 }
 
 type SanityContent implements Node {
@@ -343,7 +342,6 @@ type SanityContent implements Node {
   ): NodeBelongsTo
   content: SanityContentObject
   id: ID!
-  mainCategoryThree: SanityCategory
 }
 
 type SanityContentConnection implements NodeConnection {
@@ -373,7 +371,7 @@ type SanityContentObject {
   _type: String
   author: SanityAuthor
   categories: [SanityCategory]
-  contentBlocks: [SanityCodeBlockOrContentListOrFullPortableTextObjectOrHeader]
+  contentBlocks: [SanityCodeBlockOrContentListOrFullPortableTextObjectOrHeaderOrSeoImage]
   linkTitle: String
   mainCategory: SanityCategory
   mainImage: SanitySeoImage
@@ -473,6 +471,7 @@ type SanityGeopoint {
 type SanityHeader {
   _key: String
   _type: String
+  fade: Boolean
   image: SanitySeoImage
   layout: String
   showDate: Boolean
@@ -891,7 +890,6 @@ input SanityContentFilterInput {
   _updatedAt: DateQueryOperatorInput
   content: SanityContentObjectFilterInput
   id: IDQueryOperatorInput
-  mainCategoryThree: SanityCategoryQueryOperatorInput
 }
 
 input SanityContentObjectFilterInput {

@@ -4,15 +4,24 @@ export default {
   title: 'Code Block',
   fields: [
     {
-      name: 'language',
+      name: 'caption',
       type: 'string',
-      title: 'Language',
-      description: 'Enter language in lowercase as defined by PrismJS'
+      title: 'Caption'
     },
     {
       name: 'code',
       type: 'code',
       title: 'Code'
     }
-  ]
+  ],
+  preview: {
+    select: {
+      caption: 'caption',
+      code: 'code'
+    },
+    prepare: ({caption, code}) => ({
+      title: caption,
+      subtitle: `Language: ${code.language}`
+    })
+  }
 }

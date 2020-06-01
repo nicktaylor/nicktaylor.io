@@ -5,6 +5,7 @@ import DefaultLayout from '~/layouts/Default.vue'
 import urlForImage from './utils/urlForImage'
 import NormalizeCss from 'normalize.css'
 import dayjs from 'dayjs'
+import advancedFormat from 'dayjs/plugin/advancedFormat'
 import { gsap } from 'gsap'
 import { CSSRulePlugin } from 'gsap/all'
 
@@ -20,7 +21,8 @@ export default function(Vue, { router, head, isClient }) {
   Vue.component('Layout', DefaultLayout)
   Vue.component('v-icon', Icon)
   Vue.use(NormalizeCss)
-  Vue.filter('niceDateFormat', value => dayjs(value).format("dddd, D MMMM 'YY"))
+  dayjs.extend(advancedFormat)
+  Vue.filter('niceDateFormat', value => dayjs(value).format("dddd, Do MMMM YYYY"))
   Vue.prototype.$getComponentByType = getComponent
   Vue.prototype.$urlForImage = urlForImage
   gsap.registerPlugin(CSSRulePlugin)

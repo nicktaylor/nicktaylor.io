@@ -63,7 +63,8 @@ export default {
         {type: 'codeBlock'},
         {type: 'contentList'},
         {type: 'fullPortableTextObject'},
-        {type: 'header'}
+        {type: 'header'},
+        {type: 'seoImage'}
       ],
     },
     {

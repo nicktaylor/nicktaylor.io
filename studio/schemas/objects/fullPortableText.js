@@ -1,10 +1,11 @@
 import InternalLink from './internalLink'
 import ExternalLink from './externalLink'
+import {BsBlockquoteLeft, BsFileCode, BsCardImage} from "react-icons/bs";
 
 export default {
   name: 'fullPortableText',
   type: 'array',
-  title: 'Full Rich Text',
+  title: 'Rich Text',
   of: [
     {
       type: 'block',
@@ -30,8 +31,19 @@ export default {
       },
     },
     {
+      type: 'contentImage',
+      title: 'Image',
+      icon: BsCardImage
+    },
+    {
       type: 'codeBlock',
       title: 'Code Block',
+      icon: BsFileCode
+    },
+    {
+      type: 'quote',
+      title: 'Quote',
+      icon: BsBlockquoteLeft
     }
   ],
 }

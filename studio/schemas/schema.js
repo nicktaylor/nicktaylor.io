@@ -18,6 +18,8 @@ import contentObject from './objects/contentObject'
 import socialLink from './objects/socialLink'
 import header from "./objects/header";
 import codeBlock from "./objects/codeBlock";
+import contentImage from "./objects/contentImage";
+import quote from "./objects/quote";
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -31,6 +33,7 @@ export default createSchema({
     contentList,
     content,
     contentObject,
+    contentImage,
     header,
     siteSettings,
     socialLink,
@@ -39,6 +42,7 @@ export default createSchema({
     internalLink,
     fullPortableText,
     fullPortableTextObject,
+    quote,
     simplePortableText,
     seoImage,
   ]),

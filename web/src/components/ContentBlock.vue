@@ -8,6 +8,8 @@
 import BlockContent from 'sanity-blocks-vue-component'
 import urlResolver from '~/utils/urlResolver.js'
 import CodeBlock from "~/components/CodeBlock";
+import ContentImage from "~/components/ContentImage";
+import ContentQuote from "~/components/ContentQuote";
 
 export default {
   data() {
@@ -23,6 +25,12 @@ export default {
         types: {
           codeBlock: ({node}) => {
             return <CodeBlock code={node.code.code} language={node.code.language} />
+          },
+          contentImage: ({node}) => {
+            return <ContentImage image={node.image} layout={node.layout} maxHeight={node.maxHeight} />
+          },
+          quote: ({node}) => {
+            return <ContentQuote text={node.text} name={node.name} date={node.date} />
           }
         }
       },
@@ -45,6 +53,27 @@ a {
   box-sizing: border-box;
   max-width: var(--max-container-width);
   padding: var(--padding-small);
+
+  & > div > p {
+    margin-top: var(--padding-small);
+    margin-bottom: 0;
+  }
+
+  & > div {
+    & > div, & > blockquote {
+      margin-top: var(--padding-medium);
+      margin-bottom: 0;
+    }
+  }
+
+  & > div {
+    & > div, & > blockquote {
+      & + p {
+        margin-top: var(--padding-medium);
+        margin-bottom: var(--padding-small);
+      }
+    }
+  }
 
   & > div > *:last-child {
     margin-bottom: 0;
