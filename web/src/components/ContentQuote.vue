@@ -21,37 +21,37 @@
 
 <style lang="postcss" module>
   .quote {
-    border-left: 0.5em solid var(--content-color-main);
+    border-left: 0.5em solid var(--content-color-two);
     margin-left: 0.5em;
     padding-left: 1em;
     font-size: 1.2em;
-    color: var(--content-color-main);
+    color: var(--content-color-two);
     text-align: justify;
-  }
-
-  .text {
-
   }
 
   .ref {
     margin-top: 0.5em;
-    font-size: 0.8em;
+    font-size: 0.6em;
     text-align: right;
-    color: var(--text-color);
+    color: var(--content-color-two);
 
     span {
       display: inline-block;
     }
 
     span + time {
-      margin-left: 1em;
+      &:before {
+        content: ' - ';
+        display: inline-block;
+        padding: 0 0.5em;
+      }
     }
 
     time {
       display: inline-block;
-      font-size: 0.8em;
     }
   }
+
   @media screen and (min-width: 576px) {
     .quote {
       margin-left: 2em;

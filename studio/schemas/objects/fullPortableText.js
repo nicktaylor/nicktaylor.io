@@ -1,6 +1,7 @@
 import InternalLink from './internalLink'
 import ExternalLink from './externalLink'
 import {BsBlockquoteLeft, BsFileCode, BsCardImage} from "react-icons/bs";
+import {GrCodepen} from "react-icons/gr";
 
 export default {
   name: 'fullPortableText',
@@ -44,6 +45,11 @@ export default {
       type: 'quote',
       title: 'Quote',
       icon: BsBlockquoteLeft
+    },
+    {
+      type: 'codePen',
+      title: 'CodePen',
+      icon: GrCodepen
     }
   ],
 }

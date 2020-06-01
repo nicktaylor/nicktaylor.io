@@ -2,17 +2,19 @@
   <Layout :splash="false">
     <main :class="[$style.article]" :data-ctheme="getClass">
       <div v-for="block in $context.contentBlocks" :key="block._key">
-        <component :is="$getComponentByType(block)" v-bind="getBlockData(block)"/>
+        <component
+            :is="$getComponentByType(block)"
+            v-bind="getBlockData(block)"/>
       </div>
-      <PageNavigation v-if="$context.nextPage || $context.previousPage"
-                      :class="$style.pageNav"
-                      :next-page="$context.nextPage"
-                      :previous-page="$context.previousPage"
-                      :prev-next-label="true"/>
+      <PageNavigation
+          v-if="$context.nextPage || $context.previousPage"
+          :class="$style.pageNav"
+          :next-page="$context.nextPage"
+          :previous-page="$context.previousPage"
+          :prev-next-label="true"/>
     </main>
   </Layout>
 </template>
-
 
 <script>
   import {getClassByColor} from '~/utils/colorList'
@@ -22,7 +24,6 @@
   export default {
     components: {CodeBlock, PageNavigation},
     metaInfo: function () {
-      console.log(this.$context.contentBlocks)
       return {
         title: this.$context.title,
         meta: [
@@ -61,26 +62,31 @@
 </script>
 
 <style lang="postcss" module>
-  main > * {
-    margin-top: var(--padding-small);
-    box-sizing: border-box;
+  .article {
+    h1, h2, h3, h4, h5 {
+      color: var(--content-color-main);
+    }
 
-    &:first-child {
-      margin-top: 0;
+    & > * {
+      margin-top: var(--padding-small);
+      box-sizing: border-box;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+    .pageNav {
+      padding: var(--padding-small);
+      max-width: var(--max-container-width);
+      margin-left: auto;
+      margin-right: auto;
     }
   }
 
   @media screen and (min-width: 768px) {
-    main > * {
+    .article > * {
       margin-top: var(--padding-medium);
     }
   }
-
-  .pageNav {
-    padding: var(--padding-small);
-    max-width: var(--max-container-width);
-    margin-left: auto;
-    margin-right: auto;
-  }
-
 </style>

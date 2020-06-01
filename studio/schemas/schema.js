@@ -20,6 +20,7 @@ import header from "./objects/header";
 import codeBlock from "./objects/codeBlock";
 import contentImage from "./objects/contentImage";
 import quote from "./objects/quote";
+import codePen from "./objects/codePen";
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -30,6 +31,7 @@ export default createSchema({
   types: schemaTypes.concat([
     author,
     codeBlock,
+    codePen,
     contentList,
     content,
     contentObject,

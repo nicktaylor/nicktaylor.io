@@ -21,9 +21,9 @@
     <div :class="$style.headoverlay">
       <h1 :title="$context.title">{{$context.title}}</h1>
       <time v-if="showDate"
-            :title="datetime | niceDateFormat"
+            :title="$context.publishedAt | niceDateFormat"
             datetime="$context.publishedAt">
-        {{datetime | niceDateFormat}}
+        {{$context.publishedAt | niceDateFormat}}
       </time>
     </div>
   </header>

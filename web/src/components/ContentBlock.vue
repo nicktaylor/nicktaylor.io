@@ -10,6 +10,7 @@ import urlResolver from '~/utils/urlResolver.js'
 import CodeBlock from "~/components/CodeBlock";
 import ContentImage from "~/components/ContentImage";
 import ContentQuote from "~/components/ContentQuote";
+import CodePen from "~/components/CodePen";
 
 export default {
   data() {
@@ -31,6 +32,9 @@ export default {
           },
           quote: ({node}) => {
             return <ContentQuote text={node.text} name={node.name} date={node.date} />
+          },
+          codePen: ({node}) => {
+            return <CodePen name={node.name} title={node.title} user={node.user} penId={node.penId} theme={node.themeId} height={node.height} />
           }
         }
       },
@@ -72,6 +76,12 @@ a {
         margin-top: var(--padding-medium);
         margin-bottom: var(--padding-small);
       }
+    }
+  }
+
+  & > div {
+    & > h1, & > h2, & > h3, & > h4, & > h5 {
+      margin-top: var(--padding-medium);
     }
   }
 
