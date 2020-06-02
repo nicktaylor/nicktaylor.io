@@ -17,9 +17,17 @@ module.exports = {
     {
       use: "gridsome-plugin-service-worker",
       options: {
+        precachedRoutes: [
+            "/",
+            "/blog",
+            "/about",
+            "/contact",
+            "/resume"
+        ],
         networkFirst: {
           routes: [
             "/",
+
             /\.(js|css|jpg|png)$/, // means "every JS, CSS, and PNG images"
           ],
         },
@@ -55,7 +63,7 @@ module.exports = {
   ],
   icon: {
     favicon: './src/favicon.png',
-    touchicon: './src/touchicon.png'
+    touchicon: './src/favicon.png'
   },
   css: {
     loaderOptions: {
