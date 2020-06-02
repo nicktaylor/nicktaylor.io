@@ -31,9 +31,15 @@ module.exports = {
         background_color: "#2b2b2b",
         icon_path: "./src/favicon.png",
         name: "Nick Taylor - Web Developer",
-        short_name: "App",
+        short_name: "NickTaylor.io",
         theme_color: "#D47500",
         lang: "en",
+        orientation: "portrait",
+        serviceworker: {
+          src: "/assets/js/service-worker.js",
+          scope: "/",
+        },
+        display: "standalone"
       },
     },
     {
