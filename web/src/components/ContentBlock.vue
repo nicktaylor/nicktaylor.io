@@ -67,11 +67,7 @@ a {
     & > div, & > blockquote {
       margin-top: var(--padding-medium);
       margin-bottom: 0;
-    }
-  }
 
-  & > div {
-    & > div, & > blockquote {
       & + p {
         margin-top: var(--padding-medium);
         margin-bottom: var(--padding-small);
