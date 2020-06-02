@@ -117,6 +117,6 @@ export default {
   line-height: 1.5em;
   font-family: var(--font-normal);
   padding-bottom: 50px;
-  padding-top: 87px;
+  padding-top: 86px;
 }
 </style>

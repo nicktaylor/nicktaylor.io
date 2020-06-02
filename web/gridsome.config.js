@@ -27,8 +27,11 @@ module.exports = {
         networkFirst: {
           routes: [
             "/",
-
-            /\.(js|css|jpg|png)$/, // means "every JS, CSS, and PNG images"
+            "/blog",
+            "/about",
+            "/contact",
+            "/resume",
+            /\.(html|svg|js|css|jpg|jpeg|png|json|woff|woff2)$/, // means "every JS, CSS, and PNG images"
           ],
         },
       },
@@ -41,12 +44,11 @@ module.exports = {
         name: "Nick Taylor - Web Developer",
         short_name: "NickTaylor.io",
         theme_color: "#D47500",
-        lang: "en",
+        lang: "en-GB",
+        statusBarStyle: "black",
         orientation: "portrait",
-        serviceworker: {
-          src: "/assets/js/service-worker.js",
-          scope: "/",
-        },
+        cachedFileTypes: "js,json,svg,css,jpg,png,html,gif,jpeg,woff,woff2",
+        serviceWorkerPath: "/assets/js/service-worker.js",
         display: "standalone"
       },
     },
