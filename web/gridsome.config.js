@@ -26,6 +26,17 @@ module.exports = {
       },
     },
     {
+      use: "gridsome-plugin-manifest",
+      options: {
+        background_color: "#2b2b2b",
+        icon_path: "./src/favicon.png",
+        name: "Nick Taylor - Web Developer",
+        short_name: "App",
+        theme_color: "#D47500",
+        lang: "en",
+      },
+    },
+    {
       use: 'gridsome-source-sanity',
       options: {
         ...clientConfig.sanity,
