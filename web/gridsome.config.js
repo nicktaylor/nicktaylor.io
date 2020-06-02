@@ -15,6 +15,17 @@ module.exports = {
   },
   plugins: [
     {
+      use: "gridsome-plugin-service-worker",
+      options: {
+        networkFirst: {
+          routes: [
+            "/",
+            /\.(js|css|jpg|png)$/, // means "every JS, CSS, and PNG images"
+          ],
+        },
+      },
+    },
+    {
       use: 'gridsome-source-sanity',
       options: {
         ...clientConfig.sanity,

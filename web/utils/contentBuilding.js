@@ -14,7 +14,7 @@ function generatePagesForContentList(node, list, listPages, path, createFunc) {
       listData: listPages.slice(start, end).map((i) => ({
         title: i.content.title,
         datetime: i.content.publishedAt,
-        niceDatetime: i.content.publishedAt ? dayjs(i.content.publishedAt).format("dddd, D MMMM 'YY") : null,
+        niceDatetime: i.content.nicePublishedAt,
         url: i._url,
         text: i.content.plainTextExcerpt,
         image: i.content.mainImage,

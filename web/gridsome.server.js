@@ -26,7 +26,7 @@ function sanitizeData(data) {
         ...node.content,
         plainTextExcerpt: getExcerptFromContent(node.content, 300),
         publishedAt: node.content.publishedAt ? new Date(node.content.publishedAt) : null,
-        nicePublishedAt: node.content.publishedAt ? dayjs(node.content.publishedAt).format("dddd, D MMMM 'YY") : null
+        nicePublishedAt: node.content.publishedAt ? dayjs(node.content.publishedAt).format("dddd, Do MMMM YYYY") : null
       },
       _url: urlResolver(node, data.settings)
     }))
@@ -56,7 +56,6 @@ module.exports = function(api) {
         id: page.id,
         metadata: data.metadata,
         ...page.content,
-        publishedAt: page.content.publishedAt ? new Date(page.content.publishedAt) : null,
         ...additionalContext,
       },
     })
