@@ -17,13 +17,6 @@ module.exports = {
     {
       use: "gridsome-plugin-service-worker",
       options: {
-        precachedRoutes: [
-            "/",
-            "/blog",
-            "/about",
-            "/contact",
-            "/resume"
-        ],
         networkFirst: {
           routes: [
             "/",
