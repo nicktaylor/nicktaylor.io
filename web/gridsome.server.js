@@ -16,6 +16,8 @@ require.extensions['.graphql'] = function(module, filename) {
 }
 
 const dayjs = require('dayjs')
+const advancedFormat = require('dayjs/plugin/advancedFormat')
+dayjs.extend(advancedFormat)
 
 function sanitizeData(data) {
    const newData = {
