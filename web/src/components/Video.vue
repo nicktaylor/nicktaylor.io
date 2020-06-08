@@ -1,5 +1,5 @@
 <template>
-  <video autoplay muted="true" :poster="posterUrl">
+  <video autoplay playsinline muted="true" :poster="posterUrl">
     <source v-for="s in src" :src="s.url" :type="s.type"/>
   </video>
 </template>
