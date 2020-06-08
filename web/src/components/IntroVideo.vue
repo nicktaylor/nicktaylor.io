@@ -61,6 +61,7 @@
       border: 4px solid white;
       box-sizing: border-box;
       opacity: 0.5;
+      pointer-events: none;
     }
 
     video {
