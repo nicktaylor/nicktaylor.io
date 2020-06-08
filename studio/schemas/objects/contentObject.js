@@ -64,6 +64,7 @@ export default {
         {type: 'contentList'},
         {type: 'fullPortableTextObject'},
         {type: 'header'},
+        {type: 'introVideo'},
         {type: 'seoImage'}
       ],
     },

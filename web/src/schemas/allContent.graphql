@@ -116,6 +116,14 @@ query AllContentQuery {
                 code
               }
             }
+            ... on SanityIntroVideo {
+              _key
+              _type
+              sources {
+                url
+                type
+              }
+            }
             ... on SanityContentList {
               _key
               _type

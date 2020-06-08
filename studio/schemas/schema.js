@@ -21,6 +21,8 @@ import codeBlock from "./objects/codeBlock";
 import contentImage from "./objects/contentImage";
 import quote from "./objects/quote";
 import codePen from "./objects/codePen";
+import videoSource from './objects/videoSource'
+import introVideo from './objects/introVideo'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -30,22 +32,24 @@ export default createSchema({
   // to the ones provided by any plugins that are installed
   types: schemaTypes.concat([
     author,
+    category,
     codeBlock,
     codePen,
     contentList,
     content,
     contentObject,
     contentImage,
-    header,
-    siteSettings,
-    socialLink,
-    category,
     externalLink,
-    internalLink,
     fullPortableText,
     fullPortableTextObject,
+    header,
+    internalLink,
+    introVideo,
     quote,
     simplePortableText,
+    siteSettings,
     seoImage,
+    socialLink,
+    videoSource
   ]),
 })

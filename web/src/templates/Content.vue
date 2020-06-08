@@ -22,7 +22,7 @@
   import CodeBlock from "~/components/CodeBlock";
 
   export default {
-    components: {CodeBlock, PageNavigation},
+    components: { CodeBlock, PageNavigation},
     metaInfo: function () {
       return {
         title: this.$context.title,

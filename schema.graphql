@@ -22,11 +22,11 @@ interface NodeConnectionEdge {
 
 union SanityAuthorOrContent = SanityAuthor | SanityContent
 
-union SanityBlockOrCodeBlockOrSeoImage = SanityBlock | SanityCodeBlock | SanitySeoImage
+union SanityBlockOrCodeBlockOrCodePenOrContentImageOrQuote = SanityBlock | SanityCodeBlock | SanityCodePen | SanityContentImage | SanityQuote
 
 union SanityCategoryOrContent = SanityCategory | SanityContent
 
-union SanityCodeBlockOrContentListOrFullPortableTextObjectOrHeaderOrSeoImage = SanityCodeBlock | SanityContentList | SanityFullPortableTextObject | SanityHeader | SanitySeoImage
+union SanityCodeBlockOrContentListOrFullPortableTextObjectOrHeaderOrIntroVideoOrSeoImage = SanityCodeBlock | SanityContentList | SanityFullPortableTextObject | SanityHeader | SanityIntroVideo | SanitySeoImage
 
 type Metadata {
   pathPrefix: String
@@ -309,7 +309,19 @@ type SanityCode {
 type SanityCodeBlock {
   _key: String
   _type: String
+  caption: String
   code: SanityCode
+}
+
+type SanityCodePen {
+  _key: String
+  _type: String
+  height: Float
+  name: String
+  penId: String
+  themeId: Float
+  title: String
+  user: String
 }
 
 type SanityContent implements Node {
@@ -356,6 +368,14 @@ type SanityContentEdge implements NodeConnectionEdge {
   previous: SanityContent
 }
 
+type SanityContentImage {
+  _key: String
+  _type: String
+  image: SanitySeoImage
+  layout: String
+  maxHeight: String
+}
+
 type SanityContentList {
   _key: String
   _type: String
@@ -371,7 +391,7 @@ type SanityContentObject {
   _type: String
   author: SanityAuthor
   categories: [SanityCategory]
-  contentBlocks: [SanityCodeBlockOrContentListOrFullPortableTextObjectOrHeaderOrSeoImage]
+  contentBlocks: [SanityCodeBlockOrContentListOrFullPortableTextObjectOrHeaderOrIntroVideoOrSeoImage]
   linkTitle: String
   mainCategory: SanityCategory
   mainImage: SanitySeoImage
@@ -606,6 +626,25 @@ type SanityInternalLink {
   reference: SanityAuthorOrContent
 }
 
+type SanityIntroVideo {
+  _key: String
+  _type: String
+  sources: [SanityVideoSource]
+}
+
+type SanityQuote {
+  _key: String
+  _type: String
+  date(
+    "Date format"
+    format: String,
+    "Locale"
+    locale: String
+  ): Date
+  name: String
+  text: String
+}
+
 type SanityRootQuery {
   Author: SanityAuthor
   Category: SanityCategory
@@ -702,6 +741,13 @@ type SanitySpan {
   _type: String
   marks: [String]
   text: String
+}
+
+type SanityVideoSource {
+  _key: String
+  _type: String
+  type: String
+  url: String
 }
 
 enum ImageFit {
