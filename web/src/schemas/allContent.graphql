@@ -119,6 +119,12 @@ query AllContentQuery {
             ... on SanityIntroVideo {
               _key
               _type
+              poster {
+                asset {
+                  _id
+                  url
+                }
+              }
               sources {
                 url
                 type

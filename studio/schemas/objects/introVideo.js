@@ -12,6 +12,11 @@ export default {
       title: 'Video Sources',
       of: [{ type: 'videoSource' }],
     },
+    {
+      name: 'poster',
+      type: 'image',
+      title: 'Poster Image'
+    }
   ],
   preview: {
     select: {

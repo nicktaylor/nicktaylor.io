@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.mainContainer">
     <div :class="$style.videoContainer">
-      <Video :src="sources" />
+      <Video :src="sources" :poster-url="$urlForImage(poster, $context.metadata.sanityOptions).width(300).height(533).quality(90).auto('format').url()" />
     </div>
   </div>
 </template>
@@ -13,7 +13,8 @@
     name: 'IntroVideo',
     components: { Video },
     props: {
-      sources: Array
+      sources: Array,
+      poster: Object
     }
   }
 </script>
@@ -48,6 +49,7 @@
     margin: auto;
     border: 10px solid var(--content-color-main);
     border-radius: 50%;
+    transform: translate3d(0, 0, 0);
 
     &:after {
       content: '';
@@ -66,7 +68,6 @@
       top: calc(((60vw * 1.7776) - 90vw) / -2);
       width: 100%;
     }
-
   }
 
   @media (min-width: 768px) {

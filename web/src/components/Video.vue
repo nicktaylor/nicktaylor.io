@@ -1,5 +1,5 @@
 <template>
-  <video autoplay muted="true">
+  <video autoplay muted="true" :poster="posterUrl">
     <source v-for="s in src" :src="s.url" :type="s.type"/>
   </video>
 </template>
@@ -9,6 +9,7 @@
     name: 'Video',
     props: {
       src: Array,
+      posterUrl: String
     }
   }
 </script>
