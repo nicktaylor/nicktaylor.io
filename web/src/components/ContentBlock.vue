@@ -22,6 +22,10 @@ export default {
             const url = urlResolver(node, this.$context.settings)
             return <g-link to={url}>{content.children.join('')}</g-link>
           },
+          externalLink: content => {
+            const node = content.mark
+            return <g-link to={node.href} target={node.blank ? "_blank" : "_self"}>{content.children.join('')}</g-link>
+          },
         },
         types: {
           codeBlock: ({node}) => {
