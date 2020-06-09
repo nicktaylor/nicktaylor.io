@@ -118,5 +118,8 @@ export default {
   font-family: var(--font-normal);
   padding-bottom: 50px;
   padding-top: 86px;
+  h1, h2, h3, h4, h5 {
+    line-height: 1.1em;
+  }
 }
 </style>

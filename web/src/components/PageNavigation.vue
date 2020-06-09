@@ -40,7 +40,6 @@
       position: relative;
       color: var(--content-color-action);
       display: block;
-      clear: both;
 
       span {
         font-family: var(--font-normal);
@@ -73,9 +72,6 @@
     }
 
 
-    .previous + .next {
-      margin-top: var(--padding-medium);
-    }
 
     a.next {
       text-align: right;

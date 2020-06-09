@@ -81,6 +81,25 @@
       max-width: var(--max-container-width);
       margin-left: auto;
       margin-right: auto;
+      a {
+        clear: both;
+      }
+      & > *:last-child {
+        margin-top: var(--padding-medium);
+      }
+    }
+  }
+
+  @media screen and (min-width: 575px) {
+    .article {
+      .pageNav {
+        a {
+          clear: none;
+        }
+        & > *:last-child {
+          margin-top: 0;
+        }
+      }
     }
   }
 
