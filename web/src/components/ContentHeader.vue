@@ -150,7 +150,6 @@
 
       & > * {
         max-width: 980px;
-        padding: 0 var(--padding-small);
         box-sizing: border-box;
         margin: auto;
         display: block;
@@ -167,6 +166,10 @@
     .header {
       height: 250px;
 
+      .headoverlay {
+        padding: var(--padding-medium);
+      }
+
       h1, h2, h2 {
         font-size: 1.9em;
         line-height: 1.3;
@@ -181,6 +184,7 @@
       position: relative;
       height: 100%;
     }
+
 
     .header {
       height: 350px;

@@ -5,8 +5,9 @@ export default {
   fields: [
     {
       name: 'href',
-      type: 'url',
+      type: 'string',
       title: 'URL',
+      validation: Rule => Rule.required().error("Url is a required field")
     },
     {
       name: 'blank',

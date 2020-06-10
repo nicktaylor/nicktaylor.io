@@ -58,7 +58,6 @@ a {
 
 .block {
   margin: auto;
-  box-sizing: border-box;
   max-width: var(--max-container-width);
   padding: var(--padding-small);
 
@@ -91,5 +90,11 @@ a {
   & > div > *:first-child {
     margin-top: 0;
   }
+
+  @media screen and (min-width: 768px) {
+    padding: var(--padding-small) var(--padding-medium);
+  }
+
 }
+
 </style>
