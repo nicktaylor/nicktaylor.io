@@ -8,6 +8,17 @@
   </Layout>
 </template>
 
+<page-query>
+  query {
+    metadata {
+      sanityOptions {
+        projectId
+        dataset
+      }
+    }
+  }
+</page-query>
+
 <script>
   import PageNavigation from '~/components/PageNavigation'
   import CodeBlock from "~/components/CodeBlock";
