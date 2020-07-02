@@ -19,7 +19,7 @@
       />
     </div>
     <div :class="$style.headoverlay">
-      <h1 :title="$context.title">{{$context.title}}</h1>
+      <h1 :title="getTitle">{{getTitle}}</h1>
       <time v-if="showDate"
             :title="$context.nicePublishedAt"
             datetime="$context.publishedAt">
@@ -46,6 +46,9 @@
     computed: {
       dateAndTime() {
         return new Date(this.datetime)
+      },
+      getTitle() {
+        return !this.$context.title || this.$context.title.length === 0 ? this.$props.title : this.$context.title
       }
     }
   }
