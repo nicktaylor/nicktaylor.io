@@ -42,6 +42,12 @@ module.exports = {
       },
     },
     {
+      use: '@gridsome/plugin-google-analytics',
+      options: {
+        id: 'UA-172394854-1'
+      }
+    },
+    {
       use: 'gridsome-plugin-manifest',
       options: {
         background_color: '#2b2b2b',

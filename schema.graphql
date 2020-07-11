@@ -629,6 +629,7 @@ type SanityInternalLink {
 type SanityIntroVideo {
   _key: String
   _type: String
+  poster: SanityImage
   sources: [SanityVideoSource]
 }
 
