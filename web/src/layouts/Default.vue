@@ -32,7 +32,7 @@ export default {
     },
     links() {
       const convertToLink = link => ({
-        url: link.slug.current,
+        url: `${link.slug.current}/`,
         title: (link.linkTitle ? link.linkTitle : link.title).toLowerCase(),
         class: getClassByColor(
           link.mainCategory ? link.mainCategory.color : link.color
